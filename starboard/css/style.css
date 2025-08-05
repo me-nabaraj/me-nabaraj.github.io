@@ -209,24 +209,24 @@ body {
 /* Extra small devices (phones, 400px and down) */
 @media (max-width: 400px) {
     .logo-container img {
-        max-height: 12vw;
-        max-width: 80vw;
+        max-height: 14vw;
+        max-width: 90vw;
     }
 }
 
 /* Small devices (portrait tablets, 400px-768px) */
 @media (min-width: 401px) and (max-width: 768px) {
     .logo-container img {
-        max-height: 12vw;
-        max-width: 80vw;
+        max-height: 14vw;
+        max-width: 90vw;
     }
 }
 
 /* Medium devices (landscape tablets, 769px-1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .logo-container img {
-        max-height: 10vw;
-        max-width: 70vw;
+        max-height: 12vw;
+        max-width: 80vw;
     }
 }
 
@@ -249,7 +249,7 @@ body {
 /* Special cases for very tall screens */
 @media (max-height: 600px) {
     .logo-container img {
-        max-height: 8vh !important;
+        max-height: 10vh !important;
     }
 }
 /* Star Display Page */
@@ -605,6 +605,7 @@ body {
   --secondary: var(--theme-secondary);
 
 }
+
 
 
 
