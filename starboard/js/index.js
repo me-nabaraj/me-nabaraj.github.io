@@ -33,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedClass = classSelect.value;
         
         if (!selectedClass) {
-            loginError.textContent = 'Please select a class first';
-            loginError.classList.remove('hidden');
+            //loginError.textContent = 'Please select a class first';
+            //loginError.classList.remove('hidden');
+            showToast('Please select a class first', 'error');
             return;
         }
 
@@ -50,9 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 
         } catch (error) {
             failedAttempts++;
-            loginError.textContent = error.message;
-            loginError.classList.remove('hidden');
-            
+            //loginError.textContent = error.message;
+            //loginError.classList.remove('hidden');
+            showToast('Either email or password is incorrect', 'error');
             if (failedAttempts >= MAX_ATTEMPTS) {
                 forgotPasswordBtn.classList.remove('hidden');
             }
@@ -82,7 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedClass) {
             window.location.href = `star.html?class=${selectedClass}`;
         } else {
-            alert('Please select a class first');
+            //alert('Please select a class first');
+            showToast('Please select a class first', 'error');
         }
     });
 
@@ -150,4 +152,5 @@ document.addEventListener('DOMContentLoaded', () => {
             toast.remove();
         }, 3000);
     }
+
 });
