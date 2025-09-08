@@ -166,7 +166,7 @@ const content = {
           <li><strong>Conclusion:</strong> Summarize the overall trend.</li>
         </ul>
         <h3>Sample Interpretation:</h3>
-        <p>The line graph illustrates temperature changes throughout the day, beginning at 5:00 A.M. and ending at 7:00 P.M. The X axis shows the time of the day and the Y axis indicates temperature in degree celcious. </p>
+        <p>The line graph illustrates temperature changes throughout the day, beginning at 5:00 A.M. and ending at 7:00 P.M. The X axis shows the time of the day and the Y axis indicates temperature in degree celcius. </p>
 
         <p>The trend shows a gradual increase in temperature from the early morning, starting at 12°C at 5:00 A.M. and rising steadily to 18°C by 7:00 A.M. The temperature continues to climb, reaching 24°C at 9:00 A.M. and peaking at 30°C around 1:00 P.M. This steady rise suggests the warming effect of the sun as the day progresses. </p>
 
@@ -334,4 +334,5 @@ const content = {
     `,
     script: ''
   }
+
 };
