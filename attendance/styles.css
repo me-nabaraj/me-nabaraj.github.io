@@ -672,6 +672,7 @@ tr:hover {
     margin: 0 auto;
     padding: 10px;
     margin-top: 25px;
+    max-width: 100%;
   }
   
   header .container {
@@ -755,6 +756,7 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
 
