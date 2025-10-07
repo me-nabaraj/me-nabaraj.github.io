@@ -700,6 +700,7 @@ tr:hover {
   .form-container {
     padding: 10px;
     margin: 50px 10px;
+    max-width: 100%;
   }
   
   .card {
@@ -756,6 +757,7 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
 
