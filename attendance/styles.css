@@ -694,12 +694,12 @@ tr:hover {
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 10px;
+    padding: 10px 5px;
   }
   
   .form-container {
     padding: 10px;
-    margin: 0 10px;
+    margin: 20 10px;
   }
   
   .card {
@@ -756,6 +756,7 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
 
