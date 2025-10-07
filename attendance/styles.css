@@ -725,6 +725,7 @@ tr:hover {
   }
   .form-container {
     margin: 50px auto;
+    font-size: 20px;
  }
 
   .tabs {
@@ -760,6 +761,7 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
 
