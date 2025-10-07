@@ -671,6 +671,7 @@ tr:hover {
   .form-container {
     margin: 0 auto;
     padding: 10px;
+    margin-top: 25px;
   }
   
   header .container {
@@ -754,6 +755,7 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
 
