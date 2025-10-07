@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - Paschimanchal English School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="nepaliDatePicker.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="nepaliDatePicker.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+                <div class="school-name">Paschimanchal English School</div>                      
+            <div class="user-info">
+                <span id="teacher-name">Teacher's Name</span>
+                <span id="selected-class">Grade 1</span>
+                <button id="logout-btn" class="btn btn-secondary logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div id="attendance-message" class="mt-20 text-center"></div>
+        <div class="page-container">
+            <h2 class="card-title">Take Attendance</h2>
+            
+            <div class="card">
+                <div class="form-group">
+                    <label class="form-label" for="attendance-date">Select Date</label>
+                    <input type="text" id="attendance-date" class="date-input" placeholder="Select Date">
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="flex justify-between items-center mb-20">
+                    <h3>Student List</h3>
+                    <button id="all-present-btn" class="btn btn-success">
+                        <i class="fas fa-check-circle"></i> Mark All Present
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="students-table">
+                        <thead>
+                            <tr>
+                                <th>Roll No</th>
+                                <th>Student Name</th>
+                                <th>Attendance</th>
+                                <th>Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Student list will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="flex justify-between mt-20">
+                    <div>
+                        <button id="add-student-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Student
+                        </button>
+                        <button id="remove-student-btn" class="btn btn-danger">
+                            <i class="fas fa-minus"></i> Remove Student
+                        </button>
+                    </div>
+                    
+                    <button id="save-attendance-btn" class="btn btn-success">
+                        <i class="fas fa-save"></i> Save Attendance
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Student Modal -->
+    <div id="add-student-modal" class="modal-backdrop">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h3 class="modal-title">Add New Student</h3>
+            
+            <div class="form-group">
+                <label class="form-label" for="student-name">Student Name</label>
+                <input type="text" id="student-name" class="form-input" placeholder="Enter student name">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="student-roll">Roll Number</label>
+                <input type="number" id="student-roll" class="form-input" placeholder="Enter roll number">
+            </div>
+            
+            <button id="save-student-btn" class="btn btn-primary btn-block">
+                <i class="fas fa-save"></i> Save Student
+            </button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal-backdrop">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h3 class="modal-title">Confirm Action</h3>
+            <p id="confirmation-message">Are you sure you want to proceed?</p>
+            <div class="flex justify-between mt-20">
+                <button id="confirm-cancel" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-ok" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="common.js"></script>
+    <script src="teacher.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Paschimanchal English School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <link rel="stylesheet" href="https://unpkg.com/nepali-date-picker@2.0.2/dist/nepaliDatePicker.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- link rel="stylesheet" href="nepaliDatePicker.min.css" -->
+    <!--script src="https://code.jquery.com/jquery-3.7.1.min.js"></script -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <!-- script src="nepaliDatePicker.min.js"></script -->
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <!-- div class="logo">PES</div-->
+                <div class="school-name">Paschimanchal English School</div>
+            </div>
+            
+            <div class="user-info">
+                <span id="admin-name">Admin's Name</span>
+                <button id="admin-logout-btn" class="btn btn-secondary logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="overview">Overview</div>
+                <div class="tab" data-tab="attendance">Attendance Logs</div>
+                <div class="tab" data-tab="classes">Class Management</div>
+            </div>
+            
+            <!-- Overview Tab -->
+            <div id="overview-tab" class="tab-content active">
+                <h2 class="card-title">Today's Attendance Overview</h2>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Students</div>
+                        <div class="stat-value" id="total-students">0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Present Today</div>
+                        <div class="stat-value" id="present-today">0</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-label">Absent Today</div>
+                        <div class="stat-value" id="absent-today">0</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">Classwise Absent Students</h3>
+                    <div class="table-responsive">
+                        <table id="absent-table">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Student Name</th>
+                                    <th>Roll No</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Absent students will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Attendance Logs Tab -->
+            <div id="attendance-tab" class="tab-content">
+                <h2 class="card-title">Attendance Records</h2>
+                
+                <div class="card">
+                    <div class="form-group">
+                        <label class="form-label" for="filter-class">Filter by Class</label>
+                        <select id="filter-class" class="form-input">
+    		<option value="">-- Select Class --</option>
+    		<option value="all">All Classes</option>
+	    </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="filter-month">Filter by Month</label>
+                        <select id="filter-month" class="form-input">
+                            <option value="all">All Months</option>
+                            <option value="1">Baishakh</option>
+                            <option value="2">Jestha</option>
+                            <option value="3">Ashadh</option>
+                            <option value="4">Shrawan</option>
+                            <option value="5">Bhadra</option>
+                            <option value="6">Ashwin</option>
+                            <option value="7">Kartik</option>
+                            <option value="8">Mangsir</option>
+                            <option value="9">Poush</option>
+                            <option value="10">Magh</option>
+                            <option value="11">Falgun</option>
+                            <option value="12">Chaitra</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="filter-date">Filter by Date</label>
+                        <input type="text" id="filter-date" class="date-input" placeholder="Select Date">
+                    </div>
+  
+<div class="form-group">
+    <label class="form-label" for="filter-student">Filter by Student</label>
+    <input type="text" id="filter-student" class="form-input" list="student-suggestions" placeholder="Enter student name">
+<datalist id="student-suggestions"></datalist>
+</div>
+
+                  
+                    <button id="apply-filters-btn" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Apply Filters
+                    </button>
+                    
+                    <button id="export-csv-btn" class="btn btn-success mt-20">
+                        <i class="fas fa-file-csv"></i> Export as CSV
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <div class="table-responsive">
+                        <table id="attendance-logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Class</th>
+                                    <th>Student</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Attendance logs will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Class Management Tab -->
+            <div id="classes-tab" class="tab-content">
+                <h2 class="card-title">Class Management</h2>
+                
+                <div class="card">
+                    <h3 class="card-title">Add New Class</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="new-class-name">Class Name</label>
+                        <input type="text" id="new-class-name" class="form-input" placeholder="Enter class name">
+                    </div>
+                    
+                    <button id="add-class-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Class
+                    </button>
+                </div>
+                
+
+<div class="card mb-3">
+  <div class="card-header">Assign / Unassign Teacher</div>
+  <div class="card-body">
+    <form id="assign-teacher-form">
+      <div class="mb-3">
+        <label for="assign-class-select" class="form-label">Select Class</label>
+        <select id="assign-class-select" class="form-select" required></select>
+      </div>
+      <div class="mb-3">
+        <label for="assign-teacher-select" class="form-label">Select Class Teacher</label>
+        <select id="assign-teacher-select" class="form-select" required></select>
+      </div>
+
+      <!-- ✅ New checkbox for optional teacher -->
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="assign-as-optional">
+        <label class="form-check-label" for="assign-as-optional">
+          Not a Class Teacher
+        </label>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary" id="assign-teacher-btn">
+          Assign
+        </button>
+        <button type="button" class="btn btn-danger" id="unassign-teacher-btn">
+          Unassign
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+                <div class="card">
+                    <h3 class="card-title">Class List</h3>
+                    
+                    <div class="table-responsive">
+                        <table id="classes-table">
+                            <thead>
+                                <tr>
+                                    <th>Class Name</th>
+                                    <th>Class Teacher</th>
+                                    <th>No. of Students</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Classes will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal-backdrop">
+        <div class="modal">
+            <button class="modal-close">&times;</button>
+            <h3 class="modal-title">Confirm Action</h3>
+            <p id="confirmation-message">Are you sure you want to proceed?</p>
+            <div class="flex justify-between mt-20">
+                <button id="confirm-cancel" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-ok" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/nepali-date-picker@2.0.2/dist/nepaliDatePicker.min.js"></script>
+
+    <script src="common.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paschimanchal English School - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="logo-container" style="flex-direction: column; align-items: center; margin-bottom: 20px;">
+    <div class="logo">
+        <img src="logo.png" alt="School Logo">
+    </div>
+    <div class="school-name">Paschimanchal English School</div>
+</div>
+            
+            <h2 class="form-title">Login to Attendance System</h2>
+            
+            <div class="form-group">
+                <label class="form-label" for="login-email">Email</label>
+                <input type="email" id="login-email" class="form-input" placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="login-password">Password</label>
+                <input type="password" id="login-password" class="form-input" placeholder="Enter your password">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="class-select">Select Class</label>
+                <select id="class-select" class="form-input">
+                    <option value="">-- Select Class --</option>
+                    <option value="1">Grade 1</option>
+                    <option value="2">Grade 2</option>
+                    <option value="3">Grade 3</option>
+                    <option value="4">Grade 4</option>
+                    <option value="5">Grade 5</option>
+                </select>
+            </div>
+            
+            <button id="login-btn" class="btn btn-primary btn-block">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+            
+            <p id="forgot-password-link" class="text-center mt-20 hidden">
+                <a href="#" id="reset-password">Forgot Password?</a>
+            </p>
+            
+            <div id="login-message" class="mt-20" style="color: var(--danger); text-align: center;"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="common.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
