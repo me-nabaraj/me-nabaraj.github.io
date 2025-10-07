@@ -669,7 +669,7 @@ tr:hover {
 /* Responsive design */
 @media (max-width: 768px) {
   .form-container {
-    margin: 20px;
+    margin: 0 auto;
     padding: 10px;
   }
   
@@ -754,5 +754,6 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
