@@ -137,7 +137,7 @@ header .container {
   box-shadow: var(--shadow-lg);
   padding: 30px;
   max-width: 450px;
-  margin: 50px auto;
+  margin: 0 auto; // changed 50px
   border-top: 4px solid var(--primary);
 }
 
@@ -754,3 +754,4 @@ tr:hover {
     padding: 8px;
   }
 }
+
