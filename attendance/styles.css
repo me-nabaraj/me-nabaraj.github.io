@@ -723,6 +723,9 @@ tr:hover {
     align-items: center;
     text-align: center;
   }
+  .form-container {
+    margin: 50px auto;
+ }
 
   .tabs {
     flex-direction: column;
@@ -757,6 +760,7 @@ tr:hover {
     padding: 8px;
   }
 }
+
 
 
 
