@@ -99,9 +99,9 @@ const questions = [
       "Sher Bahadur Deuba",
       "Khadga Prasad Oli",
       "Puspa Kamal Dahal",
-      "Madhav Kumar Nepal"
+      "Sushila Karki"
     ],
-    answer: "Khadga Prasad Oli"
+    answer: "Sushila Karki"
   },
   {
     question: "Who is the present president of Nepal?",
@@ -191,10 +191,10 @@ const questions = [
     options: [
       "Giriraj Mani Pokhrel",
       "Chitralekha Yadav",
-      "Ashok Rai",
+      "Mahavir Pun",
       "Vidya Bhattarai"
     ],
-    answer: "Vidya Bhattarai"
+    answer: "Mahavir Pun"
   },
   {
     question: "Which is the capital city of Karnali province?",
@@ -545,3 +545,4 @@ function restartGame() {
   document.getElementById("congratulations").style.display = "none";
   document.getElementById("instruction").style.display = "block";
 }
+
