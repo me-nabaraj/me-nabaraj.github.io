@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Review Writing Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../indexStyle.css">
+    <style>
+        :root {
+            --primary: #5d5fef;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --light: #f7f9fc;
+            --dark: #2d3748;
+            --highlight: #ffe66d;
+            --card-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: var(--dark);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .instructions-list {
+            list-style-type: none;
+        }
+        
+        .instructions-list li {
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+        }
+        
+        .instructions-list li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .instructions-list li:nth-child(1):before { content: '1'; }
+        .instructions-list li:nth-child(2):before { content: '2'; }
+        .instructions-list li:nth-child(3):before { content: '3'; }
+        .instructions-list li:nth-child(4):before { content: '4'; }
+        .instructions-list li:nth-child(5):before { content: '5'; }
+        
+        .speech-bubble {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            border: 2px solid var(--accent);
+        }
+        
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: var(--accent) transparent;
+        }
+        
+        .side-note {
+            background: var(--highlight);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-style: italic;
+            position: relative;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .side-note:before {
+            content: '💡';
+            margin-right: 8px;
+        }
+        
+        .writing-step {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .step-title {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-title i {
+            margin-right: 8px;
+        }
+        
+        .example-btn {
+            padding: 10px 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .example-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .example-content {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .book-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .book-btn {
+            padding: 10px 15px;
+            background: var(--light);
+            color: var(--dark);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .book-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .book-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .review-display {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 300px;
+            border-left: 5px solid var(--primary);
+            display: none;
+        }
+        
+        .review-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .review-content {
+            margin-bottom: 15px;
+        }
+        
+        .review-rating {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .star {
+            color: #ffc107;
+            font-size: 1.5rem;
+            margin: 0 2px;
+        }
+        
+        .element-highlight {
+            background-color: rgba(255, 230, 109, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .key-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .key-element {
+            padding: 8px 15px;
+            background: var(--light);
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            font-size: 0.9rem;
+        }
+        
+            
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .book-selector {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>How to Write a Great Book Review</h1>
+            <p class="subtitle">A step-by-step guide for high school students to craft insightful and engaging book reviews</p>
+        </header>
+        
+        <div class="main-content">
+            <section class="section instructions-section">
+                <h2 class="section-title"><i class="fas fa-list-ol"></i> Instructions</h2>
+                <ul class="instructions-list">
+                    <li>Start with a brief introduction that includes the book's title, author, and genre.</li>
+                    <li>Summarize the plot without giving away spoilers or the ending.</li>
+                    <li>Discuss what you liked about the book - characters, writing style, themes, etc.</li>
+                    <li>Mention any weaknesses or aspects that didn't work for you.</li>
+                    <li>End with a conclusion that states your overall opinion and who might enjoy the book.</li>
+                </ul>
+                
+                <div class="speech-bubble">
+                    <strong>Teacher's Tip:</strong> A good book review balances summary with analysis. Remember to support your opinions with specific examples from the book!
+                </div>
+                
+                <div class="side-note">
+                    Don't forget to include a rating! Whether it's stars, points, or thumbs up, readers appreciate a clear indicator of your overall opinion.
+                </div>
+                
+                <div class="key-elements">
+                    <div class="key-element">Introduction</div>
+                    <div class="key-element">Summary</div>
+                    <div class="key-element">Analysis</div>
+                    <div class="key-element">Critique</div>
+                    <div class="key-element">Conclusion</div>
+                    <div class="key-element">Rating</div>
+                </div>
+            </section>
+            
+            <section class="section writing-section">
+                <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Guided Writing</h2>
+                
+                <div class="writing-step">
+                    <h3 class="step-title"><i class="fas fa-book-open"></i> Introduction Paragraph</h3>
+                    <p>Start with a hook, then mention the book's title, author, and genre. You can also include some context about why you chose to read it.</p>
+                    <button class="example-btn" data-step="intro">
+                        <i class="fas fa-eye"></i> Show Example
+                    </button>
+                    <div class="example-content" id="intro-example">
+                        <p>"J.K. Rowling's <em>Harry Potter and the Sorcerer's Stone</em> is a magical beginning to one of the most beloved fantasy series of all time. As someone who typically reads realistic fiction, I was initially hesitant to dive into the wizarding world, but I'm so glad I did."</p>
+                    </div>
+                </div>
+                
+                <div class="writing-step">
+                    <h3 class="step-title"><i class="fas fa-align-left"></i> Summary Paragraph</h3>
+                    <p>Briefly describe the main characters, setting, and plot without revealing major spoilers or the ending.</p>
+                    <button class="example-btn" data-step="summary">
+                        <i class="fas fa-eye"></i> Show Example
+                    </button>
+                    <div class="example-content" id="summary-example">
+                        <p>"The story follows Harry Potter, an ordinary boy who discovers on his 11th birthday that he is actually a famous wizard. He's whisked away to Hogwarts School of Witchcraft and Wizardry, where he makes friends, learns magic, and uncovers a mystery involving a valuable object hidden within the school."</p>
+                    </div>
+                </div>
+                
+                <div class="writing-step">
+                    <h3 class="step-title"><i class="fas fa-heart"></i> Analysis Paragraph</h3>
+                    <p>Discuss what you enjoyed about the book - characters, writing style, themes, or particular scenes that stood out.</p>
+                    <button class="example-btn" data-step="analysis">
+                        <i class="fas fa-eye"></i> Show Example
+                    </button>
+                    <div class="example-content" id="analysis-example">
+                        <p>"Rowling's world-building is exceptional - from the moving staircases to the enchanted ceiling of the Great Hall, every detail makes Hogwarts feel like a real place. The friendship between Harry, Ron, and Hermione is beautifully developed, showing how loyalty and courage can overcome even the darkest challenges."</p>
+                    </div>
+                </div>
+                
+                <div class="writing-step">
+                    <h3 class="step-title"><i class="fas fa-balance-scale"></i> Critique Paragraph</h3>
+                    <p>Mention any aspects that didn't work for you or could have been improved. Be constructive, not just negative.</p>
+                    <button class="example-btn" data-step="critique">
+                        <i class="fas fa-eye"></i> Show Example
+                    </button>
+                    <div class="example-content" id="critique-example">
+                        <p>"While the story is engaging throughout, some of the secondary characters feel underdeveloped. For example, we learn very little about Ron's family despite their importance to the plot. Additionally, the ending feels slightly rushed compared to the careful pacing of the rest of the book."</p>
+                    </div>
+                </div>
+                
+                <div class="writing-step">
+                    <h3 class="step-title"><i class="fas fa-flag-checkered"></i> Conclusion Paragraph</h3>
+                    <p>Summarize your overall opinion and mention who might enjoy this book. Include your rating if using one.</p>
+                    <button class="example-btn" data-step="conclusion">
+                        <i class="fas fa-eye"></i> Show Example
+                    </button>
+                    <div class="example-content" id="conclusion-example">
+                        <p>"Overall, <em>Harry Potter and the Sorcerer's Stone</em> is a delightful introduction to a magical world that readers of all ages can enjoy. I would highly recommend it to fantasy lovers and anyone looking for an engaging adventure story with heart. Rating: 4.5/5 stars"</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section examples-section">
+                <h2 class="section-title"><i class="fas fa-book"></i> Book Examples</h2>
+                <p>Select a book below to see a complete review example:</p>
+                
+                <div class="book-selector">
+                    <button class="book-btn active" data-book="harry-potter">Harry Potter</button>
+                    <button class="book-btn" data-book="hunger-games">Hunger Games</button>
+                    <button class="book-btn" data-book="percy-jackson">Percy Jackson</button>
+                    <button class="book-btn" data-book="holes">Holes</button>
+                    <button class="book-btn" data-book="matilda">Matilda</button>
+                </div>
+                
+                <div class="review-display" id="review-display">
+                    <!-- Review content will be loaded here by JavaScript -->
+                </div>
+            </section>
+        </div>
+        
+       <!-- Footer Section -->
+    <div>
+    <footer class="footer">
+        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+    </div>
+
+    <script>
+        // Example book reviews data
+        const bookReviews = {
+            "harry-potter": {
+                title: "Harry Potter and the Sorcerer's Stone",
+                author: "J.K. Rowling",
+                rating: 4.5,
+                content: `
+                    <p><span class="element-highlight">J.K. Rowling's <em>Harry Potter and the Sorcerer's Stone</em> is a magical beginning to one of the most beloved fantasy series of all time.</span> As someone who typically reads realistic fiction, I was initially hesitant to dive into the wizarding world, but I'm so glad I did.</p>
+                    
+                    <p><span class="element-highlight">The story follows Harry Potter, an ordinary boy who discovers on his 11th birthday that he is actually a famous wizard.</span> He's whisked away to Hogwarts School of Witchcraft and Wizardry, where he makes friends, learns magic, and uncovers a mystery involving a valuable object hidden within the school.</p>
+                    
+                    <p><span class="element-highlight">Rowling's world-building is exceptional</span> - from the moving staircases to the enchanted ceiling of the Great Hall, every detail makes Hogwarts feel like a real place. The friendship between Harry, Ron, and Hermione is beautifully developed, showing how loyalty and courage can overcome even the darkest challenges.</p>
+                    
+                    <p><span class="element-highlight">While the story is engaging throughout, some of the secondary characters feel underdeveloped.</span> For example, we learn very little about Ron's family despite their importance to the plot. Additionally, the ending feels slightly rushed compared to the careful pacing of the rest of the book.</p>
+                    
+                    <p><span class="element-highlight">Overall, <em>Harry Potter and the Sorcerer's Stone</em> is a delightful introduction to a magical world</span> that readers of all ages can enjoy. I would highly recommend it to fantasy lovers and anyone looking for an engaging adventure story with heart.</p>
+                `
+            },
+            "hunger-games": {
+                title: "The Hunger Games",
+                author: "Suzanne Collins",
+                rating: 5,
+                content: `
+                    <p><span class="element-highlight">Suzanne Collins' <em>The Hunger Games</em> is a gripping dystopian novel that combines action, social commentary, and emotional depth.</span> Set in a post-apocalyptic North America, the story follows 16-year-old Katniss Everdeen as she volunteers to take her sister's place in a deadly televised competition.</p>
+                    
+                    <p><span class="element-highlight">The Hunger Games themselves are a brutal fight to the death between 24 teenagers</span>, all representing their districts in the oppressive Capitol's annual spectacle. Katniss must use her hunting skills and wits to survive while navigating complex relationships with other tributes, particularly Peeta Mellark.</p>
+                    
+                    <p><span class="element-highlight">Collins creates a protagonist who is both strong and vulnerable, making Katniss incredibly relatable.</span> The world-building is detailed and chilling, with the stark contrast between the impoverished districts and extravagant Capitol highlighting themes of inequality and oppression.</p>
+                    
+                    <p><span class="element-highlight">Some readers might find the violence difficult, though it serves a purpose in the narrative.</span> The romantic subplot sometimes overshadows the more interesting political themes, but this is a minor issue in an otherwise excellent book.</p>
+                    
+                    <p><span class="element-highlight"><em>The Hunger Games</em> is a thought-provoking page-turner that will appeal to both young adult and adult readers.</span> It raises important questions about media, government control, and personal sacrifice that will stay with you long after you finish reading.</p>
+                `
+            },
+            "percy-jackson": {
+                title: "Percy Jackson and the Lightning Thief",
+                author: "Rick Riordan",
+                rating: 4,
+                content: `
+                    <p><span class="element-highlight">Rick Riordan's <em>Percy Jackson and the Lightning Thief</em> brings Greek mythology to life in modern-day America with humor and adventure.</span> The story follows twelve-year-old Percy Jackson, who discovers he's a demigod - the son of Poseidon - after being accused of stealing Zeus' lightning bolt.</p>
+                    
+                    <p><span class="element-highlight">Percy travels to Camp Half-Blood, a safe haven for demigods, where he meets other children of Greek gods and goddesses.</span> Together with his friends Annabeth and Grover, he embarks on a cross-country quest to find the true lightning thief and prevent a war among the gods.</p>
+                    
+                    <p><span class="element-highlight">Riordan's modern twist on classical myths is both educational and entertaining.</span> Percy's voice is authentic and funny, making him a narrator readers will instantly connect with. The action sequences are exciting and well-paced.</p>
+                    
+                    <p><span class="element-highlight">The plot follows a somewhat predictable hero's journey structure,</span> and some of the mythological references might be confusing for readers completely unfamiliar with Greek mythology. However, Riordan does a good job explaining the necessary background.</p>
+                    
+                    <p><span class="element-highlight">This book is perfect for middle grade readers who enjoy adventure, mythology, or just a good story with relatable characters.</span> It's a fun introduction to Greek myths that might even spark an interest in learning more about the original stories.</p>
+                `
+            },
+            "holes": {
+                title: "Holes",
+                author: "Louis Sachar",
+                rating: 4.5,
+                content: `
+                    <p><span class="element-highlight">Louis Sachar's <em>Holes</em> is a masterfully crafted novel that weaves together multiple storylines across different time periods.</span> The book follows Stanley Yelnats, a boy wrongly sent to a juvenile detention camp where the punishment is digging holes in the desert every day.</p>
+                    
+                    <p><span class="element-highlight">Stanley believes his family is cursed because of his "no-good-dirty-rotten-pig-stealing-great-great-grandfather,"</span> and this curse seems to explain why he's at Camp Green Lake. As Stanley digs, he uncovers connections between his own story, the history of the camp, and a legendary outlaw named Kissin' Kate Barlow.</p>
+                    
+                    <p><span class="element-highlight">Sachar's writing is clever and engaging, with well-developed characters and a plot full of surprises.</span> The way he connects seemingly unrelated events is brilliant, and the themes of fate, friendship, and justice are handled with depth and subtlety.</p>
+                    
+                    <p><span class="element-highlight">The nonlinear narrative might be challenging for some younger readers,</span> but the payoff is worth it when all the pieces come together. Some of the characterizations, particularly of the adults, border on caricature but serve the story's slightly surreal tone.</p>
+                    
+                    <p><span class="element-highlight"><em>Holes</em> is a unique and satisfying read that appeals to both children and adults.</span> It's a story about digging deep - both literally and metaphorically - and finding strength you didn't know you had.</p>
+                `
+            },
+            "matilda": {
+                title: "Matilda",
+                author: "Roald Dahl",
+                rating: 5,
+                content: `
+                    <p><span class="element-highlight">Roald Dahl's <em>Matilda</em> is a delightful celebration of intelligence, kindness, and the power of standing up to bullies.</span> The story follows Matilda Wormwood, an extraordinarily gifted child born to terrible parents who don't appreciate her.</p>
+                    
+                    <p><span class="element-highlight">Matilda discovers she has telekinetic powers, which she uses to play clever pranks on her neglectful parents and the terrifying headmistress Miss Trunchbull.</span> With the help of her kind teacher Miss Honey, Matilda finds the courage to use her talents to create a better life for herself and others.</p>
+                    
+                    <p><span class="element-highlight">Dahl's signature dark humor is on full display, balanced with genuine warmth and heart.</span> Matilda is an inspiring protagonist whose love of reading and learning will resonate with book lovers. The exaggerated villains are both frightening and hilarious.</p>
+                    
+                    <p><span class="element-highlight">Some modern readers might find the portrayal of Matilda's parents excessively cruel,</span> though this exaggeration serves the story's fairy-tale-like quality. The resolution happens rather quickly after the slow build-up of the first half.</p>
+                    
+                    <p><span class="element-highlight"><em>Matilda</em> remains a timeless classic that encourages children to value intelligence and stand up for what's right.</span> It's a perfect book for young readers who feel misunderstood or underestimated, showing that even the smallest person can make a big difference.</p>
+                `
+            }
+        };
+
+        // DOM elements
+        const exampleButtons = document.querySelectorAll('.example-btn');
+        const bookButtons = document.querySelectorAll('.book-btn');
+        const reviewDisplay = document.getElementById('review-display');
+        const exampleContents = document.querySelectorAll('.example-content');
+
+        // Initialize with first book review
+        loadBookReview('harry-potter');
+        reviewDisplay.style.display = 'block';
+
+        // Add event listeners to example buttons
+        exampleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const step = this.getAttribute('data-step');
+                const example = document.getElementById(`${step}-example`);
+                
+                // Toggle display
+                if (example.style.display === 'block') {
+                    example.style.display = 'none';
+                    this.innerHTML = '<i class="fas fa-eye"></i> Show Example';
+                } else {
+                    example.style.display = 'block';
+                    this.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Example';
+                }
+            });
+        });
+
+        // Add event listeners to book buttons
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                bookButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                // Load the selected book review
+                const bookId = this.getAttribute('data-book');
+                loadBookReview(bookId);
+            });
+        });
+
+        // Function to load book review
+        function loadBookReview(bookId) {
+            const review = bookReviews[bookId];
+            
+            // Generate star rating HTML
+            let starsHtml = '';
+            const fullStars = Math.floor(review.rating);
+            const hasHalfStar = review.rating % 1 !== 0;
+            
+            for (let i = 0; i < fullStars; i++) {
+                starsHtml += '<i class="fas fa-star star"></i>';
+            }
+            
+            if (hasHalfStar) {
+                starsHtml += '<i class="fas fa-star-half-alt star"></i>';
+            }
+            
+            const emptyStars = 5 - Math.ceil(review.rating);
+            for (let i = 0; i < emptyStars; i++) {
+                starsHtml += '<i class="far fa-star star"></i>';
+            }
+            
+            reviewDisplay.innerHTML = `
+                <h3 class="review-title">${review.title} by ${review.author}</h3>
+                <div class="review-rating">
+                    ${starsHtml} <span style="margin-left: 10px;">${review.rating}/5</span>
+                </div>
+                <div class="review-content">
+                    ${review.content}
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
