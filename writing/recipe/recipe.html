@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Recipe Writing Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#7c3aed;
+      --secondary:#0f172a;
+      --accent:#22c55e;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#1e293b;
+      --muted:#64748b;
+      --border:#e5e7eb;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+
+    header{
+      background:radial-gradient(circle at top right,#8b5cf6,#312e81);
+      color:#fff;
+      padding:4rem 2rem;
+    }
+
+    header .hero{
+      max-width:1200px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:2rem;
+      align-items:center;
+    }
+
+    header h1{font-size:3.2rem;font-weight:800;margin-bottom:1rem}
+    header p{font-size:1.15rem;opacity:.95}
+
+    header .badge{
+      display:inline-block;
+      background:rgba(255,255,255,.15);
+      padding:.4rem .9rem;
+      border-radius:999px;
+      font-size:.85rem;
+      margin-bottom:1rem;
+    }
+
+    main{
+      max-width:1200px;
+      margin:auto;
+      padding:3rem 2rem 5rem;
+      display:block;
+    }
+
+    section{
+      background:var(--card);
+      padding:2.5rem;
+      border-radius:20px;
+      border:1px solid var(--border);
+      margin-bottom:2.5rem;
+    }
+
+    section h2{
+      font-size:2.1rem;
+      margin-bottom:1rem;
+      color:var(--secondary);
+    }
+
+    .lead{
+      font-size:1.05rem;
+      color:var(--muted);
+      margin-bottom:1.5rem;
+    }
+
+    .framework{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1.5rem;
+      margin-top:1.5rem;
+    }
+
+    .framework div{
+      border:1px dashed var(--border);
+      border-radius:14px;
+      padding:1.5rem;
+    }
+
+    .framework h4{color:var(--primary);margin-bottom:.5rem}
+
+    .pro-tip{
+      background:linear-gradient(135deg,#ecfeff,#f0fdf4);
+      border-left:6px solid var(--accent);
+      padding:1.4rem 1.6rem;
+      border-radius:14px;
+      margin:2rem 0;
+    }
+
+    .recipe{
+      padding:2rem;
+      border-radius:18px;
+      border:1px solid var(--border);
+      margin-bottom:2rem;
+      transition:.3s;
+    }
+
+    .recipe:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08)}
+
+    .recipe h3{font-size:1.6rem;color:var(--primary)}
+
+    .recipe-grid{
+      display:block;
+      margin-top:1rem;
+    }
+
+    .recipe strong{color:var(--secondary)}
+
+    aside{
+      position:relative;
+      margin-top:2rem;
+    }
+
+    .sidebar{
+      background:var(--card);
+      padding:2rem;
+      border-radius:20px;
+      border:1px solid var(--border);
+    }
+
+    .sidebar h3{font-size:1.4rem;margin-bottom:1rem}
+
+    .sidebar ul{list-style:none}
+    .sidebar li{margin:.9rem 0;font-size:.95rem;color:var(--muted)}
+
+    .cta{
+      margin-top:2rem;
+      display:grid;
+      gap:1rem;
+    }
+
+    .cta button{
+      padding:.9rem 1rem;
+      border:none;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .primary{background:var(--primary);color:#fff}
+    .secondary{background:#eef2ff;color:var(--primary)}
+
+    .cta button:hover{transform:scale(1.03)}
+
+    footer{
+      background:#020617;
+      color:#c7d2fe;
+      text-align:center;
+      padding:2.5rem 1rem;
+      font-size:.9rem;
+    }
+
+    @media(max-width:900px){
+      header .hero{grid-template-columns:1fr}
+    }
+      main{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hero">
+    <div>
+      <span class="badge">Advanced Writing Skills</span>
+      <h1>Recipe Writing Studio</h1>
+      <p>Where procedural writing meets precision, clarity, and professional presentation. Designed for senior secondary learners who aim beyond exams.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div>
+    <section>
+      <h2>Recipe Writing as a Craft</h2>
+      <p class="lead">At an advanced level, recipe writing is not merely about listing steps. It is a disciplined form of instructional writing that balances accuracy, sequencing, tone, and reader psychology.</p>
+      <p>A well-written recipe anticipates the reader’s questions, eliminates ambiguity, and maintains logical flow. Every verb, quantity, and transition matters. The writer must sound confident, neutral, and precise, guiding the reader from preparation to presentation without confusion.</p>
+
+      <div class="framework">
+        <div>
+          <h4>Clarity</h4>
+          <p>Instructions must be unambiguous and measurable.</p>
+        </div>
+        <div>
+          <h4>Sequence</h4>
+          <p>Each step follows a natural and practical order.</p>
+        </div>
+        <div>
+          <h4>Economy of Language</h4>
+          <p>No unnecessary words, no missing logic.</p>
+        </div>
+        <div>
+          <h4>Consistency</h4>
+          <p>Uniform tense, tone, and measurement style.</p>
+        </div>
+      </div>
+
+      <div class="pro-tip">
+        Advanced examiners look for control, not decoration. A recipe impresses through precision, not poetry.
+      </div>
+    </section>
+
+    <section>
+      <h2>Model Recipes (Advanced Standard)</h2>
+
+      <div class="recipe">
+        <h3>Grilled Cheese Sandwich</h3>
+        <div class="recipe-grid">
+          <p><strong>Ingredients:</strong> Two slices of bread, two slices of cheese, one tablespoon of butter, and a pinch of black pepper.</p>
+          <div><strong>Method:</strong><ol><li><strong>First,</strong> butter one side of each bread slice evenly.</li><li><strong>Next,</strong> place a cheese slice between the unbuttered sides and sprinkle black pepper lightly.</li><li><strong>Then,</strong> heat a pan or grill over medium heat.</li><li><strong>After that,</strong> grill the sandwich until both sides turn golden brown.</li><li><strong>Finally,</strong> remove carefully and serve hot once the cheese has melted.</li></ol></div>
+        </div>
+      </div>
+        </div>
+      </div>
+          <div class="recipe">
+        <h3>Vegetable Soup</h3>
+        <div class="recipe-grid">
+          <p><strong>Ingredients:</strong> One cup of chopped mixed vegetables, one tablespoon of butter, one teaspoon of garlic paste, three cups of water, salt and pepper to taste.</p>
+          <div><strong>Method:</strong><ol><li><strong>First,</strong> heat butter in a saucepan and sauté the garlic paste lightly.</li><li><strong>Next,</strong> add the chopped vegetables and cook for two minutes.</li><li><strong>Then,</strong> pour in water and bring the mixture to a boil.</li><li><strong>After that,</strong> reduce heat and allow it to simmer until the vegetables are soft.</li><li><strong>Finally,</strong> season with salt and pepper and serve hot.</li></ol></div>
+        </div>
+      </div>
+
+      <div class="recipe">
+        <h3>Simple Pancakes</h3>
+        <div class="recipe-grid">
+          <p><strong>Ingredients:</strong> One cup of flour, one egg, one cup of milk, one teaspoon of baking powder, two tablespoons of sugar, and oil for frying.</p>
+          <div><strong>Method:</strong><ol><li><strong>First,</strong> mix flour, sugar, and baking powder in a bowl.</li><li><strong>Next,</strong> add the egg and milk gradually, stirring to form a smooth batter.</li><li><strong>Then,</strong> heat a lightly oiled pan over medium heat.</li><li><strong>After that,</strong> pour a ladle of batter onto the pan and cook until bubbles appear.</li><li><strong>Finally,</strong> flip the pancake, cook briefly, and serve warm.</li></ol></div>
+        </div>
+      </div>
+
+      <div class="recipe">
+        <h3>Boiled Eggs</h3>
+        <div class="recipe-grid">
+          <p><strong>Ingredients:</strong> Two eggs, enough water to cover them, and a pinch of salt.</p>
+          <div><strong>Method:</strong><ol><li><strong>First,</strong> place the eggs gently in a saucepan.</li><li><strong>Next,</strong> add enough water to cover the eggs completely.</li><li><strong>Then,</strong> bring the water to a boil over medium heat.</li><li><strong>After that,</strong> continue boiling for seven to eight minutes.</li><li><strong>Finally,</strong> remove the eggs, cool them, and peel before serving.</li></ol></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Practice Topics for Notebook Writing</h2>
+      <p class="lead">Write any <strong>one</strong> of the following recipes in your notebook. Your recipe should be between <strong>120–150 words</strong> and must follow the same professional format and cohesive sequencing used in the model recipes above.</p>
+      <ul style="margin-top:1rem;line-height:1.9;color:#475569">
+        <li>Chicken Momo</li>
+        <li>Vegetable Chowmein</li>
+        <li>Sel Roti</li>
+        <li>Chocolate Cake</li>
+        <li>Paneer Curry</li>
+      </ul>
+      <div class="pro-tip" style="margin-top:1.8rem">Before submitting, check whether your method uses clear sequencing words and whether each step logically follows the previous one.</div>
+    </section>
+  </div>
+
+  <aside>
+    <div class="sidebar">
+      <h3>Examiner’s Lens</h3>
+      <ul>
+        <li>Logical sequencing of steps</li>
+        <li>Use of imperative verbs</li>
+        <li>Consistency of tense</li>
+        <li>Accuracy of measurements</li>
+        <li>Formal and neutral tone</li>
+        <li>Neat paragraphing</li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<footer>
+  Advanced Recipe Writing • Professional Design • Academic Precision
+</footer>
+
+</body>
+</html>

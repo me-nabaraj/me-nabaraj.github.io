@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialogue Writing Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #e67e22;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 10px;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .sample-btn {
+            padding: 12px 25px;
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .sample-btn:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+        }
+        
+        .dialogue-sample {
+            text-align: left;
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: none;
+            border-left: 5px solid #e67e22;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+        
+        .dialogue-sample.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dialogue-sample h2 {
+            color: #e67e22;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .dialogue {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .dialogue p {
+    margin: 10px 0;
+    padding-left: 100px; /* space for speaker's name */
+    position: relative;
+    line-height: 1.6;
+}
+
+.dialogue .speaker {
+    position: absolute;
+    left: 10px;
+    width: 90px;
+    font-weight: bold;
+    color: #d35400;
+    display: inline-block;
+}
+ .colon {
+     margin-left: 30px; 
+}
+
+
+        /* Sticky Footer Styling */
+        .footer {
+            background: #343a40;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .footer strong {
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .footer p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+            
+            .instructions, .dialogue-sample {
+                padding: 15px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sample-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Dialogue Writing Guide</h1>
+    
+    <div class="instructions">
+        <h2>Instructions for Writing Effective Dialogues:</h2>
+        <ol>
+            <li><strong>Make it natural</strong> -- Write how people actually speak, with contractions and interruptions.</li>
+            <li><strong>Show character through speech</strong> -- Use vocabulary and sentence structure that reflects personality.</li>
+            <li><strong>Use proper formatting</strong> -- New speaker = new paragraph, no quotation marks.</li>
+            <li><strong>Include action beats</strong> -- Add small actions to show what characters are doing while speaking like: hmm, huh, oh,....</li>
+            <li><strong>Advance the plot</strong> -- Every dialogue should move the story forward or reveal character.</li>
+            <li><strong>Keep it concise</strong> -- Avoid long monologues unless necessary for character.</li>
+            <li><strong>Vary sentence length</strong> -- Mix short and long sentences for rhythm.</li>
+            <li><strong>Read aloud</strong> -- Test if it sounds natural by speaking it.</li>
+            <li><strong>Use subtext</strong> -- Sometimes what's not said is as important as what is said.</li>
+            <li><strong>Limit exposition</strong> -- Avoid characters explaining things they would already know.</li>
+        </ol>
+    </div>
+    
+    <div class="button-container">
+        <button class="sample-btn" id="loadSample1">Friends Making Plans</button>
+        <button class="sample-btn" id="loadSample2">Parent-Teen Conflict</button>
+        <button class="sample-btn" id="loadSample3">Job Interview</button>
+        <button class="sample-btn" id="loadSample4">Customer Complaint</button>
+    </div>
+    
+    <div class="dialogue-sample" id="sample1">
+        <h2>Friends Making Weekend Plans</h2>
+        <div class="dialogue">
+
+            <p><span class="speaker">Riya &ensp;&ensp;:</span> Hey, are you free this weekend? I was thinking we could do something fun.</p>
+            <p><span class="speaker">Anuj&ensp;&ensp;:</span> Actually yeah! I'm done with my exams finally. What did you have in mind?</p>
+            <p><span class="speaker">Riya &ensp;&ensp;:</span> Well, there's that new adventure park that opened near Nagarjun. We could go hiking and try the zip-lining.</p>
+            <p><span class="speaker">Anuj&ensp;&ensp;:</span> Sounds awesome! Though... I'm kind of broke after buying textbooks. How much is it?</p>
+            <p><span class="speaker">Riya &ensp;&ensp;:</span> It's 800 rupees, but I can lend you the money if you want. You can pay me back whenever.</p>
+            <p><span class="speaker">Anuj&ensp;&ensp;:</span> You're the best! Let's go Saturday morning then? I'll bring snacks for the hike.</p>
+
+        </div>
+    </div>
+    
+    <div class="dialogue-sample" id="sample2">
+        <h2>Parent-Teen Conflict About Grades</h2>
+        <div class="dialogue">
+            <p><span class="speaker">Mother &ensp;&ensp;:</span> Suman, your math teacher called today. She said you haven't submitted the last three assignments.</p>
+            <p><span class="speaker">Nirmala&ensp;&ensp;:</span> I know, I know. I'll do them this weekend.</p>
+            <p><span class="speaker">Mother &ensp;&ensp;:</span> This weekend? Your exams start Monday! Why do you keep procrastinating?</p>
+            <p><span class="speaker">Nirmala&ensp;&ensp;:</span> It's not that simple! The new topics are really hard and when I don't understand, I just... freeze.</p>
+            <p><span class="speaker">Mother &ensp;&ensp;:</span> Why didn't you tell me? I could have arranged a tutor weeks ago.</p>
+            <p><span class="speaker">Nirmala&ensp;&ensp;:</span> I didn't want to disappoint you. You always expect me to handle everything perfectly.</p>
+        </div>
+    </div>
+    
+    <div class="dialogue-sample" id="sample3">
+        <h2>Job Interview at a Tech Company</h2>
+        <div class="dialogue">
+            <p><span class="speaker">Manager&ensp;:</span> So, Priya, your portfolio shows great design work. Tell me about a challenging project you handled.</p>
+            <p><span class="speaker">Priya &ensp;&ensp;&ensp;&ensp;:</span> Thank you. The most challenging was redesigning our college website. The main issue was creating a system that worked for both students and professors.</p>
+            <p><span class="speaker">Manager&ensp;:</span> Interesting. How did you approach the different user needs?</p>
+            <p><span class="speaker">Priya &ensp;&ensp;&ensp;&ensp;:</span> I conducted surveys with both groups, then created separate dashboards with a unified login. Professors needed grade submission tools while students wanted assignment tracking.</p>
+            <p><span class="speaker">Manager&ensp;:</span> What would you change if you did it again?</p>
+            <p><span class="speaker">Priya &ensp;&ensp;&ensp;&ensp;:</span> I'd involve the IT department earlier. We had to redo some backend work because I didn't understand their constraints initially.</p>
+        </div>
+    </div>
+    
+    <div class="dialogue-sample" id="sample4">
+        <h2>Customer Complaining About a Product</h2>
+        <div class="dialogue">
+            <p><span class="speaker">Customer&ensp;:</span> Excuse me, I bought this blender here last week and it stopped working already.</p>
+            <p><span class="speaker">Manager &ensp;:</span> I'm sorry to hear that. Do you have the receipt with you?</p>
+            <p><span class="speaker">Customer&ensp;:</span> Yes, here. I only used it twice to make smoothies. Then it started smoking!</p>
+            <p><span class="speaker">Manager &ensp;:</span> Hmm, did you by chance put ice cubes in it? This model isn't designed for crushing ice.</p>
+            <p><span class="speaker">Customer&ensp;:</span> Well, the ad showed it making frozen drinks! How else would you make a smoothie?</p>
+            <p><span class="speaker">Manager &ensp;:</span> You're absolutely right. Let me replace it with our professional model that can handle ice. I'll throw in an extended warranty too.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadSample1Btn = document.getElementById('loadSample1');
+            const loadSample2Btn = document.getElementById('loadSample2');
+            const loadSample3Btn = document.getElementById('loadSample3');
+            const loadSample4Btn = document.getElementById('loadSample4');
+            const samples = [
+                document.getElementById('sample1'),
+                document.getElementById('sample2'),
+                document.getElementById('sample3'),
+                document.getElementById('sample4')
+            ];
+            
+            function hideAllSamples() {
+                samples.forEach(sample => {
+                    sample.style.display = 'none';
+                    sample.classList.remove('visible');
+                });
+            }
+            
+            function showSample(sample) {
+                hideAllSamples();
+                sample.style.display = 'block';
+                // Trigger reflow to enable transition
+                void sample.offsetWidth;
+                sample.classList.add('visible');
+            }
+            
+            loadSample1Btn.addEventListener('click', function() {
+                showSample(samples[0]);
+            });
+            
+            loadSample2Btn.addEventListener('click', function() {
+                showSample(samples[1]);
+            });
+            
+            loadSample3Btn.addEventListener('click', function() {
+                showSample(samples[2]);
+            });
+            
+            loadSample4Btn.addEventListener('click', function() {
+                showSample(samples[3]);
+            });
+            
+            // Initially hide all samples
+            hideAllSamples();
+        });
+    </script>
+</body>
+</html>

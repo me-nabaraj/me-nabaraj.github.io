@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Writing Masterclass | For High School Students</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2a9d8f;
+            --primary-dark: #21867a;
+            --secondary: #e9c46a;
+            --accent: #e76f51;
+            --light: #f8f9fa;
+            --dark: #264653;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #fefefe;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: -80px;
+            right: -80px;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -60px;
+            left: -60px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 8px 5px;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        nav a:hover, nav a.active {
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background-color: var(--light);
+            text-align: center;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--gray);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(231, 111, 81, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: #d45c3e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(231, 111, 81, 0.4);
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            gap: 30px;
+            padding: 3rem 0;
+        }
+        
+        .content {
+            flex: 3;
+        }
+        
+        .sidebar {
+            flex: 1;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            align-self: flex-start;
+            position: sticky;
+            top: 20px;
+        }
+        
+        /* Section Styles */
+        section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        section h2 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        section h2 i {
+            color: var(--secondary);
+        }
+        
+        /* Recipe Samples */
+        .recipe-samples {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .recipe-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .recipe-header {
+            padding: 20px;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .recipe-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .recipe-type {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .recipe-content {
+            padding: 20px;
+        }
+        
+        .recipe-content h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .ingredients, .instructions {
+            margin-bottom: 20px;
+        }
+        
+        .ingredients ul, .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .ingredients li, .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar h3 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .note-card {
+            background-color: white;
+            border-left: 4px solid var(--secondary);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .note-card h4 {
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .note-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+        }
+        
+        .tip-card {
+            background-color: #e8f4f3;
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        .tip-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        
+        .interactive-tool {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 25px;
+        }
+        
+        .interactive-tool h4 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+            
+            .recipe-samples {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .recipe-samples {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation for sections */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <div>
+                    <h1>Recipe Writing Masterclass</h1>
+                    <div class="tagline">Teaching high school students the art of recipe writing</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#basics">Basics</a></li>
+                    <li><a href="#samples">Recipes</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Master the Art of Recipe Writing</h2>
+            <p>Learn how to write clear, precise, and engaging recipes that anyone can follow. Perfect for high school students learning culinary arts, creative writing, or life skills.</p>
+            <a href="#basics" class="cta-button">Start Learning <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Main Content Area -->
+        <div class="content">
+            <!-- Basics Section -->
+            <section id="basics" class="fade-in">
+                <h2><i class="fas fa-book-open"></i> Recipe Writing Basics</h2>
+                <p>Writing a recipe is more than just listing ingredients and steps. A well-written recipe communicates clearly, anticipates questions, and guides the cook to success.</p>
+                
+                <div class="form-group" style="margin-top: 20px;">
+                    <h3>Key Elements of a Recipe:</h3>
+                    <ul style="padding-left: 20px; margin-top: 15px;">
+                        <li><strong>Title:</strong> Clear and descriptive name of the dish</li>
+                        <li><strong>Description:</strong> Brief introduction to the dish</li>
+                        <li><strong>Prep Time & Cook Time:</strong> Helps with meal planning</li>
+                        <li><strong>Servings/Yield:</strong> How many people it serves</li>
+                        <li><strong>Ingredients:</strong> Listed in order of use with precise measurements</li>
+                        <li><strong>Instructions:</strong> Step-by-step directions in logical order</li>
+                        <li><strong>Notes/Tips:</strong> Helpful suggestions for success</li>
+                    </ul>
+                </div>
+                
+                <div style="background-color: #f0f7f6; padding: 20px; border-radius: var(--border-radius); margin-top: 25px;">
+                    <h4><i class="fas fa-lightbulb"></i> Pro Tip:</h4>
+                    <p>Always test your recipe before sharing it! Cook it exactly as written to ensure the instructions are clear and the measurements are accurate.</p>
+                </div>
+            </section>
+
+            <!-- Recipe Samples Section -->
+            <section id="samples" class="fade-in">
+                <h2><i class="fas fa-mortar-pestle"></i> Sample Recipes</h2>
+                <p>Study these professionally written recipes to understand proper structure, formatting, and language.</p>
+                
+                <div class="recipe-samples">
+                    <!-- Recipe 1 -->
+                    <div class="recipe-card">
+                        <div class="recipe-header">
+                            <h3>Classic Chocolate Chip Cookies</h3>
+                            <div class="recipe-type">Dessert • 24 cookies</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="ingredients">
+                                <h4><i class="fas fa-shopping-basket"></i> Ingredients</h4>
+                                <ul>
+                                    <li>2¼ cups all-purpose flour</li>
+                                    <li>1 tsp baking soda</li>
+                                    <li>1 tsp salt</li>
+                                    <li>1 cup unsalted butter, softened</li>
+                                    <li>¾ cup granulated sugar</li>
+                                    <li>¾ cup brown sugar, packed</li>
+                                    <li>2 large eggs</li>
+                                    <li>2 tsp vanilla extract</li>
+                                    <li>2 cups semisweet chocolate chips</li>
+                                </ul>
+                            </div>
+                            <div class="instructions">
+                                <h4><i class="fas fa-list-ol"></i> Instructions</h4>
+                                <ol>
+                                    <li>Preheat oven to 375°F (190°C). Line baking sheets with parchment paper.</li>
+                                    <li>In a medium bowl, whisk together flour, baking soda, and salt.</li>
+                                    <li>In a large bowl, beat butter and both sugars until creamy.</li>
+                                    <li>Add eggs one at a time, then vanilla, beating well after each addition.</li>
+                                    <li>Gradually beat in flour mixture. Stir in chocolate chips.</li>
+                                    <li>Drop rounded tablespoons of dough onto prepared sheets.</li>
+                                    <li>Bake 9-11 minutes until golden brown. Cool on wire racks.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recipe 2 -->
+                    <div class="recipe-card">
+                        <div class="recipe-header">
+                            <h3>Vegetable Stir-Fry</h3>
+                            <div class="recipe-type">Main Dish • 4 servings</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="ingredients">
+                                <h4><i class="fas fa-shopping-basket"></i> Ingredients</h4>
+                                <ul>
+                                    <li>2 tbsp vegetable oil</li>
+                                    <li>1 onion, sliced</li>
+                                    <li>2 bell peppers, sliced</li>
+                                    <li>2 carrots, julienned</li>
+                                    <li>1 cup broccoli florets</li>
+                                    <li>1 cup snap peas</li>
+                                    <li>3 cloves garlic, minced</li>
+                                    <li>1 tbsp fresh ginger, grated</li>
+                                    <li>¼ cup soy sauce</li>
+                                    <li>2 tbsp honey</li>
+                                    <li>1 tbsp rice vinegar</li>
+                                </ul>
+                            </div>
+                            <div class="instructions">
+                                <h4><i class="fas fa-list-ol"></i> Instructions</h4>
+                                <ol>
+                                    <li>Heat oil in a large wok or skillet over high heat.</li>
+                                    <li>Add onion and stir-fry for 2 minutes until slightly softened.</li>
+                                    <li>Add peppers, carrots, broccoli, and snap peas. Stir-fry for 5-6 minutes.</li>
+                                    <li>Add garlic and ginger, cook for 1 minute until fragrant.</li>
+                                    <li>In a small bowl, whisk together soy sauce, honey, and rice vinegar.</li>
+                                    <li>Pour sauce over vegetables and toss to coat. Cook for 1 more minute.</li>
+                                    <li>Serve immediately over rice or noodles.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recipe 3 -->
+                    <div class="recipe-card">
+                        <div class="recipe-header">
+                            <h3>Fresh Garden Salad</h3>
+                            <div class="recipe-type">Side Dish • 6 servings</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="ingredients">
+                                <h4><i class="fas fa-shopping-basket"></i> Ingredients</h4>
+                                <ul>
+                                    <li>1 head romaine lettuce, chopped</li>
+                                    <li>1 cucumber, sliced</li>
+                                    <li>2 tomatoes, chopped</li>
+                                    <li>1 red onion, thinly sliced</li>
+                                    <li>1 carrot, grated</li>
+                                    <li>½ cup croutons</li>
+                                    <li>¼ cup grated Parmesan cheese</li>
+                                    <li>3 tbsp olive oil</li>
+                                    <li>1 tbsp red wine vinegar</li>
+                                    <li>1 tsp Dijon mustard</li>
+                                    <li>Salt and pepper to taste</li>
+                                </ul>
+                            </div>
+                            <div class="instructions">
+                                <h4><i class="fas fa-list-ol"></i> Instructions</h4>
+                                <ol>
+                                    <li>Wash and dry all vegetables thoroughly.</li>
+                                    <li>In a large salad bowl, combine lettuce, cucumber, tomatoes, onion, and carrot.</li>
+                                    <li>In a small bowl, whisk together olive oil, vinegar, mustard, salt, and pepper.</li>
+                                    <li>Pour dressing over salad and toss gently to coat.</li>
+                                    <li>Sprinkle with croutons and Parmesan cheese just before serving.</li>
+                                    <li>Serve immediately for best texture.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recipe 4 -->
+                    <div class="recipe-card">
+                        <div class="recipe-header">
+                            <h3>Banana Smoothie</h3>
+                            <div class="recipe-type">Beverage • 2 servings</div>
+                        </div>
+                        <div class="recipe-content">
+                            <div class="ingredients">
+                                <h4><i class="fas fa-shopping-basket"></i> Ingredients</h4>
+                                <ul>
+                                    <li>2 ripe bananas</li>
+                                    <li>1 cup plain yogurt</li>
+                                    <li>1 cup milk (any type)</li>
+                                    <li>2 tbsp honey or maple syrup</li>
+                                    <li>1 tsp vanilla extract</li>
+                                    <li>1 cup ice cubes</li>
+                                    <li>Optional: ½ cup berries or 1 tbsp peanut butter</li>
+                                </ul>
+                            </div>
+                            <div class="instructions">
+                                <h4><i class="fas fa-list-ol"></i> Instructions</h4>
+                                <ol>
+                                    <li>Peel bananas and break into chunks.</li>
+                                    <li>Place all ingredients in a blender in the order listed.</li>
+                                    <li>Blend on high speed until smooth and creamy, about 1 minute.</li>
+                                    <li>If too thick, add a little more milk. If too thin, add more ice.</li>
+                                    <li>Taste and adjust sweetness if needed.</li>
+                                    <li>Pour into glasses and serve immediately.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources" class="fade-in">
+                <h2><i class="fas fa-tools"></i> Recipe Writing Resources</h2>
+                <p>Use these tools and guidelines to improve your recipe writing skills.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 25px;">
+                    <div style="background-color: #e8f4f3; padding: 20px; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-file-alt"></i> Recipe Template</h4>
+                        <p>Download our printable recipe template to structure your recipes properly.</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%;">Download Template</button>
+                    </div>
+                    
+                    <div style="background-color: #fef6e6; padding: 20px; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-check-circle"></i> Checklist</h4>
+                        <p>Use our recipe writing checklist to ensure you haven't missed any important elements.</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%; background-color: var(--secondary);">View Checklist</button>
+                    </div>
+                    
+                    <div style="background-color: #fdeaea; padding: 20px; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-video"></i> Video Tutorials</h4>
+                        <p>Watch our video series on recipe writing techniques and common mistakes.</p>
+                        <button class="btn" style="margin-top: 10px; width: 100%; background-color: var(--accent);">Watch Videos</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Writing Tips</h3>
+            
+            <div class="note-card">
+                <h4>Use Active Voice</h4>
+                <p>Write instructions in active voice: "Chop the onions" instead of "The onions should be chopped."</p>
+            </div>
+            
+            <div class="tip-card">
+                <h4>Be Specific</h4>
+                <p>Instead of "add some salt," write "add 1 teaspoon of salt." Precision matters in recipes.</p>
+            </div>
+            
+            <div class="note-card">
+                <h4>List Ingredients in Order</h4>
+                <p>List ingredients in the order they're used. This helps cooks prepare efficiently.</p>
+            </div>
+            
+            <div class="tip-card">
+                <h4>Include Preparation Details</h4>
+                <p>Specify how ingredients should be prepared: "1 onion, finely diced" or "2 cloves garlic, minced."</p>
+            </div>
+            
+            <div class="interactive-tool">
+                <h4>Recipe Builder Tool</h4>
+                <p>Practice writing a recipe with our interactive tool:</p>
+                
+                <div class="form-group">
+                    <label for="recipe-title">Recipe Title</label>
+                    <input type="text" id="recipe-title" placeholder="Enter recipe title">
+                </div>
+                
+                <div class="form-group">
+                    <label for="recipe-type">Recipe Type</label>
+                    <select id="recipe-type">
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                        <option value="dessert">Dessert</option>
+                        <option value="beverage">Beverage</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ingredients">Ingredients (one per line)</label>
+                    <textarea id="ingredients" rows="4" placeholder="2 cups flour&#10;1 tsp salt&#10;..."></textarea>
+                </div>
+                
+                <button class="btn" id="generate-recipe" style="width: 100%;">Preview Your Recipe</button>
+                
+                <div id="recipe-preview" style="margin-top: 20px; display: none;">
+                    <h4>Your Recipe Preview</h4>
+                    <div id="preview-content" style="background-color: var(--light-gray); padding: 15px; border-radius: var(--border-radius);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-utensils"></i>
+                <span>Recipe Writing Masterclass</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#basics">Basics</a>
+                <a href="#samples">Recipes</a>
+                <a href="#resources">Resources</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <p>Designed for high school students to master the art of recipe writing.</p>
+            
+            <div class="copyright">
+                &copy; 2023 Recipe Writing Masterclass. All rights reserved. | Educational Purpose
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Recipe Builder
+        document.getElementById('generate-recipe').addEventListener('click', function() {
+            const title = document.getElementById('recipe-title').value || "My Recipe";
+            const type = document.getElementById('recipe-type').value;
+            const ingredients = document.getElementById('ingredients').value;
+            
+            const typeText = {
+                'breakfast': 'Breakfast',
+                'lunch': 'Lunch',
+                'dinner': 'Dinner',
+                'dessert': 'Dessert',
+                'beverage': 'Beverage'
+            };
+            
+            let previewHTML = `
+                <h3 style="color: var(--primary); margin-bottom: 10px;">${title}</h3>
+                <div style="color: var(--gray); font-size: 0.9rem; margin-bottom: 15px;">${typeText[type]} • 4 servings</div>
+                <h4 style="margin-bottom: 10px;">Ingredients:</h4>
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
+            `;
+            
+            const ingredientList = ingredients.split('\n').filter(ing => ing.trim() !== '');
+            
+            if (ingredientList.length === 0) {
+                previewHTML += `<li>2 cups flour</li><li>1 tsp salt</li><li>1 cup water</li>`;
+            } else {
+                ingredientList.forEach(ingredient => {
+                    previewHTML += `<li>${ingredient}</li>`;
+                });
+            }
+            
+            previewHTML += `
+                </ul>
+                <h4 style="margin-bottom: 10px;">Instructions:</h4>
+                <ol style="padding-left: 20px;">
+                    <li>Combine all ingredients in a large bowl.</li>
+                    <li>Mix thoroughly until well combined.</li>
+                    <li>Cook according to your recipe directions.</li>
+                    <li>Serve and enjoy!</li>
+                </ol>
+                <div style="margin-top: 15px; padding: 10px; background-color: rgba(42, 157, 143, 0.1); border-radius: var(--border-radius);">
+                    <strong>Tip:</strong> Remember to include specific cooking times and temperatures in your final recipe.
+                </div>
+            `;
+            
+            document.getElementById('preview-content').innerHTML = previewHTML;
+            document.getElementById('recipe-preview').style.display = 'block';
+            
+            // Scroll to preview
+            document.getElementById('recipe-preview').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight active section on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Add fade-in animation to sections on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

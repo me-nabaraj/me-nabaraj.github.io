@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet and Young Generation - Interactive Essay</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .main-content {
+            flex: 3;
+            padding: 20px;
+        }
+
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+           
+        }
+       
+       h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+
+       .showBtn {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+            width: 100%;
+            margin-bottom: 10px;
+            
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #thesisBtn {
+            background-color: #ff7675;
+            color: white;
+        }
+
+        #topicBtn {
+            background-color: #74b9ff;
+            color: white;
+        }
+
+        #supportingBtn {
+            background-color: #55efc4;
+            color: white;
+        }
+
+        #linkingBtn {
+            background-color: #ffffa7;
+            color: black;
+        }
+
+        .thesis-highlight {
+            background-color: rgba(255, 118, 117, 0.5);
+        }
+
+        .topic-highlight {
+            background-color: rgba(116, 185, 255, 0.5);
+        }
+
+        .supporting-highlight {
+            background-color: rgba(85, 239, 196, 0.5);
+        }
+
+        .linking-highlight {
+            background-color: rgba(255, 234, 50, 0.5);
+        }
+
+        .dictionary-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .dictionary-popup h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .dictionary-popup .pronunciation {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .dictionary-popup .definition {
+            margin-bottom: 10px;
+        }
+
+        .dictionary-popup .example {
+            font-style: italic;
+            color: #34495e;
+        }
+      
+      .dictionary-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .lookup-word {
+            cursor: help;
+            font-weight: bold;
+        }
+.container-essay {
+            max-width: 900px;
+            background: white;
+            padding: 25px;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+ .example-essay {
+            background: #d1e7dd;
+            padding: 15px;
+            border-left: 5px solid #2d6a4f;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+.callout {
+            background: #ffeb99;
+            padding: 15px;
+            border-left: 5px solid #ffcc00;
+            font-style: italic;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .speech-bubble {
+            position: relative;
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #e3f2fd;
+            border-bottom: 0;
+            margin-left: -10px;
+            margin-bottom: -10px;
+        }
+        .important {
+            font-weight: bold;
+            color: #d32f2f;
+            font-size: 1.2em;
+        }
+        /* Sticky Footer Styling */
+.footer {
+    background: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+
+        @media (max-width: 768px) {
+            body {
+            padding: 5px;
+            font-size: 18px;
+            }
+            .container {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .sidebar {
+                order: 1;
+                padding: 8px;
+            }
+
+            .main-content, .sidebar {
+                width: 100%;
+                padding: 8px;
+            }
+
+            .dictionary-popup {
+                width: 95%;
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+     <div class="main-content">
+     <div class="container-essay">
+        <h1>How to Write an Essay</h1>
+        
+        <div class="callout">
+            <strong>Tip:</strong> A well-structured essay consists of an Introduction, Body, and Conclusion.
+        </div>
+        
+        <h2>1. Introduction</h2>
+        <p>The introduction should <span class="important">grab attention</span> and present the main idea of your essay. Start with a hook, provide background information, and end with a thesis statement.</p>
+        <div class="speech-bubble">"Start with an interesting fact, a quote, or a rhetorical question to hook your reader!"</div>
+        <div class="example-essay">
+            <strong>Example:</strong> "Did you know that over 80% of students struggle with essay writing? Writing an essay is a skill that can be learned with practice and the right guidance. This guide will walk you through the key steps to craft a compelling essay."
+        </div>
+        
+        <h2>2. Body Paragraphs</h2>
+        <p>The body of your essay should contain well-structured paragraphs, each focusing on one main idea with supporting details.</p>
+        <div class="example-essay">
+            <strong>Example:</strong> "One reason why reading is beneficial is that it improves vocabulary and comprehension. Studies have shown that individuals who read regularly have a wider range of vocabulary compared to those who don’t."
+        </div>
+        
+        <h2>3. Conclusion</h2>
+        <p>Summarize the key points and restate the thesis in a fresh way. End with a strong closing thought.</p>
+        <div class="example-essay">
+            <strong>Example:</strong> "In conclusion, mastering essay writing is essential for academic success. By following a clear structure and practicing regularly, anyone can develop strong writing skills."
+        </div>
+  
+    </div>
+    <div class="container-essay">
+            <p class="callout"> Here is a sample essay which you can use as a model for writing your essay.</p>
+            <h1>Internet and Young Generation</h1>
+            <p>Is the internet bad for young people? It is now easier than ever to access the internet, whether you are using a computer, phone or tablet. <span class="thesis">There is no doubt that many young people are spending more and more time online, with both positive and negative <span class="lookup-word" data-word="consequences">consequences</span>.</span></p>
+            
+          
+<p><span class="topic">One advantage of the internet is that young people can do 
+<span class="lookup-word" data-word="research">research</span> for their schoolwork and homework.</span> 
+<span class="supporting">This often helps 
+teenagers to widen their knowledge and improve their 
+<span class="lookup-word" data-word="grades">grades</span>.</span> 
+They can also share their ideas and work with friends who are living in a faraway country. 
+Through the internet, they can submit their work to their teacher and get feedback. 
+This helps them complete their <span class="lookup-word" data-word="assignment">assignment</span> correctly and on time.
+</p>
+
+
+            
+            <p><span class="linking">On the other hand</span>, <span class="topic">there are also negative consequences</span>. Some young people become addicted to online gaming and <span class="supporting">this can mean that they waste too much time playing these games. This can have a negative effect on their schoolwork, the amount of exercise they get and their social lives.</span> <span class="linking">In addition</span>, <span class="supporting"> <span class="lookup-word" data-word="excessive">excessive</span> internet use can mean that some young people hardly talk to their families because they are always on the computer.</span></p>
+            
+            <p><span class="linking">To sum up</span>, <span class="topic">spending time on the internet can have a negative <span class="lookup-word" data-word="impact">impact</span> on young people, but it also has many advantages.</span> <span class="supporting">Personally, I think the internet is an incredible tool and the benefits of internet access outweigh the dangers. However, we should be careful not to use the internet excessively.</span></p>
+        </div>
+        </div>
+        <div class="sidebar">
+        <div class="infoContainer">
+            <p class="callout">A <strong>thesis statement</strong> is the central idea or main argument of an essay. It is typically one or two sentences long and appears at the end of the introduction paragraph.</p>
+            <p class="example-essay">A <strong>topic sentence</strong> is the first sentence of a paragraph that states its main idea. It acts as a mini-thesis for the paragraph and sets the focus for the supporting details that follow.</p>
+            <p class="callout"><strong>Supporting details</strong> are the facts, examples, reasons, explanations, or evidence that back up or explain the main idea introduced by the topic sentence in a paragraph. </p>
+            <p class="example-essay"><strong>Linking words</strong>, also known as transition words or connective phrases, are used in essay writing to create smooth connections between ideas, sentences, and paragraphs </p>
+            </div>
+            <div class="buttonContainer">
+            <button id="thesisBtn" class="showBtn">Show Thesis Statement</button>
+            <button id="topicBtn" class="showBtn">Show Topic Sentences</button>
+            <button id="supportingBtn" class="showBtn">Show Supporting Detail</button>
+            <button id="linkingBtn" class="showBtn">Show Linking Words/Phrases</button>
+           <p id="btn-instruction" class="callout">It is very important to know the different elements of an essay. To find the element like Thesis Statement, Topic Senctence, Supporting Details and Linking Words, please click the respective button above.</p>
+        </div>
+        </div>
+    </div>
+
+    <div id="dictionaryPopup" class="dictionary-popup" style="display:none;">
+        <button id= "closePopup" class="dictionary-close" onclick="closeDictionaryPopup()">&times;</button>
+        <h3 id="popupWord"></h3>
+        <div class="pronunciation" id="popupPronunciation"></div>
+        <div class="definition" id="popupDefinition"></div>
+        <div class="example" id="popupExample"></div>
+    </div>
+     <!-- Footer Section -->
+ <footer class="footer">
+        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+      <script>
+        // Dictionary highlighting and popup functionality
+        const lookupWords = document.querySelectorAll('.lookup-word');
+        const dictionaryPopup = document.getElementById('dictionaryPopup');
+        const popupWord = document.getElementById('popupWord');
+        const popupPronunciation = document.getElementById('popupPronunciation');
+        const popupDefinition = document.getElementById('popupDefinition');
+        const popupExample = document.getElementById('popupExample');
+
+        // Mock dictionary data (replacing API call for demonstration)
+        const mockDictionary = {
+           
+            'consequences': {
+                pronunciation: '/ˈkɑːn.sə.kwən.sɪz/',
+                definition: 'Results or effects of an action or condition.',
+                example: 'The consequences of climate change are becoming more evident.'
+            },
+           
+            'research': {
+                pronunciation: '/ˈriː.sɝːtʃ/',
+                definition: 'Systematic investigation into and study of materials and sources to establish facts and reach new conclusions.',
+                example: 'Scientists conduct research to advance human knowledge.'
+            },
+           
+            'grades': {
+                pronunciation: '/greɪdz/',
+                definition: 'Marks or scores indicating academic performance.',
+                example: 'Her good grades helped her get into a top university.'
+            },
+            'assignment': {
+             pronunciation: '/əˈsaɪn.mənt/',
+             definition: 'A task or piece of work given to someone as part of a job or course of study.',
+             example: 'The teacher gave us a writing assignment to complete by Monday.'
+},
+           'excessive': {
+            pronunciation: '/ɪkˈsɛs.ɪv/',
+            definition: 'More than what is necessary, normal, or desirable.',
+           example: 'Excessive use of social media can negatively impact mental health.'
+},
+           
+           'impact': {
+            pronunciation: '/ˈɪm.pækt/',  
+            definition: 'The effect or influence of one thing on another.',  
+             example: 'The new policy had a significant impact on the economy.'  
+}
+        };
+
+        lookupWords.forEach(word => {
+            word.addEventListener('click', function() {
+                const wordToLookup = this.getAttribute('data-word');
+                const wordData = mockDictionary[wordToLookup];
+
+                if (wordData) {
+                    popupWord.textContent = wordToLookup;
+                    popupPronunciation.textContent = wordData.pronunciation;
+                    popupDefinition.textContent = wordData.definition;
+                    popupExample.textContent = `Example: ${wordData.example}`;
+                    dictionaryPopup.style.display = 'block';
+                }
+            });
+        });
+
+        function closeDictionaryPopup() {
+            dictionaryPopup.style.display = 'none';
+        }
+
+        // Previous highlighting functionality remains the same
+        function toggleHighlight(className, buttonId) {
+            const elements = document.getElementsByClassName(className);
+            const button = document.getElementById(buttonId);
+            const isHighlighted = elements[0].classList.contains(className + '-highlight');
+            
+            for (let element of elements) {
+                if (isHighlighted) {
+                    element.classList.remove(className + '-highlight');
+                    button.style.opacity = '1';
+                } else {
+                    element.classList.add(className + '-highlight');
+                    button.style.opacity = '0.7';
+                }
+            }
+        }
+
+        document.getElementById('thesisBtn').addEventListener('click', () => toggleHighlight('thesis', 'thesisBtn'));
+        document.getElementById('topicBtn').addEventListener('click', () => toggleHighlight('topic', 'topicBtn'));
+        document.getElementById('supportingBtn').addEventListener('click', () => toggleHighlight('supporting', 'supportingBtn'));
+        document.getElementById('linkingBtn').addEventListener('click', () => toggleHighlight('linking', 'linkingBtn'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advertisement Writing – Visual Learning</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0ea5e9;
+  --dark:#020617;
+  --bg:#f8fafc;
+  --card:#ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Inter, sans-serif;
+  background:var(--bg);
+  color:#020617;
+}
+header{
+  background:linear-gradient(135deg,#0284c7,#0ea5e9);
+  color:white;
+  padding:3rem 1.5rem;
+  text-align:center;
+}
+header h1{font-size:3rem;font-weight:800}
+header p{opacity:.95;margin-top:.5rem}
+main{max-width:1100px;margin:auto;padding:3rem 1.5rem}
+section{
+  background:var(--card);
+  border-radius:18px;
+  padding:2.2rem;
+  margin-bottom:2.5rem;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
+section h2{font-size:2rem;margin-bottom:1.2rem}
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1.4rem;
+}
+.feature{
+  padding:1.2rem;
+  border:1px dashed #cbd5f5;
+  border-radius:14px;
+  text-align:center;
+  font-weight:600;
+}
+.ads{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+}
+.ad{
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #e5e7eb;
+}
+.ad img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.ad-body{padding:1.4rem}
+.ad h3{font-size:1.4rem;font-weight:800}
+.tagline{font-style:italic;margin:.4rem 0;color:#334155}
+.points li{margin:.3rem 0;font-size:.95rem}
+.practice ul{line-height:2}
+footer{
+  background:#020617;
+  color:#c7d2fe;
+  text-align:center;
+  padding:2rem 1rem;
+  font-size:.9rem;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Advertisement Writing</h1>
+  <p>Think visually. Write persuasively.</p>
+</header>
+
+<main>
+
+<section>
+  <h2>What Makes a Good Advertisement?</h2>
+  <div class="features">
+    <div class="feature">Catchy Headline</div>
+    <div class="feature">Strong Image</div>
+    <div class="feature">Few Powerful Words</div>
+    <div class="feature">Clear Offer</div>
+    <div class="feature">Easy Contact</div>
+  </div>
+</section>
+
+<section>
+  <h2>Product Advertisement Samples</h2>
+  <div class="ads">
+
+    <div class="ad">
+      <img src="https://picsum.photos/400/300?tech" alt="Mobile">
+      <div class="ad-body">
+        <h3>Nova X5 Smartphone</h3>
+        <p class="tagline">Power that fits your palm.</p>
+        <ul class="points">
+          <li>⚡ Super-fast performance</li>
+          <li>📸 AI Camera</li>
+          <li>🔋 Long battery life</li>
+        </ul>
+        <p><strong>Call:</strong> 98XXXXXXXX</p>
+      </div>
+    </div>
+
+    <div class="ad">
+      <img src="https://picsum.photos/400/300?food" alt="Drink">
+      <div class="ad-body">
+        <h3>FreshUp Juice</h3>
+        <p class="tagline">Pure. Fresh. Healthy.</p>
+        <ul class="points">
+          <li>🍊 100% natural fruit</li>
+          <li>❄ No preservatives</li>
+          <li>💪 Boosts energy</li>
+        </ul>
+        <p><strong>Available at:</strong> All stores</p>
+      </div>
+    </div>
+
+    <div class="ad">
+      <img src="https://picsum.photos/400/300?fashion" alt="Shoes">
+      <div class="ad-body">
+        <h3>RunMax Sports Shoes</h3>
+        <p class="tagline">Run faster. Feel lighter.</p>
+        <ul class="points">
+          <li>👟 Ultra-light design</li>
+          <li>🦶 Extra grip</li>
+          <li>🏃 Built for athletes</li>
+        </ul>
+        <p><strong>Offer:</strong> 20% off</p>
+      </div>
+    </div>
+
+    <div class="ad">
+      <img src="https://picsum.photos/400/300?school" alt="School">
+      <div class="ad-body">
+        <h3>Green Valley School</h3>
+        <p class="tagline">Where learning begins.</p>
+        <ul class="points">
+          <li>📘 Smart classrooms</li>
+          <li>🎓 Experienced teachers</li>
+          <li>⚽ Sports & activities</li>
+        </ul>
+        <p><strong>Admissions Open</strong></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="practice">
+  <h2>Notebook Practice</h2>
+  <p>Write an advertisement for any ONE:</p>
+  <ul>
+    <li>A new mobile phone</li>
+    <li>A restaurant in your town</li>
+    <li>A school or college</li>
+    <li>A sports product</li>
+    <li>An online shopping app</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  Visual Advertisement Writing • Learn by Seeing
+</footer>
+
+</body>
+</html>

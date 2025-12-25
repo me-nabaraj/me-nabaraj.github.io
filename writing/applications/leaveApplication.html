@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Application Writing</title>
+  <style>
+    :root {
+      --primary-color: #2c7873;
+      --secondary-color: #6a98b8;
+      --accent-color: #ff9a3c;
+      --light-bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --heading-color: #1a535c;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+    
+    .word-limit {
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem 5rem;
+    }
+    
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .instructions, .structure, .samples-container {
+      background-color: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .instructions:hover, .structure:hover, .samples-container:hover {
+      transform: translateY(-5px);
+    }
+    
+    .instructions {
+      border-left: 5px solid var(--primary-color);
+    }
+    
+    .structure {
+      border-left: 5px solid var(--secondary-color);
+    }
+    
+    h2 {
+      color: var(--heading-color);
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #eee;
+    }
+    
+    h3 {
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+    }
+    
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+    
+    li {
+      margin-bottom: 0.8rem;
+    }
+    
+    .highlight {
+      background-color: #fff8e1;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    
+    .important-note {
+      background-color: #e3f2fd;
+      border-left: 4px solid var(--secondary-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .btn-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1.5rem 0;
+      justify-content: center;
+    }
+    
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-weight: 600;
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+    }
+    
+    .btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn.active {
+      background-color: var(--accent-color);
+    }
+    
+    .samples-container {
+      grid-column: span 2;
+    }
+    
+    @media (max-width: 768px) {
+      .samples-container {
+        grid-column: span 1;
+      }
+    }
+    
+    .sample-box {
+      background-color: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      border: 1px solid #eaeaea;
+      min-height: 300px;
+    }
+    
+    .sample-content {
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    
+    .word-count {
+      display: inline-block;
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    
+    .footer {
+      background-color: var(--heading-color);
+      color: #f8f9fa;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 1.1rem;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .footer strong {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        min-width: 120px;
+      }
+      
+      .container {
+        padding: 1.5rem 1rem 4rem;
+      }
+    }
+    
+    .format-example {
+      background-color: #f5f5f5;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      font-family: 'Courier New', monospace;
+      border-left: 4px solid var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Leave Application Writing</h1>
+    <div class="subtitle">For SEE Examination Preparation</div>
+    <div class="word-limit">Word Limit: 150 words</div>
+  </div>
+  
+  <div class="container">
+    <div class="grid-layout">
+      <div class="instructions">
+        <h2>Instructions for Writing Leave Applications</h2>
+        <ul>
+          <li><span class="highlight">Be concise and to the point</span> - Remember the 150-word limit.</li>
+          <li><span class="highlight">Use proper format</span> - Include sender's address, date, salutation, subject, body, closing, and signature.</li>
+          <li><span class="highlight">State the purpose clearly</span> - Mention the type of leave and duration upfront.</li>
+          <li><span class="highlight">Provide a valid reason</span> - Be honest and specific about why you need leave.</li>
+          <li><span class="highlight">Mention arrangements made</span> - If applicable, state how your responsibilities will be handled.</li>
+          <li><span class="highlight">Use polite and formal language</span> - Maintain a respectful tone throughout.</li>
+          <li><span class="highlight">Proofread carefully</span> - Check for spelling, grammar, and punctuation errors.</li>
+        </ul>
+        
+        <div class="important-note">
+          <strong>Important:</strong> A leave application is a formal document. Always address the recipient properly (e.g., "Respected Sir/Madam") and end with a polite closing (e.g., "Yours faithfully").
+        </div>
+      </div>
+      
+      <div class="structure">
+        <h2>Structure of a Leave Application</h2>
+        
+        <div class="format-example">
+          <strong>1. Sender's Address</strong> (Top left)<br>
+          <strong>2. Date</strong> (Below address)<br>
+          <strong>3. Recipient's Address</strong><br>
+          <strong>4. Salutation</strong> (Respected Sir/Madam)<br>
+          <strong>5. Subject Line</strong> (Clear and concise)<br>
+          <strong>6. Body Paragraphs:</strong><br>
+          &nbsp;&nbsp;- Introduction & purpose<br>
+          &nbsp;&nbsp;- Reason for leave<br>
+          &nbsp;&nbsp;- Duration of leave<br>
+          &nbsp;&nbsp;- Arrangements made (if any)<br>
+          <strong>7. Closing</strong> (Yours faithfully/obediently)<br>
+          <strong>8. Signature</strong><br>
+          <strong>9. Your Name</strong>
+        </div>
+        
+        <h3>Key Phrases to Use</h3>
+        <ul>
+          <li>"I am writing to request leave for..."</li>
+          <li>"I would be grateful if you could grant me leave..."</li>
+          <li>"I assure you that I will complete my pending work..."</li>
+          <li>"Thank you for considering my request."</li>
+        </ul>
+      </div>
+      
+      <div class="samples-container">
+        <h2>Sample Leave Applications</h2>
+        <p>Click on any button below to view a sample leave application:</p>
+        
+        <div class="btn-container">
+          <button class="btn active" onclick="loadSample(1)">Sick Leave</button>
+          <button class="btn" onclick="loadSample(2)">Family Function</button>
+          <button class="btn" onclick="loadSample(3)">Educational Tour</button>
+          <button class="btn" onclick="loadSample(4)">Personal Work</button>
+          <button class="btn" onclick="loadSample(5)">Marriage Leave</button>
+        </div>
+        
+        <div class="sample-box">
+          <div id="sampleContent">
+            <!-- Sample content will be loaded here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
+  </footer>
+  
+  <script>
+    const samples = [
+      {
+        title: "Sick Leave Application",
+        content: `To,
+The Principal,
+Greenland Secondary School,
+Kathmandu, Nepal.
+
+Date: 15th March, 2024
+
+Subject: Application for sick leave
+
+Respected Sir/Madam,
+
+I am writing to request sick leave for three days from 16th to 18th March 2024. I have been diagnosed with viral fever and severe body aches, and my doctor has advised complete rest.
+
+I visited the hospital yesterday, and the doctor confirmed that I need proper rest and medication for recovery. Attached is the medical certificate for your reference.
+
+I will complete all pending assignments once I return to school. I have also informed my class teacher about my absence and will collect notes from my classmates.
+
+I would be grateful if you could grant me leave for the mentioned period. Thank you for your understanding.
+
+Yours faithfully,
+[Your Signature]
+Anita Sharma
+Grade 10, Roll No. 12`,
+        wordCount: "Word count: 145 words"
+      },
+      {
+        title: "Leave for Family Function",
+        content: `To,
+The Class Teacher,
+Grade 10,
+Bright Future Secondary School,
+Pokhara, Nepal.
+
+Date: 5th April, 2024
+
+Subject: Application for leave to attend a family function
+
+Respected Sir/Madam,
+
+I am writing to request a leave of absence for two days, 8th and 9th April 2024, to attend my elder sister's wedding ceremony in our hometown.
+
+The wedding is a significant family event, and my presence is required for traditional rituals and ceremonies. All our relatives will be gathering for this occasion, and it is important for me to participate.
+
+I will ensure that I collect all notes and assignments from my classmates to keep up with the studies. I have also informed my subject teachers about my temporary absence.
+
+I kindly request you to grant me leave for these two days. I will be grateful for your approval.
+
+Thank you for your consideration.
+
+Yours obediently,
+[Your Signature]
+Rohan Thapa
+Grade 10, Roll No. 24`,
+        wordCount: "Word count: 138 words"
+      },
+      {
+        title: "Leave for Educational Tour",
+        content: `To,
+The Principal,
+Mount Everest Secondary School,
+Dharan, Nepal.
+
+Date: 10th February, 2024
+
+Subject: Application for leave for educational tour
+
+Respected Sir/Madam,
+
+I am writing to request permission for a five-day leave from 15th to 19th February 2024 to participate in an educational tour organized by our school's science club.
+
+The tour includes visits to scientific institutions, museums, and research centers in Kathmandu Valley. This is an excellent opportunity to gain practical knowledge beyond our textbooks, which will help in my SEE preparation.
+
+Our science teacher, Mr. Bikram Gurung, is leading this tour, and all necessary arrangements have been made. I have already discussed with my classmates to share notes and assignments during my absence.
+
+I assure you that this educational experience will greatly benefit my studies. I would be grateful for your approval.
+
+Thank you for your understanding.
+
+Yours faithfully,
+[Your Signature]
+Sita Rai
+Grade 10, Roll No. 08`,
+        wordCount: "Word count: 142 words"
+      },
+      {
+        title: "Leave for Personal Work",
+        content: `To,
+The Class Teacher,
+Grade 10,
+Model Secondary School,
+Biratnagar, Nepal.
+
+Date: 22nd May, 2024
+
+Subject: Application for one-day leave for personal work
+
+Respected Sir/Madam,
+
+I am writing to request a one-day leave on 25th May 2024 for some urgent personal work. I need to visit the passport office with my family to complete important documentation procedures.
+
+My father has scheduled an appointment that cannot be rescheduled, and my presence is required for biometric verification and document submission. This process is essential for our upcoming family travel plans.
+
+I will complete all school assignments in advance and ensure that I do not miss any important lessons. I have already informed my subject teachers about my absence.
+
+I kindly request you to grant me leave for this single day. I appreciate your understanding in this matter.
+
+Thank you for your consideration.
+
+Yours obediently,
+[Your Signature]
+Kiran K.C.
+Grade 10, Roll No. 15`,
+        wordCount: "Word count: 139 words"
+      },
+      {
+        title: "Leave for Marriage Ceremony",
+        content: `To,
+The Principal,
+Shree Janak Secondary School,
+Janakpur, Nepal.
+
+Date: 8th November, 2024
+
+Subject: Application for marriage leave
+
+Respected Sir/Madam,
+
+I am writing to request a four-day leave from 12th to 15th November 2024 for my cousin's marriage ceremony. As a close family member, I am involved in various pre-wedding rituals and ceremonies.
+
+This is an important family event where relatives from different parts of the country will gather. My presence is required to participate in traditional customs and assist with wedding arrangements.
+
+I will collect all class notes and assignments from my friends to stay updated with my studies. I have also discussed with my teachers regarding any important material covered during my absence.
+
+I would be grateful if you could approve my leave request. Thank you for your understanding.
+
+Yours faithfully,
+[Your Signature]
+Priya Yadav
+Grade 10, Roll No. 19`,
+        wordCount: "Word count: 136 words"
+      }
+    ];
+
+    // Initialize with first sample
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSample(1);
+    });
+
+    function loadSample(index) {
+      const sampleContent = document.getElementById('sampleContent');
+      const buttons = document.querySelectorAll('.btn');
+      
+      // Remove active class from all buttons
+      buttons.forEach(button => button.classList.remove('active'));
+      
+      // Add active class to clicked button
+      buttons[index-1].classList.add('active');
+      
+      // Display sample content
+      sampleContent.innerHTML = `
+        <h3>${samples[index-1].title}</h3>
+        <div class="sample-content">${samples[index-1].content}</div>
+        <div class="word-count">${samples[index-1].wordCount}</div>
+      `;
+    }
+  </script>
+</body>
+</html>

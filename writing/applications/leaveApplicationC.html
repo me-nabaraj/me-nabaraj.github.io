@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Application Writing</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0d47a1;
+      font-size: 2.6rem;
+      margin: 20px 0;
+    }
+
+    .wrapper {
+      max-width: 950px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-left: 8px solid #2196f3;
+      padding: 20px 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+      color: #1565c0;
+      margin-bottom: 12px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .note {
+      background: #e1f5fe;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #01579b;
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      padding: 12px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #0d47a1;
+      transform: translateY(-2px);
+    }
+
+    .sample-box {
+      background: #fffde7;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.08);
+      margin-bottom: 80px;
+    }
+
+    .sample-box h2 {
+      color: #f57f17;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 1.1rem;
+    }
+
+    footer strong {
+      color: #ffeb3b;
+    }
+
+    @media(max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Leave Application Writing</h1>
+
+  <div class="wrapper">
+
+    <!-- Instructions -->
+    <div class="card">
+      <h2>How to Write a Leave Application (SEE Focus)</h2>
+      <ul>
+        <li>Follow a formal format: address, subject, salutation, body, and closing.</li>
+        <li>Clearly mention the reason for leave and the duration.</li>
+        <li>Use polite and respectful language.</li>
+        <li>Keep it brief and relevant. Avoid unnecessary details.</li>
+        <li>Word limit should not exceed <strong>150 words</strong>.</li>
+        <li>End with a proper closing like <em>Yours obediently</em> or <em>Sincerely</em>.</li>
+      </ul>
+    </div>
+
+    <div class="note">
+      ✍️ SEE Tip: Marks are awarded for format, clarity, grammar, and relevance.
+    </div>
+
+    <br>
+
+    <!-- Buttons -->
+    <div class="btn-group">
+      <button class="btn" onclick="loadSample(1)">Sick Leave</button>
+      <button class="btn" onclick="loadSample(2)">Family Function</button>
+      <button class="btn" onclick="loadSample(3)">Urgent Work</button>
+    </div>
+
+    <!-- Sample Output -->
+    <div class="sample-box" id="sampleBox">
+      <h2>Sample Leave Application</h2>
+      <p>Click any button above to view a sample leave application.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    Content developed by <strong>Nabaraj Dhungana</strong>
+  </footer>
+
+  <script>
+    const samples = [
+      {
+        title: "Application for Sick Leave",
+        content: `
+        <p>
+        To<br>
+        The Principal<br>
+        Paschimanchal English School<br>
+        Siddharthanagar
+        </p>
+
+        <p><strong>Subject:</strong> Application for Sick Leave</p>
+
+        <p>
+        Respected Sir,<br><br>
+        I respectfully request to inform you that I am suffering from fever and severe headache. 
+        As advised by the doctor, I need complete rest for two days. Therefore, I kindly request 
+        you to grant me leave from 10th to 11th Baisakh.
+        </p>
+
+        <p>
+        I assure you that I will complete all the missed lessons and assignments after returning to school. 
+        I shall be very grateful to you for your kind consideration.
+        </p>
+
+        <p>
+        Yours obediently,<br>
+        XYZ<br>
+        Class X
+        </p>
+        `
+      },
+      {
+        title: "Application for Leave due to Family Function",
+        content: `
+        <p>
+        To<br>
+        The Principal<br>
+        Paschimanchal English School<br>
+        Siddharthanagar
+        </p>
+
+        <p><strong>Subject:</strong> Application for Leave</p>
+
+        <p>
+        Respected Sir,<br><br>
+        I would like to inform you that I have to attend an important family function at my hometown. 
+        Due to this reason, I will not be able to attend school for two days from 12th to 13th Baisakh.
+        </p>
+
+        <p>
+        I kindly request you to grant me leave for the mentioned days. 
+        I promise to complete my classwork promptly after returning.
+        </p>
+
+        <p>
+        Yours sincerely,<br>
+        XYZ<br>
+        Class X
+        </p>
+        `
+      },
+      {
+        title: "Application for Urgent Work",
+        content: `
+        <p>
+        To<br>
+        The Principal<br>
+        Paschimanchal English School<br>
+        Siddharthanagar
+        </p>
+
+        <p><strong>Subject:</strong> Application for Urgent Leave</p>
+
+        <p>
+        Respected Sir,<br><br>
+        I respectfully inform you that due to some urgent personal work at home, 
+        I will be unable to attend school tomorrow.
+        </p>
+
+        <p>
+        Therefore, I kindly request you to grant me leave for one day. 
+        I shall be thankful to you for your kind support.
+        </p>
+
+        <p>
+        Yours obediently,<br>
+        XYZ<br>
+        Class X
+        </p>
+        `
+      }
+    ];
+
+    function loadSample(index) {
+      const box = document.getElementById("sampleBox");
+      box.innerHTML = `
+        <h2>${samples[index - 1].title}</h2>
+        ${samples[index - 1].content}
+      `;
+    }
+  </script>
+
+</body>
+</html>

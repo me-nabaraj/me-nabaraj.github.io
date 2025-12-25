@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Writing Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .instructions h2 {
+            color: #3498db;
+            margin-top: 0;
+        }
+        
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .sample-btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .sample-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .sample-btn.active {
+            background-color: #2c3e50;
+        }
+        
+        .letter-sample {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(20px);
+        }
+        
+        .letter-sample.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Formal Letter Layout */
+        .formal-letter {
+            padding: 40px;
+            position: relative;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .formal-letter-heading {
+            text-align: right;
+            margin-bottom: 30px;
+        }
+        
+        .formal-letter-address {
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .formal-letter-date {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .formal-letter-salutation {
+            margin-bottom: 15px;
+        }
+        
+        .formal-letter-body {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .formal-letter-closing {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .formal-letter-signature {
+            margin-top: 50px;
+        }
+        
+        /* Informal Letter Layout */
+        .informal-letter {
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .informal-letter-date {
+            text-align: right;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .informal-letter-salutation {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .informal-letter-body {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .informal-letter-closing {
+            margin-top: 30px;
+            font-style: italic;
+        }
+        
+        /* Application Letter Layout */
+        .application-letter {
+            padding: 30px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+        
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .application-subject {
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        /* Decorative Elements */
+        .letter-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .decoration-1 {
+            top: 20px;
+            left: 20px;
+            border-left: 3px solid #3498db;
+            border-top: 3px solid #3498db;
+        }
+        
+        .decoration-2 {
+            bottom: 20px;
+            right: 20px;
+            border-right: 3px solid #3498db;
+            border-bottom: 3px solid #3498db;
+        }
+
+        /* Sticky Footer */
+        .footer {
+            background: #343a40;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .footer strong {
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .footer p {
+            margin: 0;
+            padding: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .instructions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .sample-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .formal-letter, .informal-letter, .application-letter {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Letter Writing Guide</h1>
+    
+    <div class="instructions">
+        <div class="instructions-grid">
+            <div>
+                <h2>Formal Letter Instructions</h2>
+                <ol>
+                    <li><strong>Sender's Address</strong> -- Place your address at the top right</li>
+                    <li><strong>Date</strong> -- Write the date below your address</li>
+                    <li><strong>Recipient's Address</strong> -- Left-align below the date</li>
+                    <li><strong>Salutation</strong> -- Use "Dear [Title] [Last Name]:"</li>
+                    <li><strong>Subject Line</strong> -- Briefly state the purpose</li>
+                    <li><strong>Body</strong> -- Divide into clear paragraphs</li>
+                    <li><strong>Closing</strong> -- Use "Yours sincerely" or "Yours faithfully"</li>
+                    <li><strong>Signature</strong> -- Leave space for handwritten signature</li>
+                    <li><strong>Printed Name</strong> -- Include below signature</li>
+                    <li><strong>Enclosures</strong> -- Note if documents are attached</li>
+                </ol>
+            </div>
+            <div>
+                <h2>Informal Letter Instructions</h2>
+                <ol>
+                    <li><strong>Date</strong> -- Optional, can be at the top right</li>
+                    <li><strong>Salutation</strong> -- Use first name (e.g., "Dear Sarah,")</li>
+                    <li><strong>Opening</strong> -- Start with friendly greeting</li>
+                    <li><strong>Body</strong> -- Write conversationally in paragraphs</li>
+                    <li><strong>Closing</strong> -- Use warm phrases ("Best wishes," "Love,")</li>
+                    <li><strong>Signature</strong> -- Just your first name is fine</li>
+                    <li><strong>Tone</strong> -- Keep it personal and friendly</li>
+                    <li><strong>Content</strong> -- Share news, ask questions</li>
+                    <li><strong>Length</strong> -- Can be short or long as needed</li>
+                    <li><strong>Format</strong> -- More flexible than formal letters</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <div class="button-container">
+        <button class="sample-btn active" id="btnInformal1">Informal 1</button>
+        <button class="sample-btn" id="btnInformal2">Informal 2</button>
+        <button class="sample-btn" id="btnFormal1">Formal Business</button>
+        <button class="sample-btn" id="btnFormal2">Formal Complaint</button>
+        <button class="sample-btn" id="btnApplication1">Job Application</button>
+        <button class="sample-btn" id="btnApplication2">Leave Application</button>
+    </div>
+    
+    <!-- Informal Letter 1 -->
+    <div class="letter-sample visible" id="informal1">
+        <div class="informal-letter">
+            <div class="informal-letter-date">May 15, 2024</div>
+            <div class="informal-letter-salutation">Dear Anjali,</div>
+            <div class="informal-letter-body">
+                <p>I hope this letter finds you well. It's been too long since we last met, and I wanted to catch up and share some exciting news.</p>
+                <p>I've recently moved to Pokhara for a new job opportunity, and I'm absolutely loving the city. The view of the mountains every morning is breathtaking! My new apartment is small but cozy, and it's just a short walk from Phewa Lake.</p>
+                <p>How have you been? How's your new teaching position working out? I'd love to hear all about your experiences. Let's plan to meet up during the Dashain holidays - maybe we could take that trip to Chitwan we always talked about?</p>
+                <p>Please write back when you get a chance. I've included some photos of my new place and the amazing mountain views.</p>
+            </div>
+            <div class="informal-letter-closing">
+                <p>Looking forward to hearing from you,</p>
+                <p>Ramesh</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Informal Letter 2 -->
+    <div class="letter-sample" id="informal2">
+        <div class="informal-letter">
+            <div class="informal-letter-date">June 3, 2024</div>
+            <div class="informal-letter-salutation">Dear Grandma,</div>
+            <div class="informal-letter-body">
+                <p>Thank you so much for the beautiful sweater you knitted for me. It fits perfectly and is so warm! I've been wearing it every evening when it gets chilly.</p>
+                <p>School is going well. I got full marks on my science project about renewable energy, and my teacher said it might be selected for the district competition. I'll let you know if that happens!</p>
+                <p>Mom says we'll be visiting you during the summer vacation. I can't wait to see you and eat your delicious sel roti. I've been practicing making them with Mom, but they never turn out as good as yours.</p>
+                <p>Please take care of your health and don't work too hard in the garden. Say hello to Grandpa for me.</p>
+            </div>
+            <div class="informal-letter-closing">
+                <p>With love,</p>
+                <p>Sarita</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formal Business Letter -->
+    <div class="letter-sample" id="formal1">
+        <div class="formal-letter">
+            <div class="letter-decoration decoration-1"></div>
+            <div class="letter-decoration decoration-2"></div>
+            <div class="formal-letter-heading">
+                <p>Sunrise Business Solutions</p>
+                <p>123 Trade Road, Kathmandu</p>
+                <p>Phone: 01-4567890</p>
+            </div>
+            <div class="formal-letter-date">May 20, 2024</div>
+            <div class="formal-letter-address">
+                <p>Mr. Amit Sharma</p>
+                <p>Procurement Manager</p>
+                <p>Everest Trading Company</p>
+                <p>456 Business Avenue, Lalitpur</p>
+            </div>
+            <div class="formal-letter-salutation">Dear Mr. Sharma,</div>
+            <div class="formal-letter-body">
+                <p>I am writing to propose a business partnership between our companies regarding the upcoming office supply contract you advertised in last week's Business Times.</p>
+                <p>Sunrise Business Solutions has been providing quality office equipment and supplies to Kathmandu Valley businesses for over 15 years. We offer competitive pricing, reliable delivery, and exceptional after-sales service that we believe would benefit your organization.</p>
+                <p>Enclosed please find our catalog and price list for your review. I would appreciate the opportunity to meet with you to discuss how we might tailor our services to meet Everest Trading's specific needs.</p>
+            </div>
+            <div class="formal-letter-closing">Yours sincerely,</div>
+            <div class="formal-letter-signature">
+                <p>Rajiv Gurung</p>
+                <p>Sales Director</p>
+                <p>Sunrise Business Solutions</p>
+            </div>
+            <p>Enclosures: Product Catalog, Price List</p>
+        </div>
+    </div>
+    
+    <!-- Formal Complaint Letter -->
+    <div class="letter-sample" id="formal2">
+        <div class="formal-letter">
+            <div class="letter-decoration decoration-1"></div>
+            <div class="letter-decoration decoration-2"></div>
+            <div class="formal-letter-heading">
+                <p>Mrs. Sunita Maharjan</p>
+                <p>45 Green Valley Colony</p>
+                <p>Bhaktapur, Nepal</p>
+                <p>Phone: 9841234567</p>
+            </div>
+            <div class="formal-letter-date">June 1, 2024</div>
+            <div class="formal-letter-address">
+                <p>Customer Service Manager</p>
+                <p>City Power Utility</p>
+                <p>Main Office, Kathmandu</p>
+            </div>
+            <div class="formal-letter-salutation">Dear Sir/Madam,</div>
+            <div class="formal-letter-body">
+                <p>I am writing to formally complain about the inconsistent electricity supply in our area (Green Valley Colony) over the past three weeks.</p>
+                <p>Despite paying our bills promptly, we have been experiencing daily power cuts lasting 6-8 hours without any prior notice. This has caused significant inconvenience, including spoiled food and inability to work from home. Our repeated calls to your helpline have yielded no solution.</p>
+                <p>I request you to immediately address this issue and provide compensation for our losses. Please inform me of the steps being taken to resolve this matter.</p>
+            </div>
+            <div class="formal-letter-closing">Yours faithfully,</div>
+            <div class="formal-letter-signature">
+                <p>Sunita Maharjan</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Job Application Letter -->
+    <div class="letter-sample" id="application1">
+        <div class="application-letter">
+            <div class="application-header">
+                <div>
+                    <p>Anjali Shrestha</p>
+                    <p>Baneshwor, Kathmandu</p>
+                    <p>Phone: 9812345678</p>
+                    <p>Email: anjali.s@email.com</p>
+                </div>
+                <div class="formal-letter-date">June 5, 2024</div>
+            </div>
+            <div class="formal-letter-address">
+                <p>HR Manager</p>
+                <p>Tech Solutions Nepal</p>
+                <p>Durbar Marg, Kathmandu</p>
+            </div>
+            <div class="application-subject">Subject: Application for Marketing Associate Position (Job Ref: TS2024-05)</div>
+            <div class="formal-letter-salutation">Dear Hiring Manager,</div>
+            <div class="formal-letter-body">
+                <p>I am excited to apply for the Marketing Associate position at Tech Solutions Nepal as advertised on your website. With my Bachelor's degree in Marketing and two years of experience at Digital Creations, I believe I have the skills and enthusiasm to contribute to your team.</p>
+                <p>In my current role, I have successfully managed social media campaigns that increased engagement by 40% and helped launch a new product line that exceeded sales targets by 25%. I am particularly drawn to Tech Solutions' innovative approach and would welcome the opportunity to bring my digital marketing skills to your company.</p>
+                <p>Enclosed is my resume with additional details about my qualifications. I would appreciate the opportunity to discuss how my experience aligns with your needs. Thank you for your time and consideration.</p>
+            </div>
+            <div class="formal-letter-closing">Sincerely,</div>
+            <div class="formal-letter-signature">
+                <p>Anjali Shrestha</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Leave Application Letter -->
+    <div class="letter-sample" id="application2">
+        <div class="application-letter">
+            <div class="application-header">
+                <div>
+                    <p>Rohit Kumar</p>
+                    <p>Class 10, Section B</p>
+                    <p>Roll No: 25</p>
+                </div>
+                <div class="formal-letter-date">June 10, 2024</div>
+            </div>
+            <div class="formal-letter-address">
+                <p>The Principal</p>
+                <p>Bright Future Academy</p>
+                <p>Lalitpur, Nepal</p>
+            </div>
+            <div class="application-subject">Subject: Application for 3 Days Leave</div>
+            <div class="formal-letter-salutation">Respected Sir/Madam,</div>
+            <div class="formal-letter-body">
+                <p>I am writing to request your permission for a 3-day leave from June 15 to June 17, 2024, as I will be traveling with my family to attend my cousin's wedding in Biratnagar.</p>
+                <p>I understand the importance of regular attendance and will ensure to complete all assignments in advance. My friend Suresh has agreed to share notes for any classes I miss. I will return on June 18 and attend school as usual.</p>
+                <p>I kindly request you to grant me leave for these days. Thank you for your consideration.</p>
+            </div>
+            <div class="formal-letter-closing">Yours obediently,</div>
+            <div class="formal-letter-signature">
+                <p>Rohit Kumar</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = [
+                document.getElementById('btnInformal1'),
+                document.getElementById('btnInformal2'),
+                document.getElementById('btnFormal1'),
+                document.getElementById('btnFormal2'),
+                document.getElementById('btnApplication1'),
+                document.getElementById('btnApplication2')
+            ];
+            
+            const samples = [
+                document.getElementById('informal1'),
+                document.getElementById('informal2'),
+                document.getElementById('formal1'),
+                document.getElementById('formal2'),
+                document.getElementById('application1'),
+                document.getElementById('application2')
+            ];
+            
+            function hideAllSamples() {
+                samples.forEach(sample => {
+                    sample.style.display = 'none';
+                    sample.classList.remove('visible');
+                });
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+            }
+            
+            function showSample(sample, button) {
+                hideAllSamples();
+                sample.style.display = 'block';
+                // Trigger reflow to enable transition
+                void sample.offsetWidth;
+                sample.classList.add('visible');
+                button.classList.add('active');
+            }
+            
+            buttons.forEach((button, index) => {
+                button.addEventListener('click', function() {
+                    showSample(samples[index], button);
+                });
+            });
+            
+            // Initially show first sample
+            showSample(samples[0], buttons[0]);
+        });
+    </script>
+</body>
+</html>

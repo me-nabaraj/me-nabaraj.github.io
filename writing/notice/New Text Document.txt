@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Notice Writing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .section {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .section-icon {
+            font-size: 1.3em;
+        }
+
+        /* Fun Interactive Format Display */
+        .format-display {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            border: 5px dashed #ff6b6b;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .format-display:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .format-part {
+            background: white;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 6px solid #667eea;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .format-part:hover {
+            transform: translateX(10px);
+            border-left-color: #ff6b6b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .format-part h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .format-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Speech Bubbles */
+        .speech-bubble {
+            position: relative;
+            background: #fff9e6;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 3px solid #ffd93d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .speech-bubble::before {
+            content: '💬';
+            position: absolute;
+            left: -50px;
+            top: 15px;
+            font-size: 2.5em;
+        }
+
+        .speech-bubble.tip {
+            background: #e8f5e9;
+            border-color: #4caf50;
+        }
+
+        .speech-bubble.tip::before {
+            content: '✨';
+        }
+
+        .speech-bubble.warning {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .speech-bubble.warning::before {
+            content: '⚠️';
+        }
+
+        /* Interactive Rules Cards */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .rule-card {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 3px solid transparent;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: #667eea;
+        }
+
+        .rule-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+
+        .rule-card h3 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .rule-card p {
+            color: #555;
+            text-align: center;
+        }
+
+        /* Sample Notice Display */
+        .notice-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .notice-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notice-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .notice-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .notice-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .notice-btn.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+
+        .notice-display {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .notice-display.active {
+            display: block;
+        }
+
+        /* Actual Notice Format */
+        .notice-board {
+            background: #f5f5f5;
+            border: 10px solid #8b4513;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 700px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .notice-board::before {
+            content: '📌';
+            position: absolute;
+            top: -20px;
+            right: 50px;
+            font-size: 3em;
+            transform: rotate(45deg);
+        }
+
+        .notice-board::after {
+            content: '📌';
+            position: absolute;
+            top: -20px;
+            left: 50px;
+            font-size: 3em;
+            transform: rotate(-45deg);
+        }
+
+        .notice-content {
+            background: white;
+            padding: 30px;
+            border: 2px solid #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .notice-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        .notice-org {
+            font-size: 1.4em;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .notice-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-decoration: underline;
+            margin: 15px 0;
+        }
+
+        .notice-date {
+            text-align: right;
+            margin-bottom: 20px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .notice-body {
+            text-align: justify;
+            line-height: 1.8;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+
+        .notice-signature {
+            text-align: right;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        /* Annotation bubbles */
+        .annotation {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-size: 0.95em;
+        }
+
+        .annotation strong {
+            color: #1976d2;
+        }
+
+        /* Interactive Checklist */
+        .checklist-container {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+        }
+
+        .checklist-container h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            text-align: center;
+        }
+
+        .checklist-item {
+            background: white;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .checklist-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .checkbox {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #667eea;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item.checked .checkbox {
+            background: #4caf50;
+            border-color: #4caf50;
+            color: white;
+        }
+
+        /* Do's and Don'ts */
+        .dos-donts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .dos-box, .donts-box {
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .dos-box {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+
+        .donts-box {
+            background: linear-gradient(135deg, #ffa8a8 0%, #fcb69f 100%);
+        }
+
+        .dos-box h3, .donts-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .dos-box h3::before {
+            content: '✅ ';
+            font-size: 1.2em;
+        }
+
+        .donts-box h3::before {
+            content: '❌ ';
+            font-size: 1.2em;
+        }
+
+        .dos-box ul, .donts-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .dos-box li, .donts-box li {
+            background: white;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .dos-box li:hover, .donts-box li:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.6em;
+            }
+
+            .dos-donts {
+                grid-template-columns: 1fr;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notice-board {
+                padding: 20px;
+            }
+
+            .speech-bubble::before,
+            .speech-bubble.tip::before,
+            .speech-bubble.warning::before {
+                position: static;
+                margin-right: 10px;
+            }
+
+            .notice-board::before,
+            .notice-board::after {
+                font-size: 2em;
+            }
+        }
+
+        /* Pulse animation for important elements */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📢 Master Notice Writing</h1>
+            <p>Learn to write clear, professional notices that grab attention and communicate effectively</p>
+        </header>
+
+        <!-- SECTION 1: WHAT IS A NOTICE -->
+        <div class="section">
+            <h2><span class="section-icon">📋</span> What is a Notice?</h2>
+            
+            <div class="speech-bubble">
+                <strong>A notice is a formal written announcement</strong> that provides important information to a specific group of people. It's designed to be displayed publicly (on bulletin boards, walls, websites) to inform people about events, meetings, changes, or important updates. Think of it as an official memo that everyone needs to see!
+            </div>
+
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <span class="rule-icon">🎯</span>
+                    <h3>Purpose</h3>
+                    <p>To inform, announce, or instruct a large group of people about something important</p>
+                </div>
+
+                <div class="rule-card">
+                    <span class="rule-icon">👥</span>
+                    <h3>Audience</h3>
+                    <p>General public or specific groups like students, employees, club members, residents</p>
+                </div>
+
+                <div class="rule-card">
+                    <span class="rule-icon">📏</span>
+                    <h3>Length</h3>
+                    <p>Short and concise—typically 50-100 words. No unnecessary details!</p>
+                </div>
+
+                <div class="rule-card">
+                    <span class="rule-icon">💼</span>
+                    <h3>Tone</h3>
+                    <p>Formal, direct, and professional. No casual language or emotions</p>
+                </div>
+
+                <div class="rule-card">
+                    <span class="rule-icon">📦</span>
+                    <h3>Format</h3>
+                    <p>Follows a strict structure with a box/border. Always organized and neat</p>
+                </div>
+
+                <div class="rule-card">
+                    <span class="rule-icon">⏰</span>
+                    <h3>Timeliness</h3>
+                    <p>Posted well in advance with clear dates, times, and deadlines</p>
+                </div>
+            </div>
+
+            <div class="speech-bubble tip">
+                <strong>Remember the 5 W's:</strong> A good notice answers Who, What, When, Where, and Why (if necessary). Keep it clear, keep it brief, and make every word count!
+            </div>
+        </div>
+
+        <!-- SECTION 2: NOTICE FORMAT -->
+        <div class="section">
+            <h2><span class="section-icon">🏗️</span> The Perfect Notice Format</h2>
+
+            <div class="speech-bubble warning">
+                <strong>Format is everything!</strong> A notice must follow a specific structure. Missing even one element can cost you marks. Let's break down each component:
+            </div>
+
+            <div class="format-display">
+                <div class="format-part">
+                    <span class="format-label">Part 1</span>
+                    <h3>📍 Organization/Institution Name</h3>
+                    <p><strong>Position:</strong> Top center, in capital letters</p>
+                    <p><strong>Example:</strong> GREENWOOD HIGH SCHOOL</p>
+                    <p><strong>Purpose:</strong> Identifies who is issuing the notice</p>
+                </div>
+
+                <div class="format-part">
+                    <span class="format-label">Part 2</span>
+                    <h3>📢 The Word "NOTICE"</h3>
+                    <p><strong>Position:</strong> Center, below the organization name, underlined</p>
+                    <p><strong>Format:</strong> All capitals, underlined</p>
+                    <p><strong>Purpose:</strong> Immediately identifies the document type</p>
+                </div>
+
+                <div class="format-part">
+                    <span class="format-label">Part 3</span>
+                    <h3>📅 Date</h3>
+                    <p><strong>Position:</strong> Left side, below "NOTICE"</p>
+                    <p><strong>Format:</strong> Day Month, Year (e.g., 15 March, 2024)</p>
+                    <p><strong>Purpose:</strong> Shows when the notice was issued</p>
+                </div>
+
+                <div class="format-part">
+                    <span class="format-label">Part 4</span>
+                    <h3>💭 Subject/Heading</h3>
+                    <p><strong>Position:</strong> Center or left, brief and specific</p>
+                    <p><strong>Example:</strong> Subject: Annual Sports Day Postponement</p>
+                    <p><strong>Purpose:</strong> Summarizes the main topic in one line</p>
+                </div>
+
+                <div class="format-part">
+                    <span class="format-label">Part 5</span>
+                    <h3>📝 Body</h3>
+                    <p><strong>Content:</strong> The main message with all essential details</p>
+                    <p><strong>Structure:</strong> 3-5 sentences covering Who, What, When, Where, Why/How</p>
+                    <p><strong>Style:</strong> Third person, passive voice, formal language</p>
+                </div>
+
+                <div class="format-part">
+                    <span class="format-label">Part 6</span>
+                    <h3>✍️ Signature</h3>
+                    <p><strong>Position:</strong> Right side at the bottom</p>
+                    <p><strong>Content:</strong> Name and designation of the issuer</p>
+                    <p><strong>Example:</strong> John Smith<br>Sports Secretary</p>
+                </div>
+            </div>
+
+            <div class="speech-bubble tip">
+                <strong>Pro Tip:</strong> Always enclose your notice in a box or border! This is a non-negotiable requirement that makes it look professional and official.
+            </div>
+        </div>
+
+        <!-- SECTION 3: DOS AND DON'TS -->
+        <div class="section">
+            <h2><span class="section-icon">⚖️</span> Do's and Don'ts of Notice Writing</h2>
+
+            <div class="dos-donts">
+                <div class="dos-box">
+                    <h3>Do's</h3>
+                    <ul>
+                        <li>✓ Use a box or border around the entire notice</li>
+                        <li>✓ Keep it brief—50 to 100 words maximum</li>
+                        <li>✓ Use formal, official language</li>
+                        <li>✓ Write in third person (avoid "I" or "We")</li>
+                        <li>✓ Include all essential details (date, time, venue)</li>
+                        <li>✓ Put the most important information first</li>
+                        <li>✓ Use passive voice where appropriate</li>
+                        <li>✓ Proofread for grammar and spelling</li>
+                        <li>✓ Include contact information if needed</li>
+                        <li>✓ Make headings bold or underlined</li>
+                    </ul>
+                </div>
+
+                <div class="donts-box">
+                    <h3>Don'ts</h3>
+                    <ul>
+                        <li>✗ Don't write in paragraph form—use points</li>
+                        <li>✗ Don't use casual or emotional language</li>
+                        <li>✗ Don't exceed the word limit</li>
+                        <li>✗ Don't forget to sign with name and designation</li>
+                        <li>✗ Don't use abbreviations (write "Physical Education" not "PE")</li>
+                        <li>✗ Don't include unnecessary details</li>
+                        <li>✗ Don't forget to mention the date and time</li>
+                        <li>✗ Don't use decorative fonts or colors</li>
+                        <li>✗ Don't write complete sentences when points work better</li>
+                        <li>✗ Don't forget the box/border!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist-container">
+                <h3>✅ Your Notice Writing Checklist</h3>
+                <p style="text-align: center; margin-bottom: 20px; color: #555;">Click each item as you complete it!</p>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Notice is enclosed in a box/border</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Organization name at the top in capitals</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>The word "NOTICE" is centered and underlined</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Date is mentioned on the left side</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Subject/heading clearly states the topic</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Body includes all 5 W's (Who, What, When, Where, Why)</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Language is formal and third person</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Word count is between 50-100 words</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Signature with name and designation on the right</span>
+                </div>
+                <div class="checklist-item" onclick="toggleCheck(this)">
+                    <div class="checkbox">✓</div>
+                    <span>Proofread for spelling and grammar errors</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: SAMPLE NOTICES -->
+        <div class="section">
+            <h2><span class="section-icon">📚</span> Sample Notices - Learn from Examples</h2>
+
+            <div class="speech-bubble">
+                <strong>Study these sample notices carefully!</strong> Each one follows the correct format and demonstrates different scenarios. Click the buttons below to view different examples and see how the format stays consistent while the content changes.
+            </div>
+
+            <div class="notice-selector">
+                <button class="notice-btn active" onclick="showNotice('lost-found')">
+                    📦<br>Lost & Found
+                </button>
+                <button class="notice-btn" onclick="showNotice('sports-day')">
+                    🏆<br>Sports Event
+                </button>
+                <button class="notice-btn" onclick="showNotice('meeting')">
+                    👥<br>Meeting Notice
+                </button>
+                <button class="notice-btn" onclick="showNotice('excursion')">
+                    🚌<br>Educational Trip
+                </button>
+            </div>
+
+            <!-- Lost and Found Notice -->
+            <div class="notice-display active" id="lost-found">
+                <h3 style="color: #667eea; margin-bottom: 20px; text-align: center;">Sample 1: Lost and Found Notice</h3>
+                
+                <div class="notice-board">
+                    <div class="notice-content">
+                        <div class="notice-header">
+                            <div class="notice-org">RIVERSIDE HIGH SCHOOL</div>
+                            <div class="notice-title">NOTICE</div>
+                        </div>
+                        
+                        <div class="notice-date">17 December, 2025</div>
+                        
+                        <div style="margin-bottom: 15px;"><strong>Subject: Lost School Bag</strong></div>
+                        
+                        <div class="notice-body">
+                            This is to inform all students that a blue school bag containing textbooks and notebooks has been found near the basketball court. The bag has a "Marvel" sticker on the front pocket. The owner can collect the bag from the school office during break time by providing proper identification and describing the contents. The last date to claim the bag is 24 December, 2025. After this date, the bag will be donated to charity.
+                        </div>
+                        
+                        <div class="notice-signature">
+                            Priya Sharma<br>
+                            Head Girl
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotation">
+                    <strong>Analysis:</strong><br>
+                    ✓ <strong>Clear purpose:</strong> Announces found item<br>
+                    ✓ <strong>Essential details:</strong> Description, location where found, claim procedure<br>
+                    ✓ <strong>Deadline mentioned:</strong> Last date to claim<br>
+                    ✓ <strong>Formal tone:</strong> "This is to inform," professional language<br>
+                    ✓ <strong>Complete format:</strong> All 6 components present
+                </div>
+            </div>
+
+            <!-- Sports Day Notice -->
+            <div class="notice-display" id="sports-day">
+                <h3 style="color: #667eea; margin-bottom: 20px; text-align: center;">Sample 2: Sports Day Announcement</h3>
+                
+                <div class="notice-board">
+                    <div class="notice-content">
+                        <div class="notice-header">
+                            <div class="notice-org">ST. XAVIER'S SCHOOL</div>
+                            <div class="notice-title">NOTICE</div>
+                        </div>
+                        
+                        <div class="notice-date">17 December, 2025</div>
+                        
+                        <div style="margin-bottom: 15px;"><strong>Subject: Annual Sports Day - 2025</strong></div>
+                        
+                        <div class="notice-body">
+                            All students are hereby informed that the Annual Sports Day will be held on 5 January, 2026, at the school sports ground from 8:00 AM to 2:00 PM. Students interested in participating in various events such as 100m race, long jump, shot put, and relay races must register their names with their respective Physical Education teachers by 28 December, 2025. Parents and guardians are cordially invited to attend the event. Participation is mandatory for all students in at least one event.
+                        </div>
+                        
+                        <div class="notice-signature">
+                            Rajesh Kumar<br>
+                            Sports Secretary
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotation">
+                    <strong>Analysis:</strong><br>
+                    ✓ <strong>Complete event details

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Job Application Writing</title>
+  <style>
+    :root {
+      --primary: #1a237e;
+      --primary-light: #534bae;
+      --secondary: #ff6f00;
+      --secondary-light: #ff9e40;
+      --accent: #00b8d4;
+      --light: #f5f7ff;
+      --dark: #0d1b2a;
+      --success: #2e7d32;
+      --card-bg: #ffffff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7ff 0%, #e3f2fd 100%);
+      color: var(--dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+    
+    /* Creative Header */
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      padding: 2.5rem 1rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(26, 35, 126, 0.2);
+    }
+    
+    .header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path fill="white" d="M30,30 Q50,10 70,30 T90,30 T70,50 T90,70 T70,90 T50,70 T30,90 T10,70 T30,50 T10,30 Z"/></svg>');
+      background-size: 80px;
+      opacity: 0.1;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(to right, #fff, #ffecb3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .subtitle {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 0.6rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(255, 111, 0, 0.3);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: -2rem auto 0;
+      padding: 0 1rem;
+    }
+    
+    /* Interactive Cards */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent);
+    }
+    
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+    }
+    
+    .card-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: white;
+      box-shadow: 0 5px 15px rgba(26, 35, 126, 0.2);
+    }
+    
+    .card h2 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+    
+    .card h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--secondary);
+    }
+    
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .card li {
+      padding: 0.5rem 0;
+      position: relative;
+      padding-left: 1.8rem;
+    }
+    
+    .card li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+    
+    /* Format Guide */
+    .format-guide {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-left: 8px solid var(--secondary);
+    }
+    
+    .format-guide h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .format-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    
+    .step {
+      flex: 1;
+      min-width: 250px;
+      background: var(--light);
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin: 0 auto 1rem;
+      box-shadow: 0 5px 15px rgba(26, 35, 126, 0.2);
+    }
+    
+    /* Sample Applications Section */
+    .samples-section {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    
+    .samples-section h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .job-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+    
+    .tab-btn {
+      background: var(--light);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .tab-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      box-shadow: 0 8px 20px rgba(26, 35, 126, 0.3);
+    }
+    
+    .tab-icon {
+      font-size: 1.2rem;
+    }
+    
+    .sample-content {
+      background: var(--light);
+      padding: 2.5rem;
+      border-radius: 15px;
+      min-height: 400px;
+      border: 2px dashed var(--accent);
+      position: relative;
+      overflow: auto;
+    }
+    
+    .sample-header {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--accent);
+    }
+    
+    .sample-body {
+      white-space: pre-line;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    
+    .word-count {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    /* Tips Section */
+    .tips-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .tip-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    
+    .tip-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+      position: relative;
+    }
+    
+    .footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+    }
+    
+    .footer strong {
+      color: var(--secondary-light);
+      font-weight: 700;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .tab-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .sample-content {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header {
+        padding: 1.8rem 1rem;
+      }
+      
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .format-steps {
+        flex-direction: column;
+      }
+    }
+    
+    /* Print-friendly class */
+    .print-only {
+      display: none;
+    }
+    
+    @media print {
+      .no-print {
+        display: none;
+      }
+      .print-only {
+        display: block;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="header-content">
+      <h1>Professional Job Application Writing</h1>
+      <div class="subtitle">Master the art of writing compelling job applications for SEE Examination</div>
+      <div class="badge">
+        <i class="fas fa-briefcase"></i> Key to Professional Success
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Essential Elements Cards -->
+    <section class="cards-grid">
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <h2>Essential Elements</h2>
+        <ul>
+          <li>Sender's address & contact details</li>
+          <li>Date of application</li>
+          <li>Recipient's address</li>
+          <li>Clear subject line</li>
+          <li>Professional salutation</li>
+          <li>Body with clear paragraphs</li>
+          <li>Polite closing</li>
+          <li>Signature and name</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h2>Key Guidelines</h2>
+        <ul>
+          <li>Be concise and professional</li>
+          <li>Tailor to specific job</li>
+          <li>Highlight relevant skills</li>
+          <li>Use formal language</li>
+          <li>Check spelling and grammar</li>
+          <li>Include references if possible</li>
+          <li>State availability clearly</li>
+          <li>Proofread multiple times</li>
+        </ul>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">
+          <i class="fas fa-magic"></i>
+        </div>
+        <h2>Powerful Phrases</h2>
+        <ul>
+          <li>"I am writing to apply for..."</li>
+          <li>"With reference to your advertisement..."</li>
+          <li>"I believe I am suitable because..."</li>
+          <li>"My qualifications include..."</li>
+          <li>"I have experience in..."</li>
+          <li>"I am available for an interview..."</li>
+          <li>"Looking forward to hearing from you..."</li>
+          <li>"Thank you for considering my application"</li>
+        </ul>
+      </div>
+    </section>
+    
+    <!-- Format Guide -->
+    <section class="format-guide">
+      <h2>Professional Format Guide</h2>
+      <div class="format-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Header</h3>
+          <p>Your address, email, phone number</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Date & Recipient</h3>
+          <p>Date, employer's name and address</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Subject Line</h3>
+          <p>Clear job application reference</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Body Content</h3>
+          <p>Introduction, skills, experience, closing</p>
+        </div>
+        <div class="step">
+          <div class="step-number">5</div>
+          <h3>Closing</h3>
+          <p>Signature, typed name, enclosures</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Interactive Sample Applications -->
+    <section class="samples-section">
+      <h2>Interactive Sample Applications</h2>
+      <p style="text-align: center; margin-bottom: 2rem; color: var(--primary-light);">
+        Click on different job positions to view tailored application samples
+      </p>
+      
+      <div class="job-tabs">
+        <button class="tab-btn active" onclick="showSample(1)">
+          <span class="tab-icon"><i class="fas fa-laptop-code"></i></span>
+          IT Assistant
+        </button>
+        <button class="tab-btn" onclick="showSample(2)">
+          <span class="tab-icon"><i class="fas fa-chalkboard-teacher"></i></span>
+          Teaching Assistant
+        </button>
+        <button class="tab-btn" onclick="showSample(3)">
+          <span class="tab-icon"><i class="fas fa-cashier"></i></span>
+          Sales Assistant
+        </button>
+        <button class="tab-btn" onclick="showSample(4)">
+          <span class="tab-icon"><i class="fas fa-hotel"></i></span>
+          Hotel Receptionist
+        </button>
+        <button class="tab-btn" onclick="showSample(5)">
+          <span class="tab-icon"><i class="fas fa-book-reader"></i></span>
+          Library Assistant
+        </button>
+      </div>
+      
+      <div class="sample-content">
+        <div class="sample-header" id="sampleTitle">Job Application for IT Assistant Position</div>
+        <div class="sample-body" id="sampleBody">
+          <!-- Sample content loaded via JavaScript -->
+        </div>
+        <div class="word-count" id="wordCount">Word Count: 245</div>
+      </div>
+    </section>
+    
+    <!-- Professional Tips -->
+    <section class="tips-section">
+      <div class="tip-card">
+        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+        <h3>Do's</h3>
+        <p>Research the company, Use professional email, Highlight achievements, Quantify results, Follow up politely</p>
+      </div>
+      
+      <div class="tip-card">
+        <i class="fas fa-times-circle" style="font-size: 3rem; color: var(--secondary); margin-bottom: 1rem;"></i>
+        <h3>Don'ts</h3>
+        <p>Use informal language, Include irrelevant information, Make spelling errors, Exaggerate qualifications, Forget to sign</p>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Content developed by <strong>Nabaraj Dhungana</strong> | SEE Examination Preparation Series</p>
+  </footer>
+  
+  <script>
+    const jobSamples = [
+      {
+        title: "Job Application for IT Assistant Position",
+        content: `To,
+The HR Manager,
+Tech Solutions Pvt. Ltd.,
+Maharajgunj, Kathmandu
+
+Date: October 15, 2024
+
+Subject: Application for the position of IT Assistant
+
+Dear Sir/Madam,
+
+I am writing to apply for the position of IT Assistant as advertised in the Himalayan Times on October 10, 2024. As a recent SEE graduate with distinction in Computer Science and a passion for technology, I believe I possess the skills and enthusiasm required for this role.
+
+During my school years, I served as the computer lab assistant, where I gained practical experience in troubleshooting hardware and software issues, maintaining computer systems, and assisting teachers with technical requirements. I have completed basic courses in computer hardware, networking, and Microsoft Office applications.
+
+My technical skills include:
+- Hardware troubleshooting and maintenance
+- Software installation and configuration
+- Basic network setup
+- Microsoft Office proficiency
+- Excellent problem-solving abilities
+
+I am a quick learner, responsible, and eager to contribute to your organization. I am available for an interview at your convenience and can provide references from my school principal and computer teacher.
+
+Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to Tech Solutions Pvt. Ltd.
+
+Yours sincerely,
+
+[Signature]
+
+Anil Kumar Shrestha
+Phone: 9841XXXXXX
+Email: anil.shrestha@email.com`,
+        wordCount: 245
+      },
+      {
+        title: "Job Application for Teaching Assistant Position",
+        content: `To,
+The Principal,
+Bright Future Secondary School,
+Baneshwor, Kathmandu
+
+Date: October 15, 2024
+
+Subject: Application for Teaching Assistant Position
+
+Respected Sir/Madam,
+
+With reference to your advertisement in Kantipur Daily dated October 12, 2024, I wish to apply for the position of Teaching Assistant at your esteemed institution. Having recently completed my SEE examination with excellent grades, I am keen to begin my career in education.
+
+During my time as a student, I often assisted teachers with classroom activities, helped younger students with their studies, and participated in school events. My academic record demonstrates strong performance in English, Mathematics, and Science, subjects in which I would be particularly capable of assisting.
+
+I possess the following qualities relevant to this position:
+- Strong academic background
+- Patience and good communication skills
+- Ability to explain concepts clearly
+- Experience helping fellow students
+- Responsible and punctual nature
+
+I am passionate about education and believe I could make a positive contribution to your school's learning environment. I am available to start immediately and would welcome the opportunity to discuss my application further.
+
+Thank you for your time and consideration.
+
+Yours faithfully,
+
+[Signature]
+
+Sita Sharma
+Phone: 9803XXXXXX
+Email: sita.sharma@email.com`,
+        wordCount: 220
+      },
+      {
+        title: "Job Application for Sales Assistant Position",
+        content: `To,
+The Store Manager,
+City Department Store,
+New Road, Kathmandu
+
+Date: October 15, 2024
+
+Subject: Application for Sales Assistant Position
+
+Dear Sir/Madam,
+
+I am writing to express my interest in the Sales Assistant position advertised at your City Department Store. As a recent SEE graduate with excellent communication skills and a customer-oriented approach, I believe I would be a valuable addition to your team.
+
+Although I am new to formal employment, I have gained relevant experience through helping at my family's small retail business during holidays and weekends. This has taught me the importance of customer service, product knowledge, and maintaining a tidy sales environment.
+
+My key strengths include:
+- Friendly and approachable personality
+- Good communication skills in Nepali and English
+- Basic mathematical ability for handling transactions
+- Willingness to learn about products
+- Responsible and honest character
+
+I am a hardworking individual who learns quickly and works well in a team environment. I am available to work flexible hours, including weekends and holidays as required.
+
+I would appreciate the opportunity to discuss my application in person. Thank you for considering me for this position.
+
+Yours sincerely,
+
+[Signature]
+
+Ramesh Thapa
+Phone: 9815XXXXXX
+Email: ramesh.thapa@email.com`,
+        wordCount: 210
+      },
+      {
+        title: "Job Application for Hotel Receptionist Position",
+        content: `To,
+The Human Resources Manager,
+Everest View Hotel,
+Thamel, Kathmandu
+
+Date: October 15, 2024
+
+Subject: Application for Hotel Receptionist Position
+
+Dear Sir/Madam,
+
+I am writing to apply for the position of Hotel Receptionist as advertised on your hotel's notice board. Having recently completed my SEE examination, I am eager to begin my career in the hospitality industry where I can utilize my communication skills and customer service orientation.
+
+During my school years, I participated in various extracurricular activities that developed my interpersonal skills. I served as the secretary of our school's social club, which involved organizing events and communicating with various stakeholders - skills I believe are transferable to a receptionist role.
+
+My relevant qualities include:
+- Excellent communication skills in Nepali and English
+- Pleasant and professional telephone manner
+- Basic computer proficiency
+- Neat and organized work habits
+- Ability to remain calm under pressure
+
+I am a fast learner with a positive attitude and a strong desire to provide excellent service to hotel guests. I am available for shift work and can start immediately.
+
+Thank you for considering my application. I look forward to the possibility of contributing to Everest View Hotel.
+
+Yours faithfully,
+
+[Signature]
+
+Priya Basnet
+Phone: 9860XXXXXX
+Email: priya.basnet@email.com`,
+        wordCount: 225
+      },
+      {
+        title: "Job Application for Library Assistant Position",
+        content: `To,
+The Chief Librarian,
+Central Public Library,
+Pulchowk, Lalitpur
+
+Date: October 15, 2024
+
+Subject: Application for Library Assistant Position
+
+Respected Sir/Madam,
+
+With reference to the vacancy notice posted at the Central Public Library, I wish to apply for the position of Library Assistant. As an avid reader and recent SEE graduate with excellent organizational skills, I am confident that I would be an asset to your library.
+
+Throughout my school life, I volunteered in our school library, where I gained experience in shelving books, assisting students with locating resources, and maintaining a quiet study environment. My teachers have often commended me for my organizational abilities and attention to detail.
+
+I possess the following relevant skills:
+- Knowledge of library classification systems
+- Careful handling of books and materials
+- Ability to maintain organized records
+- Patience in assisting library users
+- Respect for quiet study environments
+
+I am a responsible individual who takes pride in maintaining order and providing helpful service. I am available to work the required hours and can start immediately.
+
+Thank you for considering my application. I would welcome the opportunity to discuss how I can contribute to your library's operations.
+
+Yours sincerely,
+
+[Signature]
+
+Kiran Rai
+Phone: 9851XXXXXX
+Email: kiran.rai@email.com`,
+        wordCount: 215
+      }
+    ];
+
+    // Initialize with first sample
+    document.addEventListener('DOMContentLoaded', function() {
+      showSample(1);
+    });
+
+    function showSample(index) {
+      // Update active tab
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(button => button.classList.remove('active'));
+      tabButtons[index-1].classList.add('active');
+      
+      // Update sample content
+      document.getElementById('sampleTitle').textContent = jobSamples[index-1].title;
+      document.getElementById('sampleBody').textContent = jobSamples[index-1].content;
+      document.getElementById('wordCount').textContent = `Word Count: ${jobSamples[index-1].wordCount}`;
+    }
+  </script>
+</body>
+</html>
