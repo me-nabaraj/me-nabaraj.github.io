@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="instruction" class="instruction-section">
+      <h1>Welcome to the Quiz Game!</h1>
+      <div class="instructions">
+        <p>Instructions:</p>
+        <ul>
+          <li>1 point for a correct answer.</li>
+          <li>-1 point for a wrong answer.</li>
+          <li>There are 50 questions altogether.</li>
+          <li>Click on an option to select your answer.</li>
+          <li>Click "Next Question" after selecting an answer.</li>
+        </ul>
+      </div>
+      <button id="start-button" class="btn-primary">Start Game</button>
+    </div>
+
+    <div id="game-section" class="game-section">
+      <div class="header">
+        <strong><span id="user-name" class="user-name"></span>   Score: <span id="score" class="score">0</span></strong>
+      </div>
+
+      <div class="question-container">
+        <strong><p id="question-number" class="question-number">Question: 1</p>
+        <p id="question-text" class="question-text"></p></strong>
+        <div id="flag-image-container" class="flag-image-container">
+          <img id="flag-image" src="#" alt="Image not found" class="flag-image" />
+         </div>
+        <div id="options-container" class="options-container"></div>
+        <button id="next-button" class="btn-primary" disabled>Next Question</button>
+      </div>
+    </div>
+
+    <div id="congratulations" class="congratulations-section">
+      <p id="final-message" class="final-message"></p>
+      <button id="restart-button" class="btn-primary">Restart Quiz</button>
+    </div>
+  </div>
+ <!-- Sound Files -->
+    <audio id="correct-sound" src="right.wav"></audio>
+    <audio id="wrong-sound" src="wrong.wav"></audio>
+   <script src="script3.js"></script>
+<!-- Footer Section -->
+ <footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+</body>
+</html>

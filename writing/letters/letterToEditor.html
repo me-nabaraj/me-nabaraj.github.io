@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letter to the Editor Writing</title>
+  <style>
+    :root {
+      --newsprint: #f8f5e9;
+      --ink: #1a1a1a;
+      --headline: #8b0000;
+      --byline: #2e5a88;
+      --highlight: #e6b325;
+      --accent: #006b54;
+      --border: #d4c7a3;
+    }
+    
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: var(--newsprint);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%23d4c7a3" stroke-width="0.5" stroke-dasharray="2,2"/></svg>');
+    }
+    
+    /* Newspaper Header */
+    .newspaper-header {
+      background: linear-gradient(to bottom, #1a1a1a 0%, #2a2a2a 100%);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-bottom: 8px solid var(--headline);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .newspaper-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" opacity="0.1"><text x="0" y="15" font-family="Georgia" font-size="16">DAILY TIMES</text></svg>');
+      background-size: 200px;
+      opacity: 0.3;
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .newspaper-name {
+      font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+      font-size: 4rem;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      margin: 0;
+      text-shadow: 3px 3px 0px rgba(139, 0, 0, 0.5);
+      border-bottom: 3px solid var(--highlight);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+    
+    .edition {
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--highlight);
+      margin: 0.5rem 0 1rem;
+      letter-spacing: 2px;
+    }
+    
+    .word-count-badge {
+      display: inline-block;
+      background: var(--headline);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      margin-top: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--highlight);
+    }
+    
+    /* Newspaper Layout */
+    .newspaper-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    .newspaper-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    @media (max-width: 900px) {
+      .newspaper-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Main Column - Editorial */
+    .editorial-column {
+      background: white;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .editorial-column::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 100%;
+      background: var(--headline);
+    }
+    
+    .column-header {
+      font-family: 'Palatino Linotype', serif;
+      font-size: 2.2rem;
+      color: var(--headline);
+      margin: 0 0 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .subhead {
+      font-size: 1.4rem;
+      color: var(--byline);
+      font-weight: bold;
+      margin: 1.5rem 0 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+    }
+    
+    /* Guidelines Section */
+    .guidelines {
+      background: white;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      margin-top: 2rem;
+      position: relative;
+    }
+    
+    .guidelines::before {
+      content: "Tips";
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      background: var(--accent);
+      color: white;
+      padding: 0.3rem 1.5rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+    
+    .guidelines-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .guidelines-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed var(--border);
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    .guidelines-list li::before {
+      content: "✎";
+      position: absolute;
+      left: 0;
+      color: var(--headline);
+      font-weight: bold;
+    }
+    
+    /* Sidebar - Format Guide */
+    .sidebar {
+      background: white;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar-title {
+      font-family: 'Palatino Linotype', serif;
+      font-size: 1.8rem;
+      color: var(--headline);
+      margin: 0 0 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+    
+    .format-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: step-counter;
+    }
+    
+    .format-steps li {
+      counter-increment: step-counter;
+      padding: 1.2rem 0 1.2rem 3.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .format-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--headline);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      font-family: Arial, sans-serif;
+    }
+    
+    /* Topic Selector */
+    .topic-selector {
+      background: white;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .topic-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .topic-btn {
+      background: white;
+      border: 2px solid var(--border);
+      padding: 1.2rem 1rem;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .topic-btn:hover {
+      background: var(--headline);
+      color: white;
+      border-color: var(--headline);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .topic-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      font-weight: bold;
+    }
+    
+    /* Sample Letter Display */
+    .letter-display {
+      background: white;
+      padding: 3rem;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+      position: relative;
+      min-height: 500px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      font-family: 'Georgia', serif;
+    }
+    
+    .letter-display::before {
+      content: "SAMPLE LETTER";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      padding: 0.5rem 2rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      border-radius: 20px;
+    }
+    
+    .letter-content {
+      white-space: pre-line;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    
+    .letter-meta {
+      text-align: right;
+      font-style: italic;
+      color: var(--byline);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    
+    /* Writing Tips */
+    .writing-tips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .tip-box {
+      background: white;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .tip-box h3 {
+      color: var(--headline);
+      margin-top: 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .do-box {
+      border-top: 5px solid var(--accent);
+    }
+    
+    .dont-box {
+      border-top: 5px solid var(--headline);
+    }
+    
+
+     .footer::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--border), var(headline), var(--newsprint));
+    }
+  .footer {
+    background: #1a1a1a;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .newspaper-name {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+      }
+      
+      .column-header {
+        font-size: 1.8rem;
+      }
+      
+      .topic-buttons {
+        grid-template-columns: 1fr;
+      }
+      
+      .letter-display {
+        padding: 1.5rem;
+      }
+      
+      .newspaper-grid {
+        gap: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .newspaper-name {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+      }
+      
+      .column-header {
+        font-size: 1.5rem;
+      }
+      
+      .writing-tips {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Special Newspaper Elements */
+    .dateline {
+      font-family: 'Courier New', monospace;
+      color: var(--byline);
+      font-size: 0.9rem;
+      text-align: right;
+      margin-bottom: 1rem;
+    }
+    
+    .pull-quote {
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--headline);
+      border-left: 4px solid var(--highlight);
+      padding: 1rem 0 1rem 1.5rem;
+      margin: 1.5rem 0;
+      background: #f9f7f0;
+    }
+    
+    .byline {
+      font-weight: bold;
+      color: var(--byline);
+      font-family: Arial, sans-serif;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Newspaper Header -->
+  <header class="newspaper-header">
+    <div class="header-content">
+      <h1 class="newspaper-name">The SEE Chronicle</h1>
+      <div class="edition">SPECIAL EDUCATIONAL EDITION</div>
+      <div class="word-count-badge">
+        <i class="fas fa-newspaper"></i> Letter Length: around 200 Words
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Newspaper Container -->
+  <div class="newspaper-container">
+    <!-- Newspaper Grid Layout -->
+    <div class="newspaper-grid">
+      <!-- Main Editorial Column -->
+      <div class="editorial-column">
+        <div class="dateline">Friday, December 26, 2024 | Page E3</div>5
+        <h2 class="column-header">Writing Letters to the Editor</h2>
+        
+        <div class="byline">By The Editorial Board</div>
+        
+        <div class="pull-quote">
+          "A well-written letter to the editor is a powerful tool for civic engagement and public discourse."
+        </div>
+        
+        <h3 class="subhead">What is a Letter to the Editor?</h3>
+        <p>A letter to the editor is a formal letter written to a newspaper or magazine expressing opinions, concerns, or responses to published articles. It allows citizens to participate in public dialogue and influence community thinking.</p>
+        
+        <h3 class="subhead">Purpose & Importance</h3>
+        <p>These letters serve multiple purposes: expressing viewpoints on current issues, correcting misinformation, praising good work, suggesting solutions to problems, or responding to other readers' letters. For SEE exam purpose, they are typically around 200 words—concise yet persuasive.</p>
+        
+        <div class="guidelines">
+          <h3 class="subhead">Essential Guidelines</h3>
+          <ul class="guidelines-list">
+            <li><strong>Be concise:</strong> Stay within the 200 word limit</li>
+            <li><strong>Focus on one issue:</strong> Address a single topic clearly</li>
+            <li><strong>Reference appropriately:</strong> Mention the article you're responding to</li>
+            <li><strong>Provide evidence:</strong> Support your arguments with facts</li>
+            <li><strong>Maintain respectful tone:</strong> Even when disagreeing</li>
+            <li><strong>Include contact information:</strong> Most publications verify authorship</li>
+            <li><strong>Proofread carefully:</strong> Errors reduce credibility</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Sidebar - Format Guide -->
+      <div class="sidebar">
+        <h3 class="sidebar-title">Letter Format Guide</h3>
+        <ol class="format-steps">
+          <li><strong>Sender's Address:</strong> Your complete address</li>
+          <li><strong>Date:</strong> Date of writing the letter</li>
+          <li><strong>Editor's Address:</strong> Newspaper's editorial office</li>
+          <li><strong>Salutation:</strong> "Dear Editor" or "Sir/Madam"</li>
+          <li><strong>Subject Line:</strong> Clear reference to topic</li>
+          <li><strong>Introduction:</strong> State purpose and reference</li>
+          <li><strong>Body:</strong> Present arguments logically</li>
+          <li><strong>Conclusion:</strong> Summarize and suggest action</li>
+          <li><strong>Closing:</strong> "Yours sincerely/faithfully"</li>
+          <li><strong>Signature & Name:</strong> With contact details</li>
+        </ol>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: #f9f7f0; border-left: 4px solid var(--accent);">
+          <strong>Pro Tip:</strong> Always check the newspaper's specific submission guidelines for word limits and formatting requirements.
+        </div>
+      </div>
+    </div>
+    
+    <!-- Topic Selector -->
+    <div class="topic-selector">
+      <h3 class="subhead">Select a Topic to View Sample Letter</h3>
+      <p>Click on different topics below to see how to write effective letters on various issues:</p>
+      
+      <div class="topic-buttons">
+        <button class="topic-btn active" onclick="loadLetter(1)">Noise Pollution</button>
+        <button class="topic-btn" onclick="loadLetter(2)">Road Accidents</button>
+        <button class="topic-btn" onclick="loadLetter(3)">Plastic Pollution</button>
+        <button class="topic-btn" onclick="loadLetter(4)">Health & Hygiene</button>
+        <button class="topic-btn" onclick="loadLetter(5)">Traffic Issues</button>
+        <button class="topic-btn" onclick="loadLetter(6)">Youth Issues</button>
+      </div>
+    </div>
+    
+    <!-- Sample Letter Display -->
+    <div class="letter-display">
+      <div id="letterContent" class="letter-content">
+        <!-- Letter content will be loaded here -->
+      </div>
+      <div class="letter-meta" id="wordCount">Word Count: ~215 words</div>
+    </div>
+    
+    <!-- Writing Tips -->
+    <div class="writing-tips">
+      <div class="tip-box do-box">
+        <h3>What to DO</h3>
+        <ul>
+          <li>Start with a polite tone and state your position in the first paragraph</li>
+          <li>Use facts and logical arguments</li>
+          <li>Keep paragraphs short and focused</li>
+          <li>Suggest constructive solutions</li>
+          <li>Proofread for clarity and correctness</li>
+          <li>Include your contact information</li>
+        </ul>
+      </div>
+      
+      <div class="tip-box dont-box">
+        <h3>What NOT to Do</h3>
+        <ul>
+          <li>Don't exceed the word limit</li>
+          <li>Avoid personal attacks or insults</li>
+          <li>Don't make unsubstantiated claims</li>
+          <li>Avoid overly emotional language</li>
+          <li>Don't include irrelevant information</li>
+          <li>Avoid complicated jargon</li>
+          <li>Don't forget to include your name</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Developed by <strong>Nabaraj Dhungana</strong> </p>
+     </footer>
+  
+  <script>
+    const letters = [
+      {
+        title: "Noise Pollution in Cities",
+        content: `To,
+The Editor,
+The Himalayan Times,
+Maharajgunj, Kathmandu
+
+Date: December 26, 2025
+
+Subject: Problem of Noise Pollution in Siddharthanagar
+
+Sir/Madam,
+
+Through the esteemed columns of your widely-read newspaper, I wish to draw attention of the concerned authorities to the escalating problem of noise pollution in our Siddharthanagar. The honking of vehicles, blaring loudspeakers from religious functions and commercial establishments, construction activities at odd hours, and increasing use of sound systems in public events have collectively transformed our city into unbearable noise zones.
+
+This particularly affects vulnerable groups: students struggling to concentrate on their studies, elderly citizens needing peaceful rest and patients requiring quiet recovery environments. Medical research confirms that chronic noise exposure leads to stress, hypertension, hearing impairment and sleep disorders. This problem is often overlooked amidst other environmental concerns, despite its severe consequences.
+
+The authorities must implement and strictly enforce noise control regulations, including specific decibel limits for different zones and times. Loudspeaker usage should be regulated, construction activities restricted to daytime hours, and vehicle horn usage minimized through public awareness campaigns. Installing noise monitoring devices in sensitive areas and imposing penalties on violators would be helpful. 
+
+I earnestly hope that concerned authorities will recognize the gravity of this issue and take immediate measures to restore peacefulness, making Siddharthanagar more livable for all residents.
+
+Yours faithfully,
+Rohan Sharma
+Siddharthanagar- 9 
+Contact: 9841XXXXXX`,
+        wordCount: "Word Count: 218 words"
+      },
+      {
+        title: "Increasing Road Accidents",
+        content: `To,
+The Editor,
+The Rising Nepal,
+Kathmandu, Nepal
+
+Date: October 16, 2024
+
+Subject: Increasing Road Accidents in Urban Areas
+
+Dear Sir/Madam,
+
+I write with deep concern regarding the alarming increase in road accidents across our urban areas. Every day brings tragic reports of preventable accidents claiming precious lives, leaving families devastated and communities in mourning. This serious crisis demands immediate attention from both authorities and citizens alike.
+
+Primary causes of this problem include reckless driving behaviors such as speeding, drunk driving, and disregard for traffic rules. However, there are also other causes like inadequate infrastructure: poorly maintained roads, insufficient pedestrian crossings, lack of speed breakers near schools and residential areas, and ineffective traffic management systems. 
+
+To address this emergency, a multi-pronged approach is essential. Traffic police must enforce rules effectively, with zero tolerance for violations.  Driver licensing procedures should be strengthened with rigorous testing and mandatory refresher courses. Regular maintance of roads is essential. Public awareness campaigns should be conducted to create responsible road sharing behaviour. 
+
+As citizens, we must also cultivate road discipline and respect for fellow users. I urge the concerned authorities to implement these measures promptly, transforming our roads from danger zones to safe passages, thereby preventing needless loss of life and ensuring safer mobility for all.
+
+Yours faithfully,
+Anita K.C.
+Lalitpur, Nepal
+Contact: 9803XXXXXX`,
+        wordCount: "Word Count: 220 words"
+      },
+      {
+        title: "Plastic Pollution Crisis",
+        content: `To,
+The Editor,
+The Kathmandu Post,
+Thapathali, Kathmandu
+
+Date: October 16, 2025
+
+Subject: Growing Problem of Plastic Pollution
+
+Dear Sir/Madam,
+
+I wish to express grave concern through your respected publication about the escalating crisis of plastic pollution that is threatening public health. Despite government regulations, our cities, rivers, and open spaces continue to be inundated with non-biodegradable waste that persists for centuries, disrupting ecosystems.
+
+The visible manifestations—plastic bags snagged on trees, bottles clogging drainage systems, packaging littering streets, and microplastics contaminating water sources—represent just the surface of a deeper environmental emergency. This pollution blocks waterways during monsoon. The persistence of plastic use despite regulations indicates failures in both enforcement and public awareness, alongside insufficient alternatives.
+
+Authorities must impose ban on certain type of plastic with consistent monitoring and meaningful penalties for violators. Simultaneously, promoting affordable, accessible alternatives like cloth bags, biodegradable packaging, and reusable containers is crucial. Educational programs in schools should instill environmental responsibility from early ages, while corporate responsibility must include reducing plastic packaging and supporting recycling initiatives.
+
+As individuals, we must adopt the principles of reduce, reuse, and recycle in daily life. I hope this appeal through your newspaper mobilizes collective action to combat plastic pollution, preserving our environment for future generations.
+Yours sincerely,
+Bikram Thapa
+Pokhara, Nepal
+Contact: 9860XXXXXX`,
+        wordCount: "Word Count: 216 words"
+      },
+      {
+        title: "Health & Hygiene Awareness",
+        content: `To,
+The Editor,
+Republica Daily,
+Kathmandu, Nepal
+
+Date: October 16, 2024
+
+Subject: Promoting Hygiene Awareness in Schools
+
+Sir/Madam,
+
+I appreciate your coverage of "Post-Pandemic Health Challenges" (October 5, 2024) which rightly emphasized continued vigilance. As a student, I believe schools play a crucial role in promoting hygiene awareness that extends beyond pandemic times.
+
+While handwashing stations were established during COVID-19, many schools now lack proper maintenance. Soap and water are often unavailable, and hygiene education has diminished. This is concerning as good hygiene prevents not only COVID-19 but also seasonal flu, gastrointestinal diseases, and other infections.
+
+I propose a sustained school hygiene program with three components: First, ensuring functional handwashing facilities with regular supplies. Second, integrating hygiene education into the curriculum with practical demonstrations. Third, organizing student-led hygiene monitoring committees to promote peer accountability.
+
+Schools should also address menstrual hygiene by providing accessible facilities and education for all genders to eliminate stigma. Such initiatives would develop lifelong healthy habits among students while protecting community health.
+
+Investing in school hygiene yields multiple benefits: reduced absenteeism, better learning environments, and healthier communities. Let us not lose the hygiene awareness gained during the pandemic but instead institutionalize it for lasting impact.
+
+Yours sincerely,
+[Signature]
+Sarina Gurung
+Grade 10 Student
+Health Awareness Club President
+Contact: 9851XXXXXX`,
+        wordCount: "Word Count: 220 words"
+      },
+      {
+        title: "Traffic Management",
+        content: `To,
+The Editor,
+The Rising Nepal,
+Kathmandu, Nepal
+
+Date: October 16, 2024
+
+Subject: Addressing School Zone Traffic Chaos
+
+Dear Editor,
+
+Your article "Traffic Woes During School Hours" (October 3, 2024) accurately described the daily chaos many of us experience. As a student who walks to school, I witness dangerous situations created by traffic mismanagement around educational institutions.
+
+During morning and afternoon peak hours, school zones become congested with vehicles, risking student safety. Parents parking improperly, vehicles blocking pedestrian crossings, and impatient driving create hazardous conditions. The recent accident near our school highlights this urgent issue.
+
+I recommend three measures: First, implementing strict "No Parking" zones around schools during opening and closing times. Second, deploying traffic volunteers (including responsible senior students) to assist with pedestrian crossing. Third, promoting "Walk to School" groups to reduce individual vehicle use.
+
+Schools should stagger dismissal times to minimize congestion. Parent education about safe drop-off/pick-up practices is equally important. Simple solutions like designated waiting areas and clear signage could significantly improve safety.
+
+Our young students deserve safe passage to and from school. Let us prioritize their safety through coordinated efforts between schools, traffic police, parents, and local authorities.
+
+Yours sincerely,
+[Signature]
+Rajesh Yadav
+Grade 10 Student
+Student Welfare Committee
+Contact: 9815XXXXXX`,
+        wordCount: "Word Count: 210 words"
+      },
+      {
+        title: "Youth Employment Opportunities",
+        content: `To,
+The Editor,
+Kantipur Daily,
+Kathmandu, Nepal
+
+Date: October 16, 2024
+
+Subject: Creating Opportunities for Youth Skill Development
+
+Dear Editor,
+
+I read with concern your report "Growing Unemployment Among Educated Youth" (October 1, 2024) and wish to highlight the need for early skill development opportunities for students.
+
+Many students complete their education with theoretical knowledge but lack practical skills demanded by employers. This skills gap contributes to unemployment despite educational qualifications. As SEE students approaching higher education decisions, we need exposure to diverse career paths and skill development opportunities.
+
+I suggest creating structured internship programs for high school students during vacations. Local businesses could offer short-term placements introducing students to workplace environments. Vocational training centers should offer affordable short courses in digital skills, communication, and basic entrepreneurship.
+
+Schools should invite professionals from various fields for career talks and organize visits to different workplaces. Such exposure would help students make informed education choices aligned with market needs.
+
+Investing in youth skill development benefits both individuals and society. Skilled youth become productive citizens, innovators, and job creators rather than job seekers. Let us build bridges between education and employment starting from school level.
+
+Yours sincerely,
+[Signature]
+Prabin Adhikari
+Grade 10 Student
+Future Career Planning Club
+Contact: 9823XXXXXX`,
+        wordCount: "Word Count: 217 words"
+      }
+    ];
+
+    // Initialize with first letter
+    document.addEventListener('DOMContentLoaded', function() {
+      loadLetter(1);
+    });
+
+    function loadLetter(index) {
+      // Update active button
+      const buttons = document.querySelectorAll('.topic-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+      buttons[index-1].classList.add('active');
+      
+      // Update letter content
+      document.getElementById('letterContent').textContent = letters[index-1].content;
+      document.getElementById('wordCount').textContent = letters[index-1].wordCount;
+    }
+  </script>
+</body>
+</html>

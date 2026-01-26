@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #1a1a2e; /* Dark navy blue */
+  color: #e0e0e0; /* Light gray */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.quiz-container {
+  background-color: #16213e; /* Darker navy blue */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.instruction-section, .game-section, .congratulations-section {
+  text-align: center;
+}
+
+.instruction-section h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #e94560; /* Vibrant pink */
+}
+
+.instructions {
+  margin-bottom: 20px;
+}
+
+.instructions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.instructions li {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #e0e0e0; /* Light gray */
+}
+
+.btn-primary {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #e94560; /* Vibrant pink */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-top:10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #d2334a; /* Darker pink */
+}
+
+.btn-primary:disabled {
+  background-color: #7f8c8d; /* Gray */
+  cursor: not-allowed;
+}
+
+.game-section {
+  display: none;
+}
+
+.header {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #e94560; /* Vibrant pink */
+}
+
+.question-container {
+  margin-top: 20px;
+}
+
+.question-number {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #e94560;  /* Vibrant pink */
+}
+
+.question-text {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #e0e0e0; /* Light gray */
+}
+
+.flag-image-container {
+  margin-bottom: 20px;
+}
+
+.flag-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.options-container button {
+  padding: 12px;
+  font-size: 18px;
+  background-color: #0f3460; /* Dark blue */
+  color: #e0e0e0; /* Light gray */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.options-container button:hover {
+  background-color: #3a5a8e; /* light blue */
+}
+
+.options-container button.correct {
+  background-color: #2ecc71; /* Green */
+  color: #fff;
+}
+
+.options-container button.incorrect {
+  background-color: #e74c3c; /* Red */
+  color: #fff;
+}
+
+.congratulations-section {
+  display: none;
+}
+
+.final-message {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #e94560; /* Vibrant pink */
+}
+/* Footer Styles */
+.footer {
+  background: #1e293b;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer strong {
+  color: #e94560;
+  font-weight: 700;
+}
+
+.footer p {
+  margin: 0;
+}

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Instructions & Directions Writing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #600080 0%, #260033 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section h2 {
+            color: #f5576c;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Speech Bubbles */
+        .speech-bubble {
+            position: relative;
+            background: #fff4e6;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff9800;
+        }
+
+        .speech-bubble::before {
+            content: '💡';
+            position: absolute;
+            left: -40px;
+            top: 10px;
+            font-size: 2em;
+        }
+
+        .speech-bubble.info {
+            background: #e3f2fd;
+            border-left-color: #2196f3;
+        }
+
+        .speech-bubble.info::before {
+            content: 'ℹ️';
+        }
+
+        .speech-bubble.warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+
+        .speech-bubble.warning::before {
+            content: '⚠️';
+        }
+
+        /* Side Notes */
+        .side-note {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #4caf50;
+            font-size: 0.95em;
+        }
+
+        .side-note::before {
+            content: '📌 Pro Tip: ';
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        /* Principles Cards */
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .principle-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .principle-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .principle-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Comparison Table */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-box {
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-box.instructions {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .comparison-box.directions {
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        }
+
+        .comparison-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        /* Examples Section */
+        .example-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .example-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .example-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .example-btn.active {
+            background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        }
+
+        .example-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .example-content.active {
+            display: block;
+        }
+
+        .example-display {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #f5576c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .instruction-step {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #f5576c;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .good-example {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+
+        .bad-example {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+
+        .example-label {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .good-label {
+            background: #4caf50;
+            color: white;
+        }
+
+        .bad-label {
+            background: #f44336;
+            color: white;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .checklist h3 {
+            color: #f5576c;
+            margin-bottom: 15px;
+        }
+
+        .checklist-item {
+            padding: 10px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-item::before {
+            content: '✓';
+            background: #4caf50;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Interactive Toggle */
+        .toggle-section {
+            background: #f0f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-section:hover {
+            background: #e3edff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .toggle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .toggle-content {
+            display: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .toggle-section.active .toggle-content {
+            display: block;
+        }
+
+        .toggle-indicator {
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-section.active .toggle-indicator {
+            transform: rotate(180deg);
+        }
+/* Sticky Footer Styling */
+        .footer {
+            background: #600080;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.2rem;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .footer strong {
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .footer p {
+            margin: 0;
+            padding: 0;
+        }
+        
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+
+            .principle-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .speech-bubble::before {
+                position: static;
+                margin-right: 10px;
+            }
+
+            .tab-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Master Instructions & Directions Writing</h1>
+            <p>Learn to write clear, step-by-step guides that anyone can follow</p>
+        </header>
+
+        <!-- SECTION 1: KEY PRINCIPLES -->
+        <div class="section">
+            <h2><span class="section-icon">🎯</span> Key Principles of Great Instructions</h2>
+            
+            <div class="speech-bubble">
+                <strong>Why is this important?</strong> Whether you're explaining how to bake cookies, build a robot, or navigate to a new location, clear instructions make the difference between success and confusion. Let's learn the essential principles!
+            </div>
+
+            <div class="principle-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">🔢</div>
+                    <h3>Sequential Order</h3>
+                    <p>Present steps in the exact order they should be performed. Number each step clearly so readers don't get lost.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">💎</div>
+                    <h3>Clarity & Precision</h3>
+                    <p>Use simple, specific language. Avoid ambiguous words like "some" or "nearby." Say exactly what you mean.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">👁️</div>
+                    <h3>Visual Language</h3>
+                    <p>Help readers picture each step. Use descriptive verbs and specific measurements or landmarks.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">🎬</div>
+                    <h3>Action Verbs</h3>
+                    <p>Start each step with a strong action verb: "Turn," "Mix," "Click," "Walk." This makes instructions direct and clear.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">⚠️</div>
+                    <h3>Include Warnings</h3>
+                    <p>Alert readers to potential mistakes or safety concerns before they reach that step.</p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">✅</div>
+                    <h3>Test & Verify</h3>
+                    <p>Always test your instructions by following them yourself or having someone else try them.</p>
+                </div>
+            </div>
+
+            <div class="side-note">
+                Great instructions anticipate questions and confusion. Think about what might trip up your reader and address it proactively!
+            </div>
+        </div>
+
+        <!-- SECTION 2: INSTRUCTIONS VS DIRECTIONS -->
+        <div class="section">
+            <h2><span class="section-icon">🔄</span> Instructions vs. Directions: What's the Difference?</h2>
+
+            <div class="speech-bubble info">
+                <strong>Know the difference!</strong> While both provide step-by-step guidance, instructions and directions serve different purposes. Understanding this helps you choose the right approach.
+            </div>
+
+            <div class="comparison-container">
+                <div class="comparison-box instructions">
+                    <h3>📋 Instructions</h3>
+                    <p><strong>Purpose:</strong> Explain HOW to do or make something</p>
+                    <p><strong>Focus:</strong> Process, procedure, or task completion</p>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>How to bake a cake</li>
+                        <li>How to assemble furniture</li>
+                        <li>How to use an app</li>
+                        <li>How to perform CPR</li>
+                        <li>How to write an essay</li>
+                    </ul>
+                    <p><strong>Key Elements:</strong></p>
+                    <ul>
+                        <li>Materials/tools needed</li>
+                        <li>Preparation steps</li>
+                        <li>Detailed procedures</li>
+                        <li>Safety warnings</li>
+                        <li>Expected results</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-box directions">
+                    <h3>🗺️ Directions</h3>
+                    <p><strong>Purpose:</strong> Explain HOW to get somewhere</p>
+                    <p><strong>Focus:</strong> Navigation from point A to point B</p>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>How to get to the library</li>
+                        <li>How to reach the park</li>
+                        <li>How to find a classroom</li>
+                        <li>How to navigate downtown</li>
+                        <li>How to walk to a store</li>
+                    </ul>
+                    <p><strong>Key Elements:</strong></p>
+                    <ul>
+                        <li>Starting point</li>
+                        <li>Landmarks to look for</li>
+                        <li>Turns and distances</li>
+                        <li>Final destination markers</li>
+                        <li>Estimated travel time</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="side-note">
+                Think of it this way: Instructions teach you to DO something; Directions teach you to GO somewhere!
+            </div>
+        </div>
+
+        <!-- SECTION 3: HOW TO WRITE -->
+        <div class="section">
+            <h2><span class="section-icon">✍️</span> How to Write Each Type</h2>
+
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('instructions-guide')">Writing Instructions</button>
+                <button class="tab-btn" onclick="switchTab('directions-guide')">Writing Directions</button>
+            </div>
+
+            <!-- Instructions Writing Guide -->
+            <div class="tab-content active" id="instructions-guide">
+                <h3 style="color: #f5576c; margin-bottom: 20px;">How to Write Clear Instructions</h3>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 1: Choose a Clear Title</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Start with "How to..." followed by the specific task.</p>
+                        <p><strong>Examples:</strong></p>
+                        <ul>
+                            <li>✓ "How to Make a Peanut Butter and Jelly Sandwich"</li>
+                            <li>✓ "How to Create a Strong Password"</li>
+                            <li>✗ "Sandwich Making" (too vague)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 2: List Materials/Tools Needed</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Before the steps, create a complete list of everything needed.</p>
+                        <p><strong>Why:</strong> This lets readers gather everything first, making the process smoother.</p>
+                        <p><strong>Example:</strong></p>
+                        <p><em>Materials Needed:</em></p>
+                        <ul>
+                            <li>2 slices of bread</li>
+                            <li>Peanut butter (creamy or chunky)</li>
+                            <li>Jelly or jam</li>
+                            <li>Butter knife</li>
+                            <li>Plate</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 3: Write Sequential Steps</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Number each step and start with an action verb.</p>
+                        <p><strong>Tips:</strong></p>
+                        <ul>
+                            <li>Break complex steps into smaller sub-steps</li>
+                            <li>Use consistent formatting</li>
+                            <li>Include time estimates when relevant</li>
+                            <li>Describe expected outcomes for key steps</li>
+                        </ul>
+                        <p><strong>Example:</strong></p>
+                        <p>1. Place two slices of bread on a clean plate.</p>
+                        <p>2. Open the peanut butter jar and use the butter knife to scoop out about 2 tablespoons.</p>
+                        <p>3. Spread the peanut butter evenly on one slice of bread, covering it from edge to edge.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 4: Add Warnings & Tips</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Include helpful notes, warnings, or alternatives.</p>
+                        <p><strong>Types of notes:</strong></p>
+                        <ul>
+                            <li><strong>⚠️ Warning:</strong> "Do not use metal utensils on non-stick pans."</li>
+                            <li><strong>💡 Tip:</strong> "For extra flavor, toast the bread first."</li>
+                            <li><strong>ℹ️ Note:</strong> "This step can take 5-10 minutes depending on your oven."</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 5: End with Expected Results</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Describe what success looks like.</p>
+                        <p><strong>Example:</strong> "Your sandwich should have peanut butter and jelly evenly distributed between two slices of bread. The sandwich can be cut diagonally or into rectangles for easier eating."</p>
+                    </div>
+                </div>
+
+                <div class="checklist">
+                    <h3>Instructions Writing Checklist ✓</h3>
+                    <div class="checklist-item">Clear, descriptive title starting with "How to..."</div>
+                    <div class="checklist-item">Complete list of materials and tools</div>
+                    <div class="checklist-item">Steps numbered in chronological order</div>
+                    <div class="checklist-item">Each step begins with an action verb</div>
+                    <div class="checklist-item">Specific measurements and quantities included</div>
+                    <div class="checklist-item">Warnings placed BEFORE the relevant step</div>
+                    <div class="checklist-item">Tips and alternatives mentioned when helpful</div>
+                    <div class="checklist-item">Description of final result/expected outcome</div>
+                </div>
+            </div>
+
+            <!-- Directions Writing Guide -->
+            <div class="tab-content" id="directions-guide">
+                <h3 style="color: #f5576c; margin-bottom: 20px;">How to Write Clear Directions</h3>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 1: Identify Start & End Points</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Clearly state where the journey begins and ends.</p>
+                        <p><strong>Example:</strong></p>
+                        <p><em>Starting Point:</em> School main entrance</p>
+                        <p><em>Destination:</em> City Public Library</p>
+                        <p><strong>Why:</strong> This orients your reader and sets expectations.</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 2: Use Cardinal Directions & Landmarks</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Combine compass directions (north, south, east, west) with visible landmarks.</p>
+                        <p><strong>Good examples:</strong></p>
+                        <ul>
+                            <li>✓ "Head north on Main Street toward the tall red-brick church"</li>
+                            <li>✓ "Turn right at the McDonald's with the playground"</li>
+                            <li>✓ "Walk past the fountain in the center of the park"</li>
+                        </ul>
+                        <p><strong>Avoid:</strong></p>
+                        <ul>
+                            <li>✗ "Go that way for a while" (too vague)</li>
+                            <li>✗ "Turn at the third tree" (not distinctive enough)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 3: Include Distances & Time</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Give readers a sense of how far and how long.</p>
+                        <p><strong>Examples:</strong></p>
+                        <ul>
+                            <li>"Walk straight for about 0.3 miles (5 minutes)"</li>
+                            <li>"Continue for two blocks until you reach the intersection"</li>
+                            <li>"Drive approximately 10 minutes on Highway 101"</li>
+                        </ul>
+                        <p><strong>Tip:</strong> Estimate time for the mode of travel (walking vs. driving).</p>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 4: Write Step-by-Step Directions</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Number each direction change or significant point.</p>
+                        <p><strong>Action verbs for directions:</strong></p>
+                        <ul>
+                            <li>Turn (left/right)</li>
+                            <li>Continue straight</li>
+                            <li>Cross (the street/intersection)</li>
+                            <li>Pass (a landmark)</li>
+                            <li>Head (toward)</li>
+                            <li>Proceed (along)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="toggle-section" onclick="toggleContent(this)">
+                    <div class="toggle-header">
+                        <span>Step 5: Confirm Arrival</span>
+                        <span class="toggle-indicator">▼</span>
+                    </div>
+                    <div class="toggle-content">
+                        <p><strong>What to do:</strong> Describe what the destination looks like so readers know they've arrived.</p>
+                        <p><strong>Example:</strong> "The library is a modern glass building on your right with blue banners hanging from the entrance. The main doors are at the front, and there's a bike rack to the left."</p>
+                    </div>
+                </div>
+
+                <div class="checklist">
+                    <h3>Directions Writing Checklist ✓</h3>
+                    <div class="checklist-item">Clear starting point mentioned</div>
+                    <div class="checklist-item">Destination clearly identified</div>
+                    <div class="checklist-item">Specific landmarks used for reference</div>
+                    <div class="checklist-item">Cardinal directions (N, S, E, W) included when possible</div>
+                    <div class="checklist-item">Distances or time estimates provided</div>
+                    <div class="checklist-item">Each turn or change numbered sequentially</div>
+                    <div class="checklist-item">Action verbs used (turn, walk, cross, etc.)</div>
+                    <div class="checklist-item">Destination appearance described for confirmation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: EXAMPLES -->
+        <div class="section">
+            <h2><span class="section-icon">📖</span> Examples: Good vs. Bad</h2>
+
+            <div class="speech-bubble warning">
+                <strong>Learn from mistakes!</strong> Comparing good and bad examples helps you understand what works and what doesn't. Click the buttons below to see different examples.
+            </div>
+
+            <div class="example-selector">
+                <button class="example-btn active" onclick="showExample('recipe')">Recipe Instructions</button>
+                <button class="example-btn" onclick="showExample('tech')">Tech Instructions</button>
+                <button class="example-btn" onclick="showExample('walking')">Walking Directions</button>
+                <button class="example-btn" onclick="showExample('driving')">Driving Directions</button>
+            </div>
+
+            <!-- Recipe Example -->
+            <div class="example-content active" id="recipe">
+                <h3 style="color: #f5576c; margin-bottom: 15px;">Example 1: Making Hot Chocolate</h3>
+                
+                <div class="instruction-step bad-example">
+                    <span class="example-label bad-label">❌ BAD EXAMPLE</span>
+                    <p><strong>How to Make Hot Chocolate</strong></p>
+                    <p>Get some milk and chocolate. Heat it up until it's hot. Add the chocolate and stir it. Pour it in a cup and drink it.</p>
+                    <p><strong>Why it's bad:</strong></p>
+                    <ul>
+                        <li>No materials list</li>
+                        <li>Vague measurements ("some milk")</li>
+                        <li>Unclear instructions ("heat it up")</li>
+                        <li>Steps are out of order</li>
+                        <li>No specific temperatures or times</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-step good-example">
+                    <span class="example-label good-label">✅ GOOD EXAMPLE</span>
+                    <p><strong>How to Make Hot Chocolate</strong></p>
+                    <p><strong>Materials Needed:</strong></p>
+                    <ul>
+                        <li>1 cup of milk (whole or 2%)</li>
+                        <li>2 tablespoons cocoa powder</li>
+                        <li>1-2 tablespoons sugar</li>
+                        <li>Small saucepan</li>
+                        <li>Whisk or spoon</li>
+                        <li>Mug</li>
+                    </ul>
+                    <p><strong>Instructions:</strong></p>
+                    <p><span class="step-number">1</span> Pour 1 cup of milk into a small saucepan.</p>
+                    <p><span class="step-number">2</span> Add 2 tablespoons of cocoa powder and 1-2 tablespoons of sugar to the milk.</p>
+                    <p><span class="step-number">3</span> Turn the stove to medium heat and place the saucepan on the burner.</p>
+                    <p><span class="step-number">4</span> Stir constantly with a whisk for 3-5 minutes until the mixture is hot and steaming (do not let it boil).</p>
+                    <p><span class="step-number">5</span> Remove the saucepan from heat once you see small bubbles forming at the edges.</p>
+                    <p><span class="step-number">6</span> Carefully pour the hot chocolate into your mug.</p>
+                    <p>⚠️ <strong>Warning:</strong> The saucepan and liquid will be very hot. Use an oven mitt when handling.</p>
+                    <p>💡 <strong>Tip:</strong> Top with marshmallows or whipped cream for extra deliciousness!</p>
+                    <p><strong>Result:</strong> You should have a smooth, chocolatey drink that's hot but not boiling, with no powder lumps.</p>
+                </div>
+            </div>
+
+            <!-- Tech Example -->
+            <div class="example-content" id="tech">
+                <h3 style="color: #f5576c; margin-bottom: 15px;">Example 2: Taking a Screenshot</h3>
+                
+                <div class="instruction-step bad-example">
+                    <span class="example-label bad-label">❌ BAD EXAMPLE</span>
+                    <p><strong>How to Screenshot</strong></p>
+                    <p>Press some buttons on your keyboard and it saves somewhere on your computer.</p>
+                    <p><strong>Why it's bad:</strong></p>
+                    <ul>
+                        <li>Doesn't specify which device (Windows, Mac, phone)</li>
+                        <li>"Some buttons" is completely unclear</li>
+                        <li>No information about where to find the screenshot</li>
+                        <li>Missing step-by-step instructions</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-step good-example">
+                    <span class="example-label good-label">✅ GOOD EXAMPLE</span>
+                    <p><strong>How to Take a Screenshot on Windows</strong></p>
+                    <p><strong>Method 1: Full Screen Screenshot</strong></p>
+                    <p><span class="step-number">1</span> Make sure the screen shows exactly what you want to capture.</p>
+                    <p><span class="step-number">2</span> Press the <strong>Windows key + Print Screen</strong> buttons at the same time.</p>
+                    <p><span class="step-number">3</span> Your screen will briefly dim, indicating the screenshot was taken.</p>
+                    <p><span class="step-number">4</span> Open File Explorer and navigate to <strong>This PC > Pictures > Screenshots</strong>.</p>
+                    <p><span class="step-number">5</span> Your screenshot will be saved here with the date and time as the filename.</p>
+                    <p><strong>Method 2: Partial Screen Screenshot</strong></p>
+                    <p><span class="step-number">1</span> Press <strong>Windows key + Shift + S</strong>.</p>
+                    <p><span class="step-number">2</span> Your screen will dim and a cursor will appear.</p>
+                    <p><span class="step-number">3</span> Click and drag to select the area you want to capture.</p>
+                    <p><span class="step-number">4</span> Release the mouse button when the correct area is highlighted.</p>
+                    <p><span class="step-number">5</span> The screenshot is copied to your clipboard. Open any program (like Paint or Word) and press <strong>Ctrl + V</strong> to paste it.</p>
+                    <p>💡 <strong>Tip:</strong> Use Method 1 for quick full-screen captures, Method 2 when you only need part of the screen.</p>
+                </div>
+            </div>
+
+            <!-- Walking Directions Example -->
+            <div class="example-content" id="walking">
+                <h3 style="color: #f5576c; margin-bottom: 15px;">Example 3: Walking to the Park</h3>
+                
+                <div class="instruction-step bad-example">
+                    <span class="example-label bad-label">❌ BAD EXAMPLE</span>
+                    <p><strong>Directions to the Park</strong></p>
+                    <p>Go down the street and turn. Keep walking until you see trees. The park is over there.</p>
+                    <p><strong>Why it's bad:</strong></p>
+                    <ul>
+                        <li>No starting point specified</li>
+                        <li>"Turn" - which direction? Left or right?</li>
+                        <li>"Keep walking" - for how long?</li>
+                        <li>No specific landmarks</li>
+                        <li>"Over there" is meaningless in written directions</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-step good-example">
+                    <span class="example-label good-label">✅ GOOD EXAMPLE</span>
+                    <p><strong>Walking Directions from Lincoln High School to Riverside Park</strong></p>
+                    <p><strong>Starting Point:</strong> Main entrance of Lincoln High School</p>
+                    <p><strong>Total Distance:</strong> 0.7 miles (approximately 15 minutes walking)</p>
+                    <p><span class="step-number">1</span> Exit through the main doors and turn right onto Oak Street heading east.</p>
+                    <p><span class="step-number">2</span> Walk straight on Oak Street for three blocks (about 5 minutes). You'll pass a Starbucks on your left and a CVS pharmacy on your right.</p>
+                    <p><span class="step-number">3</span> At the third intersection, you'll reach Maple Avenue. Turn left (north) at the traffic light with the crosswalk.</p>
+                    <p><span class="step-number">4</span> Continue north on Maple Avenue for two blocks (about 4 minutes). You'll walk past an elementary school with a yellow playground on your right.</p>
+                    <p><span class="step-number">5</span> Cross River Road at the stoplight. Use the pedestrian crossing button and wait for the walk signal.</p>
+                    <p><span class="step-number">6</span> After crossing, you'll see the park entrance directly ahead. Look for the stone pillars with "Riverside Park" engraved on them and a large oak tree between them.</p>
+                    <p><span class="step-number">7</span> Walk through the stone pillars. The main picnic area is 100 feet straight ahead, and the playground is to your left.</p>
+                    <p>⚠️ <strong>Safety Note:</strong> Cross all streets at designated crosswalks and obey traffic signals.</p>
+                    <p>💡 <strong>Tip:</strong> If you reach the gas station on the corner of Maple and Pine, you've gone one block too far—turn back!</p>
+                </div>
+            </div>
+
+            <!-- Driving Directions Example -->
+            <div class="example-content" id="driving">
+                <h3 style="color: #f5576c; margin-bottom: 15px;">Example 4: Driving to the Airport</h3>
+                
+                <div class="instruction-step bad-example">
+                    <span class="example-label bad-label">❌ BAD EXAMPLE</span>
+                    <p><strong>Directions to Airport</strong></p>
+                    <p>Take the highway north and follow signs. Get off at the airport exit. You'll see planes.</p>
+                    <p><strong>Why it's bad:</strong></p>
+                    <ul>
+                        <li>Which highway? There could be multiple.</li>
+                        <li>No specific exit number</li>
+                        <li>No distance or time estimates</li>
+                        <li>Doesn't specify which terminal or parking area</li>
+                        <li>No information about lanes or merging</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-step good-example">
+                    <span class="example-label good-label">✅ GOOD EXAMPLE</span>
+                    <p><strong>Driving Directions to Regional Airport - Terminal B Departures</strong></p>
+                    <p><strong>Starting Point:</strong> Downtown Convention Center parking garage</p>
+                    <p><strong>Total Distance:</strong> 12.5 miles (approximately 20 minutes without traffic)</p>
+                    <p><span class="step-number">1</span> Exit the parking garage and turn right onto Convention Street.</p>
+                    <p><span class="step-number">2</span> Drive 0.3 miles and merge onto Highway 95 North using the on-ramp on your right.</p>
+                    <p><span class="step-number">3</span> Stay in the right two lanes after merging. Continue on Highway 95 North for 8.5 miles (about 12 minutes).</p>
+                    <p><span class="step-number">4</span> Watch for green airport signs. Take Exit 47B marked "Regional Airport - All Terminals."</p>
+                    <p><span class="step-number">5</span> After exiting, stay in the left lane and follow signs for "Terminal B - Departures."</p>
+                    <p><span class="step-number">6</span> At the fork, bear left toward Terminal B. The right fork goes to Terminal A.</p>
+                    <p><span class="step-number">7</span> Follow the elevated roadway for 0.5 miles. You'll see the terminal building on your left.</p>
+                    <p><span class="step-number">8</span> Follow signs for either "Hourly Parking" (garage on left) or "Short-Term Parking" (right side) depending on your needs.</p>
+                    <p>⚠️ <strong>Important:</strong> Terminal B has a departure drop-off zone on Level 2. If dropping off passengers, follow signs for "Departures Upper Level."</p>
+                    <p>💡 <strong>Tip:</strong> During rush hour (7-9 AM and 4-6 PM), add 15-20 minutes to your travel time.</p>
+                    <p><strong>Destination:</strong> Terminal B is a modern white building with large windows. The entrance has automatic sliding doors and electronic flight information displays above them.</p>
+                </div>
+            </div>
+
+            <div class="side-note">
+                Notice how good examples always include: specific numbers, clear landmarks, action verbs, and descriptions of what to look for. Practice writing your own using these as models!
+            </div>
+        </div>
+
+        <!-- SECTION 5: PRACTICE TIPS -->
+        <div class="section">
+            <h2><span class="section-icon">💪</span> Practice & Tips</h2>
+
+            <div class="speech-bubble">
+                <strong>Ready to practice?</strong> The best way to improve is to write your own instructions and directions. Here are some exercises and final tips to help you master this skill!
+            </div>
+
+            <h3 style="color: #f5576c; margin: 25px 0 15px 0;">Practice Exercises</h3>
+
+            <div class="toggle-section" onclick="toggleContent(this)">
+                <div class="toggle-header">
+                    <span>Exercise 1: Write Instructions for a Daily Task</span>
+                    <span class="toggle-indicator">▼</span>
+                </div>
+                <div class="toggle-content">
+                    <p><strong>Task:</strong> Choose something you do every day and write clear instructions for it.</p>
+                    <p><strong>Ideas:</strong></p>
+                    <ul>
+                        <li>How to pack a school backpack</li>
+                        <li>How to make your bed</li>
+                        <li>How to organize your desk</li>
+                        <li>How to prepare a bowl of cereal</li>
+                    </ul>
+                    <p><strong>Challenge:</strong> Give your instructions to a friend or family member and watch them follow them exactly. Where did they get confused? Revise your instructions to fix those problems!</p>
+                </div>
+            </div>
+
+            <div class="toggle-section" onclick="toggleContent(this)">
+                <div class="toggle-header">
+                    <span>Exercise 2: Write Directions to Your Favorite Place</span>
+                    <span class="toggle-indicator">▼</span>
+                </div>
+                <div class="toggle-content">
+                    <p><strong>Task:</strong> Write walking or driving directions from your school to your favorite restaurant, store, or hangout spot.</p>
+                    <p><strong>Must Include:</strong></p>
+                    <ul>
+                        <li>Clear starting and ending points</li>
+                        <li>At least 3 specific landmarks</li>
+                        <li>Estimated distance or time</li>
+                        <li>Cardinal directions (N, S, E, W)</li>
+                        <li>Description of the destination's appearance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="toggle-section" onclick="toggleContent(this)">
+                <div class="toggle-header">
+                    <span>Exercise 3: Improve Bad Instructions</span>
+                    <span class="toggle-indicator">▼</span>
+                </div>
+                <div class="toggle-content">
+                    <p><strong>Bad Example:</strong> "How to use a microwave: Put food in. Press buttons. Take it out when done."</p>
+                    <p><strong>Your Task:</strong> Rewrite this with:</p>
+                    <ul>
+                        <li>Specific steps numbered in order</li>
+                        <li>Exact button names or settings</li>
+                        <li>Time guidelines</li>
+                        <li>Safety warnings</li>
+                        <li>Tips for best results</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="color: #f5576c; margin: 25px 0 15px 0;">Common Mistakes to Avoid</h3>
+
+            <div class="comparison-container">
+                <div class="comparison-box instructions">
+                    <h3>❌ Don't Do This</h3>
+                    <ul>
+                        <li>Use vague words: "some," "a little," "nearby," "soon"</li>
+                        <li>Skip steps that seem obvious to you</li>
+                        <li>Assume everyone knows technical terms</li>
+                        <li>Write paragraphs instead of numbered steps</li>
+                        <li>Forget to mention materials needed</li>
+                        <li>Put warnings after the dangerous step</li>
+                        <li>Use passive voice: "The button should be pressed"</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-box directions">
+                    <h3>✅ Do This Instead</h3>
+                    <ul>
+                        <li>Use specific words: "2 cups," "200 feet," "at the corner," "for 5 minutes"</li>
+                        <li>Include every single step, even simple ones</li>
+                        <li>Define terms or use simpler language</li>
+                        <li>Number each step clearly</li>
+                        <li>List materials at the beginning</li>
+                        <li>Place warnings before the relevant step</li>
+                        <li>Use active voice: "Press the button"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="side-note">
+                The ultimate test: Can someone who has never done this task successfully complete it using only your instructions? That's the gold standard!</div>
+        </div>
+    </div>
+<footer class="footer">
+<p>Developed by: <strong>Nabaraj Dhungana<strong><p>
+</footer>
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+
+            // Highlight clicked button
+            event.target.classList.add('active');
+        }
+
+        function showExample(exampleId) {
+            // Hide all examples
+            const examples = document.querySelectorAll('.example-content');
+            examples.forEach(ex => ex.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.example-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected example
+            document.getElementById(exampleId).classList.add('active');
+
+            // Highlight clicked button
+            event.target.classList.add('active');
+
+            // Smooth scroll to example
+            document.getElementById(exampleId).scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest' 
+            });
+        }
+
+        function toggleContent(element) {
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

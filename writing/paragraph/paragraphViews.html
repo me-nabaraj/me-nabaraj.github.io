@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Views and Attitude Paragraph - SEE Preparation</title>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #3498DB;
+            --accent: #E74C3C;
+            --success: #27AE60;
+            --light-bg: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text: #2C3E50;
+            --border: #E1E8ED;
+            --highlight: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495E 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><text x="50" y="50" font-family="Arial" font-size="10" text-anchor="middle" fill="white">¶</text></svg>');
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .exam-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: -2rem auto 0;
+            padding: 0 1rem 4rem;
+        }
+
+        /* Key Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--secondary);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), #2980B9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Structure Guide */
+        .structure-guide {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--success);
+        }
+
+        .structure-guide h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .structure-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            position: relative;
+            counter-increment: step-counter;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--secondary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .step h4 {
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Paragraph Samples */
+        .samples-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .word-limit {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .sample-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .topic-btn {
+            background: var(--light-bg);
+            border: 2px solid var(--border);
+            padding: 1.2rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .topic-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .topic-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Paragraph Display */
+        .paragraph-display {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 2.5rem;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+        }
+
+        .paragraph-display::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--success));
+        }
+
+        .paragraph-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+            position: relative;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .paragraph-text::first-letter {
+            font-size: 2em;
+            color: var(--secondary);
+            font-weight: bold;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            margin-top: 5px;
+        }
+
+        .word-count {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .topic-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Marking Criteria */
+        .criteria-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-right: 5px solid var(--accent);
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .criteria-item {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .criteria-item h4 {
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .points {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tip-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .do-card {
+            border-top: 5px solid var(--success);
+        }
+
+        .avoid-card {
+            border-top: 5px solid var(--accent);
+        }
+
+        .tip-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .tip-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tip-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed var(--border);
+            position: relative;
+            padding-left: 1.8rem;
+        }
+
+        .do-card .tip-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .avoid-card .tip-list li:before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+       .footer {
+    background: var(--primary);
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+
+.footer strong {
+    color: var(--secondary);
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding: 0 0.5rem 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .structure-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .sample-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .paragraph-display {
+                padding: 1.5rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .header {
+                padding: 2rem 1rem;
+            }
+
+            .feature-card, .structure-guide, .samples-section, .criteria-section {
+                padding: 1.5rem;
+            }
+
+            .paragraph-text {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* Highlight for key terms */
+        .key-term {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 0 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Views and Attitude Paragraph Writing</h1>
+            <div class="subtitle">Expressing Perspectives in a Single Paragraph for SEE Examination</div>
+            <div class="exam-badge">
+                <i class="fas fa-paragraph"></i>
+                Paragraph Writing Task
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Key Features -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>What is a View?</h3>
+                <p>Your personal perspective or opinion on a topic. It should be clear, logical, and supported by reasoning.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>What is Attitude?</h3>
+                <p>The emotional tone or stance you take. It should be appropriate, consistent, and reflected through word choice.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+                <h3>Single Paragraph</h3>
+                <p>All views and attitudes must be expressed within one coherent paragraph of approximately 150 words.</p>
+            </div>
+        </div>
+
+        <!-- Structure Guide -->
+        <section class="structure-guide">
+            <h2>
+                <i class="fas fa-sitemap"></i>
+                Paragraph Structure Guide
+            </h2>
+            <p>A well-structured paragraph follows this logical flow:</p>
+            
+            <div class="structure-steps">
+                <div class="step">
+                    <h4>Topic Sentence</h4>
+                    <p>Clearly state your main view or attitude about the topic.</p>
+                </div>
+                <div class="step">
+                    <h4>Supporting Points</h4>
+                    <p>Provide 2-3 reasons or arguments supporting your view.</p>
+                </div>
+                <div class="step">
+                    <h4>Examples/Evidence</h4>
+                    <p>Include specific examples or experiences to strengthen your points.</p>
+                </div>
+                <div class="step">
+                    <h4>Concluding Sentence</h4>
+                    <p>Reinforce your view and leave a strong final impression.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Paragraph Samples -->
+        <section class="samples-section">
+            <div class="section-header">
+                <h2>Sample Paragraphs</h2>
+                <div class="word-limit">
+                    <i class="fas fa-clock"></i>
+                    Approximately 150 words per paragraph
+                </div>
+                <p>Select different topics to view sample paragraphs</p>
+            </div>
+
+            <div class="sample-selector">
+                <button class="topic-btn active" onclick="showParagraph(1)">
+                    <i class="fas fa-mobile-alt"></i>
+                    Technology Impact
+                </button>
+                <button class="topic-btn" onclick="showParagraph(2)">
+                    <i class="fas fa-tree"></i>
+                    Environment
+                </button>
+                <button class="topic-btn" onclick="showParagraph(3)">
+                    <i class="fas fa-book"></i>
+                    Reading Habits
+                </button>
+                <button class="topic-btn" onclick="showParagraph(4)">
+                    <i class="fas fa-users"></i>
+                    Social Media
+                </button>
+            </div>
+
+            <div class="paragraph-display">
+                <div class="topic-title">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span id="paragraphTopic">Impact of Technology on Students</span>
+                </div>
+                <div class="paragraph-text fade-in" id="paragraphText">
+                    In my view, technology has become a double-edged sword for students, offering incredible opportunities while presenting significant challenges that require careful navigation. Personally, I hold a cautiously optimistic attitude toward technological integration in education. On one hand, I genuinely appreciate how digital tools have democratized access to information, allowing students from all backgrounds to learn from world-class resources and connect with global perspectives. The interactive learning platforms and educational apps have made complex concepts more accessible and engaging, transforming traditional classrooms into dynamic learning environments. However, I am deeply concerned about the potential negative impacts, particularly the distraction caused by social media and gaming platforms, which can severely fragment concentration and reduce academic productivity. Furthermore, the sedentary lifestyle promoted by excessive screen time worries me, as physical activity and face-to-face social interactions are equally crucial for holistic development. Therefore, while I enthusiastically embrace technology's educational benefits, I firmly believe in establishing healthy boundaries and promoting digital literacy to ensure that technology serves as an empowering tool rather than a dominating force in students' lives.
+                </div>
+                <div class="word-count" id="wordCount">Word Count: 151</div>
+            </div>
+        </section>
+
+        <!-- Marking Criteria -->
+        <section class="criteria-section">
+            <h2>
+                <i class="fas fa-clipboard-list"></i>
+                Examiner's Marking Criteria
+            </h2>
+            <p>Your paragraph will be evaluated based on these key criteria:</p>
+            
+            <div class="criteria-grid">
+                <div class="criteria-item">
+                    <h4><i class="fas fa-bullseye"></i> Content and Ideas</h4>
+                    <p>Clarity of view, relevance to topic, depth of thought</p>
+                    <div class="points">• Clear thesis statement<br>• Relevant supporting points<br>• Logical reasoning</div>
+                </div>
+                <div class="criteria-item">
+                    <h4><i class="fas fa-paint-brush"></i> Expression and Style</h4>
+                    <p>Language use, vocabulary, sentence structure</p>
+                    <div class="points">• Appropriate tone<br>• Varied vocabulary<br>• Cohesive devices</div>
+                </div>
+                <div class="criteria-item">
+                    <h4><i class="fas fa-cogs"></i> Organization</h4>
+                    <p>Paragraph structure, logical flow, coherence</p>
+                    <div class="points">• Clear topic sentence<br>• Smooth transitions<br>• Strong conclusion</div>
+                </div>
+                <div class="criteria-item">
+                    <h4><i class="fas fa-spell-check"></i> Accuracy</h4>
+                    <p>Grammar, spelling, punctuation, word count</p>
+                    <div class="points">• Correct grammar<br>• Proper punctuation<br>• 150±10 words</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <div class="tips-grid">
+            <div class="tip-card do-card">
+                <h3>
+                    <i class="fas fa-check-circle"></i>
+                    Essential Do's
+                </h3>
+                <ul class="tip-list">
+                    <li>Start with a clear topic sentence stating your view</li>
+                    <li>Use transition words (however, therefore, furthermore)</li>
+                    <li>Support views with specific examples or experiences</li>
+                    <li>Maintain consistent tone throughout the paragraph</li>
+                    <li>Use varied sentence structures for rhythm</li>
+                    <li>Conclude by reinforcing your main view</li>
+                    <li>Stay within 140-160 word range</li>
+                    <li>Proofread for grammar and spelling errors</li>
+                </ul>
+            </div>
+
+            <div class="tip-card avoid-card">
+                <h3>
+                    <i class="fas fa-times-circle"></i>
+                    Critical Don'ts
+                </h3>
+                <ul class="tip-list">
+                    <li>Don't write multiple paragraphs</li>
+                    <li>Avoid contradictory statements within the paragraph</li>
+                    <li>Don't use overly emotional or biased language</li>
+                    <li>Avoid vague statements without explanation</li>
+                    <li>Don't exceed the word limit significantly</li>
+                    <li>Avoid informal slang or contractions</li>
+                    <li>Don't introduce new ideas in conclusion</li>
+                    <li>Avoid repetitive words or phrases</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Developed by <strong>Nabaraj Dhungana</strong> </p>
+        </footer>
+
+    <script>
+        const paragraphs = [
+            {
+                topic: "Impact of Technology on Students",
+                content: `In my view, technology has become a double-edged sword for students, offering incredible opportunities while presenting significant challenges that require careful navigation. Personally, I hold a cautiously optimistic attitude toward technological integration in education. On one hand, I genuinely appreciate how digital tools have democratized access to information, allowing students from all backgrounds to learn from world-class resources and connect with global perspectives. The interactive learning platforms and educational apps have made complex concepts more accessible and engaging, transforming traditional classrooms into dynamic learning environments. However, I am deeply concerned about the potential negative impacts, particularly the distraction caused by social media and gaming platforms, which can severely fragment concentration and reduce academic productivity. Furthermore, the sedentary lifestyle promoted by excessive screen time worries me, as physical activity and face-to-face social interactions are equally crucial for holistic development. Therefore, while I enthusiastically embrace technology's educational benefits, I firmly believe in establishing healthy boundaries and promoting digital literacy to ensure that technology serves as an empowering tool rather than a dominating force in students' lives.`,
+                wordCount: 151
+            },
+            {
+                topic: "Importance of Environmental Conservation",
+                content: `From my perspective, environmental conservation is not merely an optional activity but an absolute necessity for our survival and the wellbeing of future generations. I maintain a passionate and committed attitude toward protecting our natural world, viewing it as our most sacred responsibility. The rapid degradation of ecosystems, alarming pollution levels, and devastating effects of climate change deeply concern me, compelling me to advocate for immediate action. I strongly believe that every individual has a crucial role to play in environmental stewardship, as simple daily actions like reducing plastic consumption, conserving water, and proper waste management collectively create significant positive impacts. My participation in school clean-up drives and tree plantation campaigns has reinforced my conviction that environmental consciousness must begin early and be nurtured continuously. Ultimately, I view environmental conservation as an expression of respect for all life forms and a commitment to preserving the delicate balance of our planet for generations to come.`,
+                wordCount: 149
+            },
+            {
+                topic: "Value of Reading in Modern Life",
+                content: `In my considered opinion, cultivating reading habits remains one of the most valuable pursuits in our fast-paced digital age, and I hold an enthusiastically positive attitude toward regular reading. While I acknowledge the convenience of digital information consumption, I firmly believe that deep, focused reading of books offers unparalleled benefits for intellectual growth and emotional well-being. Reading expands vocabulary, enhances concentration, and develops critical thinking skills in ways that fragmented online content simply cannot match. Personally, I find immense joy and comfort in getting lost in a good book, as it transports me to different worlds, exposes me to diverse perspectives, and provides a much-needed respite from constant digital stimulation. Moreover, reading fosters empathy by allowing us to experience life through others' eyes, making us more understanding and compassionate individuals. Therefore, despite the allure of instant digital gratification, I wholeheartedly advocate for preserving and prioritizing the timeless habit of reading as an essential component of personal development and lifelong learning.`,
+                wordCount: 150
+            },
+            {
+                topic: "Social Media's Role in Society",
+                content: `My view on social media's role in contemporary society is decidedly ambivalent, reflecting both appreciation for its connective capabilities and concern about its psychological impacts. I approach social media platforms with a deliberately cautious attitude, recognizing their dual nature as both bridge and barrier to genuine human connection. On the positive side, I value how these platforms have revolutionized communication, enabling immediate information sharing, social activism, and maintenance of relationships across geographical boundaries. The ability to connect with diverse communities and access varied perspectives is genuinely remarkable. However, I am increasingly troubled by the curated perfection, comparison culture, and validation-seeking behavior that social media often promotes, which can undermine authentic self-esteem and mental well-being. The blurring of online personas with real identities concerns me deeply, as does the potential for misinformation spread. Consequently, while I utilize social media for specific purposes, I consciously limit my engagement and prioritize face-to-face interactions, believing that balanced, mindful usage is essential for harnessing its benefits while mitigating its potential harms.`,
+                wordCount: 152
+            }
+        ];
+
+        // Initialize with first paragraph
+        document.addEventListener('DOMContentLoaded', function() {
+            showParagraph(1);
+        });
+
+        function showParagraph(index) {
+            // Update active button
+            const buttons = document.querySelectorAll('.topic-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+            buttons[index-1].classList.add('active');
+            
+            // Get paragraph
+            const paragraph = paragraphs[index-1];
+            
+            // Update display with animation
+            const paragraphText = document.getElementById('paragraphText');
+            const paragraphTopic = document.getElementById('paragraphTopic');
+            const wordCount = document.getElementById('wordCount');
+            
+            // Add fade out effect
+            paragraphText.classList.remove('fade-in');
+            setTimeout(() => {
+                paragraphTopic.textContent = paragraph.topic;
+                paragraphText.textContent = paragraph.content;
+                wordCount.textContent = `Word Count: ${paragraph.wordCount}`;
+                paragraphText.classList.add('fade-in');
+                
+                // Highlight key terms
+                highlightKeyTerms();
+            }, 150);
+        }
+
+        function highlightKeyTerms() {
+            const textElement = document.getElementById('paragraphText');
+            let text = textElement.textContent;
+            
+            // Define key terms to highlight
+            const keyTerms = [
+                'in my view', 'from my perspective', 'in my opinion',
+                'I believe', 'I think', 'personally',
+                'however', 'therefore', 'furthermore',
+                'on one hand', 'on the other hand'
+            ];
+            
+            keyTerms.forEach(term => {
+                const regex = new RegExp(`\\b${term}\\b`, 'gi');
+                text = text.replace(regex, `<span class="key-term">$&</span>`);
+            });
+            
+            textElement.innerHTML = text;
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>

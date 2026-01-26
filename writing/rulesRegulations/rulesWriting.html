@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obligations and Prohibitions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #ff6f61;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .instructions, .sample-box {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .instructions h2, .sample-box h2 {
+      color: #6b5b95;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    .instructions ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    ul li {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background-color: #13ad0e;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      flex: 1 1 auto;
+      text-align: center;
+    }
+    .btn:hover {
+      background-color: #ed480c;
+    }
+    .sample-box {
+      background-color: #ffff96;
+      color: #333;
+      margin-bottom: 3rem;
+    }
+    .sample-box ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+   /* Sticky Footer Styling */
+.footer {
+    background: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .instructions h2, .sample-box h2 {
+        font-size: 1.5rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+      .btn-container {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      .instructions h2, .sample-box h2 {
+        font-size: 1.3rem;
+      }
+      .btn {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+      .instructions, .sample-box {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Writing Obligations and Prohibitions</h1>
+
+    <!-- Instructions Section -->
+    <div class="instructions">
+      <h2>Instructions for Writing Obligations and Prohibitions</h2>
+      <ul>
+        <li><strong>Understand the Purpose:</strong> Identify the specific rules and guidelines needed for a particular place or situation.</li>
+        <li><strong>Use Clear and Direct Language:</strong> Write in simple and precise sentences.</li>
+        <li><strong>Structure the Statements Properly:</strong> Use words like "must," "should," "is required to" for obligations, and "must not," "is not allowed" for prohibitions.</li>
+        <li><strong>Use Variety in Sentence Formation:</strong> Avoid repeating the same sentence structure.</li>
+        <li><strong>Make It Specific and Relevant:</strong> Tailor the rules to the setting.</li>
+        <li><strong>Maintain a Formal Tone:</strong> Use a respectful and authoritative tone.</li>
+      </ul>
+    </div>
+
+    <!-- Buttons to Load Samples -->
+    <div class="btn-container">
+      <button class="btn" onclick="loadSample(1)">Assembly Rules</button>
+      <button class="btn" onclick="loadSample(2)">Library Rules</button>
+      <button class="btn" onclick="loadSample(3)">Laboratory Rules</button>
+      <button class="btn" onclick="loadSample(4)">Hostel Rules</button>
+      <button class="btn" onclick="loadSample(5)">Zoo Rules</button>
+    </div>
+
+    <!-- Sample Box -->
+    <div class="sample-box" id="sampleBox">
+      <h2>Sample Obligations and Prohibitions</h2>
+      <p>Click a button above to load a sample.</p>
+    </div>
+  </div>
+ <footer class="footer">
+        <p>Content developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+  <script>
+    const samples = [
+      {
+        title: "Obligations and Prohibitions for a School Assembly",
+        content: `
+          <ul>
+            <li>All students must stand in a straight line and maintain discipline throughout the assembly.</li>
+            <li>It is mandatory for students to wear the proper school uniform and arrive on time.</li>
+            <li>Students should listen attentively to speeches, prayers, and announcements without unnecessary talking.</li>
+            <li>No student is allowed to use mobile phones, chew gum, or engage in disruptive behavior during the assembly.</li>
+            <li>Running, pushing, or making loud noises in the assembly area is strictly prohibited.</li>
+            <li>Respecting teachers, staff, and fellow students is essential; any form of misconduct will not be tolerated.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Obligations and Prohibitions for a Library",
+        content: `
+          <ul>
+            <li>Students must keep quiet inside the library to ensure a peaceful reading environment. Loud talking, shouting, or unnecessary noise is strictly prohibited.</li>
+            <li>All books must be handled with care. Marking, tearing, or damaging library materials in any way is not allowed.</li>
+            <li>Eating or drinking inside the library is strictly forbidden to prevent damage to books and maintain cleanliness.</li>
+            <li>Students must use the library furniture properly. Reserving seats for friends is not allowed.</li>
+            <li>No student is allowed to keep a book more than 15 days. Keeping longer than the designated period will result in a fine.</li>
+            <li>Before leaving, students must return books to the proper place and ensure the library remains tidy for the next user.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Obligations and Prohibitions for a Laboratory",
+        content: `
+          <ul>
+            <li>Students are required to wear lab coats and safety goggles at all times to ensure safety.</li>
+            <li>All experiments must be conducted strictly under the guidance of the instructor, following the given procedures carefully.</li>
+            <li>Conducting unauthorized experiments is strictly prohibited.</li>
+            <li>No student is allowed to touch or operate any laboratory equipment without explicit permission.</li>
+            <li>Students must clean their workspace and return all materials to their designated places after completing the experiment.</li>
+            <li>In case of any accident, spill, or hazardous situation, students must immediately inform the instructor and follow emergency protocols.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Obligations and Prohibitions for a School Hostel",
+        content: `
+          <ul>
+            <li>Students must follow the hostel schedule strictly, including wake-up, study, and meal times.</li>
+            <li>Keeping rooms clean and organized is a shared responsibility; everyone should contribute.</li>
+            <li>No student is allowed to leave the hostel premises without prior permission from the warden.</li>
+            <li>Bringing or using prohibited items such as mobile phones (if restricted), cigarettes, or any intoxicants is strictly forbidden.</li>
+            <li>Loud music, shouting, or any disturbance that affects others’ study and rest is not allowed.</li>
+            <li>All students must respect hostel staff and fellow residents, ensuring a peaceful and friendly environment.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Obligations and Prohibitions for Visitors in a Zoo",
+        content: `
+          <ul>
+            <li>All visitors must follow the designated pathways and stay within the allowed areas. Wandering into restricted zones can be dangerous and is strictly prohibited.</li>
+            <li>Feeding the animals is not allowed. They have special diets, and outside food may harm them.</li>
+            <li>Littering inside the zoo premises is strictly forbidden. Use the dustbins provided to keep the environment clean and safe for both animals and visitors.</li>
+            <li>Visitors should maintain silence near animal enclosures. Loud noises can disturb or stress the animals, affecting their well-being.</li>
+            <li>Do not tease, touch, or try to provoke the animals in any way. Such actions are harmful and may lead to serious consequences.</li>
+            <li>Respect the zoo rules and staff instructions at all times. Cooperation ensures a pleasant experience for everyone while keeping the animals safe and comfortable.</li>
+          </ul>
+        `
+      }
+    ];
+
+    function loadSample(index) {
+      const sampleBox = document.getElementById("sampleBox");
+      sampleBox.innerHTML = `
+        <h2>${samples[index - 1].title}</h2>
+        ${samples[index - 1].content}
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.quiz-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* Limit width for larger screens */
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+#question-container {
+  margin-bottom: 20px;
+}
+
+#sentence {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+#answer-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+#show-answer-btn {
+  padding: 10px 20px;
+  font-size: 0.9em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: auto; /* Fixed width for larger screens */
+  display: inline-block; /* Ensure buttons don't stretch */
+}
+
+#show-answer-btn:hover {
+  background-color: #0056b3;
+}
+
+#feedback {
+  font-size: 0.9em;
+  margin-top: 10px;
+  height: 20px;
+  color: #999;
+}
+
+.score-container {
+  margin-bottom: 20px;
+}
+
+#next-btn, #reset-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: auto; /* Fixed width for larger screens */
+  display: inline-block; /* Ensure buttons don't stretch */
+}
+
+#reset-btn {
+  background-color: #dc3545;
+  padding: 10px 28px;
+}
+
+#next-btn:hover {
+  background-color: #218838;
+}
+
+#reset-btn:hover {
+  background-color: #c82333;
+}
+/* Sticky Footer Styling */
+.footer {
+    background: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+/* Instructions */
+.instructions {
+    font-size: 1.2rem;
+    color: #007bff;
+    margin: 0; /* Remove any default margin */
+    padding: 5px 0; /* Add small padding for spacing */
+    font-weight: bold;
+}
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  #sentence {
+    font-size: 1em;
+  }
+
+  #answer-input, #show-answer-btn, #next-btn, #reset-btn {
+    font-size: 0.9em;
+  }
+
+  #show-answer-btn, #next-btn, #reset-btn {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2em;
+  }
+
+  #sentence {
+    font-size: 0.9em;
+  }
+
+  #answer-input, #show-answer-btn, #next-btn, #reset-btn {
+    font-size: 0.8em;
+  }
+
+  #show-answer-btn, #next-btn, #reset-btn {
+    width: 100%; /* Full width on smaller screens */
+  }
+}

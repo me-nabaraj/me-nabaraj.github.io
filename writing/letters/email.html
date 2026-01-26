@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Email Writing</title>
+  <style>
+    :root {
+      --primary: #4285f4;
+      --primary-dark: #3367d6;
+      --secondary: #34a853;
+      --accent: #ea4335;
+      --warning: #fbbc05;
+      --light-bg: #f8f9fa;
+      --dark-bg: #202124;
+      --card-bg: #ffffff;
+      --text: #3c4043;
+      --border: #dadce0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Google Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    /* Tech Header */
+    .tech-header {
+      background: linear-gradient(135deg, var(--dark-bg) 0%, #3c4043 100%);
+      color: white;
+      padding: 2.5rem 1rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .tech-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(52, 168, 83, 0.1) 0%, transparent 50%);
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #4285f4, #34a853, #ea4335);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .subtitle {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    
+    .email-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      margin-top: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    /* Dashboard Layout */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    @media (max-width: 900px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Email Interface Card */
+    .email-interface {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    
+    .email-interface::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+    }
+    
+    .interface-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .interface-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+    }
+    
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .form-field {
+      padding: 0.8rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .form-field:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+    }
+    
+    .email-body {
+      min-height: 200px;
+      resize: vertical;
+    }
+    
+    /* Side Panel */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .format-card, .tips-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+    
+    .format-card h2, .tips-card h2 {
+      color: var(--primary-dark);
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .format-steps {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .format-steps li {
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+    
+    .step-number {
+      width: 30px;
+      height: 30px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    
+    .tips-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .tips-list li {
+      padding: 0.8rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .tip-icon {
+      color: var(--secondary);
+      font-weight: bold;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    
+    /* Email Templates Section */
+    .templates-section {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+    
+    .templates-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .templates-header h2 {
+      color: var(--primary-dark);
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .template-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .template-tab {
+      background: white;
+      border: 2px solid var(--border);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-family: inherit;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .template-tab:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(66, 133, 244, 0.1);
+    }
+    
+    .template-tab.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 5px 15px rgba(66, 133, 244, 0.2);
+    }
+    
+    .tab-icon {
+      font-size: 1.2rem;
+    }
+    
+    .template-preview {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 2rem;
+      min-height: 400px;
+      border: 2px dashed var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .email-preview {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+    
+    .email-header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .email-meta {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #5f6368;
+      margin-bottom: 1rem;
+    }
+    
+    .email-label {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+    
+    .email-subject {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin: 1rem 0;
+    }
+    
+    .email-content {
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+    
+    .word-count {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--secondary);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    /* Do's and Don'ts */
+    .dos-donts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .dos-card, .donts-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
+    }
+    
+    .dos-card {
+      border-top: 5px solid var(--secondary);
+    }
+    
+    .donts-card {
+      border-top: 5px solid var(--accent);
+    }
+    
+    .dos-card h3, .donts-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    /* Footer */
+     .footer::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+    }
+  .footer {
+    background: var(--dark-bg);
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .email-interface, .format-card, .tips-card, .templates-section {
+        padding: 1.5rem;
+      }
+      
+      .template-tabs {
+        flex-direction: column;
+      }
+      
+      .template-tab {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .dashboard {
+        gap: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .tech-header {
+        padding: 1.8rem 1rem;
+      }
+      
+      .container {
+        padding: 0 0.5rem;
+      }
+      
+      .dos-donts {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Interactive Elements */
+    .copy-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      align-self: flex-start;
+    }
+    
+    .copy-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(66, 133, 244, 0.2);
+    }
+    
+    .notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--secondary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+    
+    .notification.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Tech Header -->
+  <header class="tech-header">
+    <div class="header-content">
+      <h1>Professional Email Writing</h1>
+      <div class="subtitle">Master Digital Communication for SEE Examination & Beyond</div>
+      <div class="email-badge">
+        <i class="fas fa-envelope"></i>
+        Essential 21st Century Skill
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Container -->
+  <main class="container">
+    <!-- Dashboard Layout -->
+    <div class="dashboard">
+      <!-- Email Interface -->
+      <div class="email-interface">
+        <div class="interface-header">
+          <div class="interface-icon">
+            <i class="fas fa-paper-plane"></i>
+          </div>
+          <div>
+            <h2 style="color: var(--primary-dark); margin: 0;">Email Writing Interface</h2>
+            <p style="color: #5f6368; margin: 0;">Practice the proper format</p>
+          </div>
+        </div>
+        
+        <div class="email-form">
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fas fa-user"></i>
+              From
+            </label>
+            <input type="text" class="form-field" value="student.name@email.com" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fas fa-users"></i>
+              To
+            </label>
+            <input type="text" class="form-field" value="teacher.name@school.edu.np" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fas fa-tag"></i>
+              Subject
+            </label>
+            <input type="text" class="form-field" value="Request for Study Materials - Grade 10" readonly>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">
+              <i class="fas fa-edit"></i>
+              Email Body
+            </label>
+            <textarea class="form-field email-body" readonly>Dear Sir/Madam,
+
+I hope this email finds you well. I am writing to kindly request additional study materials for our upcoming SEE examination preparation.
+
+As we approach the final months before our board exams, I believe having access to supplementary resources would greatly benefit my preparation. Specifically, I would appreciate any practice question sets, solved examples, or reference materials you might recommend for Mathematics and Science subjects.
+
+I understand you have a busy schedule, so any materials you can share would be immensely helpful. I am particularly struggling with certain topics in Algebra and Physics, so focused materials in these areas would be especially valuable.
+
+Thank you for your continuous support and guidance. I look forward to your response.
+
+Best regards,
+[Your Name]
+Grade 10 Student
+[Your School Name]</textarea>
+          </div>
+          
+          <button class="copy-btn" onclick="copyEmailFormat()">
+            <i class="far fa-copy"></i>
+            Copy Format
+          </button>
+        </div>
+      </div>
+      
+      <!-- Side Panel -->
+      <div class="side-panel">
+        <div class="format-card">
+          <h2>Email Format Guide</h2>
+          <ol class="format-steps">
+            <li>
+              <div class="step-number">1</div>
+              <span><strong>Sender's Email:</strong> Your professional email address</span>
+            </li>
+            <li>
+              <div class="step-number">2</div>
+              <span><strong>Recipient's Email:</strong> Correct email of the receiver</span>
+            </li>
+            <li>
+              <div class="step-number">3</div>
+              <span><strong>Subject Line:</strong> Clear and concise (5-8 words)</span>
+            </li>
+            <li>
+              <div class="step-number">4</div>
+              <span><strong>Salutation:</strong> Formal greeting (Dear Sir/Madam, etc.)</span>
+            </li>
+            <li>
+              <div class="step-number">5</div>
+              <span><strong>Introduction:</strong> State purpose clearly</span>
+            </li>
+            <li>
+              <div class="step-number">6</div>
+              <span><strong>Body:</strong> Detailed message in paragraphs</span>
+            </li>
+            <li>
+              <div class="step-number">7</div>
+              <span><strong>Closing:</strong> Polite ending with your name</span>
+            </li>
+            <li>
+              <div class="step-number">8</div>
+              <span><strong>Signature:</strong> Name, designation, contact</span>
+            </li>
+          </ol>
+        </div>
+        
+        <div class="tips-card">
+          <h2>Quick Tips</h2>
+          <ul class="tips-list">
+            <li>
+              <span class="tip-icon">✓</span>
+              <span>Keep subject line clear and specific</span>
+            </li>
+            <li>
+              <span class="tip-icon">✓</span>
+              <span>Use formal language for professional emails</span>
+            </li>
+            <li>
+              <span class="tip-icon">✓</span>
+              <span>Proofread for spelling and grammar errors</span>
+            </li>
+            <li>
+              <span class="tip-icon">✓</span>
+              <span>Be concise but complete in your message</span>
+            </li>
+            <li>
+              <span class="tip-icon">✓</span>
+              <span>Include a clear call to action if needed</span>
+            </li>
+            <li>
+              <span class="tip-icon">✓</span>
+              <span>Use paragraphs for better readability</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Email Templates Section -->
+    <section class="templates-section">
+      <div class="templates-header">
+        <h2>Email Templates for Students</h2>
+        <p>Click on different scenarios to view sample emails (150-200 words each)</p>
+      </div>
+      
+      <div class="template-tabs">
+        <button class="template-tab active" onclick="showTemplate(1)">
+          <span class="tab-icon"><i class="fas fa-graduation-cap"></i></span>
+          To Teacher
+        </button>
+        <button class="template-tab" onclick="showTemplate(2)">
+          <span class="tab-icon"><i class="fas fa-school"></i></span>
+          To Principal
+        </button>
+        <button class="template-tab" onclick="showTemplate(3)">
+          <span class="tab-icon"><i class="fas fa-briefcase"></i></span>
+          Job Inquiry
+        </button>
+        <button class="template-tab" onclick="showTemplate(4)">
+          <span class="tab-icon"><i class="fas fa-question-circle"></i></span>
+          Information Request
+        </button>
+        <button class="template-tab" onclick="showTemplate(5)">
+          <span class="tab-icon"><i class="fas fa-calendar-check"></i></span>
+          Leave Application
+        </button>
+      </div>
+      
+      <div class="template-preview">
+        <div class="email-preview">
+          <div class="email-header">
+            <div class="email-meta">
+              <span class="email-label">From:</span>
+              <span id="previewFrom">anita.sharma@email.com</span>
+            </div>
+            <div class="email-meta">
+              <span class="email-label">To:</span>
+              <span id="previewTo">math.teacher@school.edu.np</span>
+            </div>
+            <div class="email-meta">
+              <span class="email-label">Date:</span>
+              <span id="previewDate">October 16, 2024</span>
+            </div>
+            <div class="email-subject" id="previewSubject">Request for Additional Mathematics Practice Problems</div>
+          </div>
+          
+          <div class="email-content" id="previewContent">
+            Dear Sir/Madam,
+
+I hope this email finds you well. I am writing to kindly request additional practice problems for our upcoming Mathematics examination, particularly focusing on Algebra and Geometry chapters.
+
+As we prepare for the SEE examination, I believe solving more varied problems would significantly enhance my understanding and problem-solving speed. While I have been practicing from our textbook, I would greatly benefit from additional challenging problems similar to those expected in the board exams.
+
+If possible, could you please share some practice sets or recommend reliable resources where I can find quality problems with solutions? I am particularly struggling with quadratic equations and circle theorems, so focused materials on these topics would be especially helpful.
+
+I understand you have a busy schedule, so I appreciate any time you can spare to guide me. I am committed to improving my performance and believe your assistance would make a substantial difference.
+
+Thank you for your continuous support and excellent teaching throughout the year.
+
+Best regards,
+Anita Sharma
+Grade 10, Section A
+Roll No: 15
+Green Valley Secondary School
+          </div>
+        </div>
+        <div class="word-count" id="wordCount">Word Count: 185</div>
+      </div>
+    </section>
+    
+    <!-- Do's and Don'ts -->
+    <div class="dos-donts">
+      <div class="dos-card">
+        <h3>
+          <i class="fas fa-check-circle" style="color: var(--secondary);"></i>
+          Professional Email Do's
+        </h3>
+        <ul class="tips-list">
+          <li><span class="tip-icon">✓</span> Use a clear, descriptive subject line</li>
+          <li><span class="tip-icon">✓</span> Start with a formal greeting</li>
+          <li><span class="tip-icon">✓</span> State your purpose early in the email</li>
+          <li><span class="tip-icon">✓</span> Use proper paragraphs and spacing</li>
+          <li><span class="tip-icon">✓</span> Proofread before sending</li>
+          <li><span class="tip-icon">✓</span> Include a professional signature</li>
+          <li><span class="tip-icon">✓</span> Respond within 24-48 hours</li>
+          <li><span class="tip-icon">✓</span> Use appropriate font and formatting</li>
+        </ul>
+      </div>
+      
+      <div class="donts-card">
+        <h3>
+          <i class="fas fa-times-circle" style="color: var(--accent);"></i>
+          Professional Email Don'ts
+        </h3>
+        <ul class="tips-list">
+          <li><span class="tip-icon">✗</span> Don't use informal language or slang</li>
+          <li><span class="tip-icon">✗</span> Avoid vague subject lines</li>
+          <li><span class="tip-icon">✗</span> Don't write overly long paragraphs</li>
+          <li><span class="tip-icon">✗</span> Avoid excessive exclamation marks</li>
+          <li><span class="tip-icon">✗</span> Don't forget to attach mentioned files</li>
+          <li><span class="tip-icon">✗</span> Avoid using all caps (it looks like shouting)</li>
+          <li><span class="tip-icon">✗</span> Don't send without checking recipient address</li>
+          <li><span class="tip-icon">✗</span> Avoid emotional or angry language</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Developed by <strong>Nabaraj Dhungana</strong> </p>
+    </footer>
+  
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    Email format copied to clipboard!
+  </div>
+  
+  <script>
+    const templates = [
+      {
+        from: "anita.sharma@email.com",
+        to: "math.teacher@school.edu.np",
+        date: "October 16, 2024",
+        subject: "Request for Additional Mathematics Practice Problems",
+        content: `Dear Sir/Madam,
+
+I hope this email finds you well. I am writing to kindly request additional practice problems for our upcoming Mathematics examination, particularly focusing on Algebra and Geometry chapters.
+
+As we prepare for the SEE examination, I believe solving more varied problems would significantly enhance my understanding and problem-solving speed. While I have been practicing from our textbook, I would greatly benefit from additional challenging problems similar to those expected in the board exams.
+
+If possible, could you please share some practice sets or recommend reliable resources where I can find quality problems with solutions? I am particularly struggling with quadratic equations and circle theorems, so focused materials on these topics would be especially helpful.
+
+I understand you have a busy schedule, so I appreciate any time you can spare to guide me. I am committed to improving my performance and believe your assistance would make a substantial difference.
+
+Thank you for your continuous support and excellent teaching throughout the year.
+
+Best regards,
+Anita Sharma
+Grade 10, Section A
+Roll No: 15
+Green Valley Secondary School`,
+        wordCount: 185
+      },
+      {
+        from: "rohan.thapa@email.com",
+        to: "principal@school.edu.np",
+        date: "October 16, 2024",
+        subject: "Suggestion for Library Improvement - Grade 10 Student",
+        content: `Dear Sir/Madam,
+
+I hope this message finds you in good health. I am writing to respectfully submit a suggestion regarding improvements to our school library facilities, which I believe would greatly benefit all students, especially those preparing for SEE examinations.
+
+Currently, our library operates with limited hours and has insufficient copies of reference books for popular subjects. Many students, including myself, often find that required reference materials are already checked out when we need them most. Additionally, the study area could benefit from more seating arrangements and better lighting to create a more conducive learning environment.
+
+I would like to suggest extending library hours during examination periods, acquiring additional copies of essential reference books, and creating a quiet study zone exclusively for senior students. These improvements would significantly support our academic preparation and encourage more students to utilize library resources.
+
+I understand that implementing changes requires careful consideration and resources. However, I believe these enhancements would greatly contribute to student success. Thank you for your time and consideration of this matter.
+
+Respectfully yours,
+Rohan Thapa
+Grade 10, Section B
+School Prefect
+Green Valley Secondary School`,
+        wordCount: 190
+      },
+      {
+        from: "sarita.rai@email.com",
+        to: "hr@bookstore.com.np",
+        date: "October 16, 2024",
+        subject: "Inquiry About Part-Time Position - SEE Student",
+        content: `Dear Hiring Manager,
+
+I am writing to express my interest in any available part-time positions at your bookstore, as advertised on your website. As a Grade 10 student preparing for my SEE examinations, I am seeking weekend employment opportunities that would allow me to gain practical work experience while managing my academic responsibilities.
+
+Although I am new to formal employment, I possess strong organizational skills, a keen interest in books and literature, and excellent customer service abilities developed through volunteer work at school events. I am a quick learner, reliable, and committed to providing helpful service to customers. My academic schedule allows me to work on Saturdays and Sundays, and I am also available during school holidays.
+
+I believe working at your bookstore would provide valuable experience in customer service and retail operations while allowing me to contribute to a literary environment I genuinely appreciate. I have attached my brief resume for your consideration and would be happy to provide references from my school teachers.
+
+Thank you for considering my application. I look forward to the possibility of discussing how I could contribute to your team.
+
+Sincerely,
+Sarita Rai
+Grade 10 Student
+Contact: 9841XXXXXX
+Email: sarita.rai@email.com`,
+        wordCount: 195
+      },
+      {
+        from: "bikram.kc@email.com",
+        to: "info@college.edu.np",
+        date: "October 16, 2024",
+        subject: "Request for Information About Science Stream Admission",
+        content: `Dear Admissions Office,
+
+I am writing to request information regarding admission procedures for the Science stream at your college for the upcoming academic year. As a current Grade 10 student preparing for SEE examinations, I am researching higher education options and your institution has been highly recommended.
+
+Could you please provide details about the admission requirements, application deadlines, required documents, and any entrance examinations for the Science program? I am particularly interested in understanding the specific subject combinations offered, laboratory facilities available, and scholarship opportunities for meritorious students.
+
+Additionally, if there are any open house events, campus tours, or virtual information sessions scheduled in the coming months, I would appreciate details about how to participate. As I finalize my subject choices for Grade 11, this information would be invaluable in making an informed decision about my academic future.
+
+Thank you for your assistance. I look forward to receiving the requested information and learning more about the educational opportunities at your esteemed institution.
+
+Yours faithfully,
+Bikram K.C.
+Grade 10 Student
+Future Science Aspirant
+Contact: 9803XXXXXX`,
+        wordCount: 185
+      },
+      {
+        from: "priya.gurung@email.com",
+        to: "class.teacher@school.edu.np",
+        date: "October 16, 2024",
+        subject: "Leave Application for Family Function - October 20-21",
+        content: `Dear Sir/Madam,
+
+I am writing to formally request leave from school for two days, October 20 and 21, 2024, to attend an important family function in our hometown. My elder sister's wedding ceremonies are scheduled during these dates, and my presence is required for traditional rituals and family gatherings.
+
+I understand the importance of regular attendance, especially during our SEE preparation period, and I assure you that I will make up for any missed coursework promptly. I have already arranged with my classmates to share notes and assignments for the days I will be absent. Additionally, I will complete all pending work in advance to minimize disruption to my studies.
+
+The function is a significant family occasion that requires travel to our village, hence the need for two days of absence. I will return to school on October 22 and resume my regular studies immediately. I appreciate your understanding and consideration of this request.
+
+Thank you for your support. Please let me know if you require any additional information or documentation regarding this leave application.
+
+Respectfully,
+Priya Gurung
+Grade 10, Section C
+Roll No: 28
+Green Valley Secondary School`,
+        wordCount: 195
+      }
+    ];
+
+    // Initialize with first template
+    document.addEventListener('DOMContentLoaded', function() {
+      showTemplate(1);
+    });
+
+    function showTemplate(index) {
+      // Update active tab
+      const tabs = document.querySelectorAll('.template-tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      tabs[index-1].classList.add('active');
+      
+      // Update preview content
+      const template = templates[index-1];
+      document.getElementById('previewFrom').textContent = template.from;
+      document.getElementById('previewTo').textContent = template.to;
+      document.getElementById('previewDate').textContent = template.date;
+      document.getElementById('previewSubject').textContent = template.subject;
+      document.getElementById('previewContent').textContent = template.content;
+      document.getElementById('wordCount').textContent = `Word Count: ${template.wordCount}`;
+    }
+
+    function copyEmailFormat() {
+      const emailFormat = `From: student.name@email.com
+To: recipient@example.com
+Subject: Clear and Concise Subject Line
+
+Dear Sir/Madam,
+
+[Introduction: State your purpose clearly]
+
+[Body: Provide details in organized paragraphs]
+
+[Closing: Summarize and express gratitude]
+
+Best regards,
+[Your Full Name]
+[Your Grade/Class]
+[Additional Contact Information if needed]`;
+      
+      navigator.clipboard.writeText(emailFormat).then(() => {
+        const notification = document.getElementById('notification');
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      });
+    }
+  </script>
+</body>
+</html>

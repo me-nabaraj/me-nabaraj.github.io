@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Letter Writing</title>
+  <style>
+    :root {
+      --stationery: #fffef7;
+      --paper-line: #e8e4d9;
+      --ink: #2c1810;
+      --accent: #8b4513;
+      --accent-light: #d2691e;
+      --stamp: #c41e3a;
+      --border: #d4b483;
+      --shadow: rgba(139, 69, 19, 0.1);
+    }
+    
+    body {
+      font-family: 'Crimson Text', 'Georgia', serif;
+      background: linear-gradient(135deg, #f9f5eb 0%, #f0e6d6 100%);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-image: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M0,20 L100,20 M0,40 L100,40 M0,60 L100,60 M0,80 L100,80" stroke="%23e8e4d9" stroke-width="1" stroke-opacity="0.3"/></svg>');
+    }
+    
+    /* Stationery Header */
+    .stationery-header {
+      background: linear-gradient(135deg, var(--accent) 0%, #a0522d 100%);
+      color: white;
+      padding: 2.5rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 8px solid var(--border);
+    }
+    
+    .stationery-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-family: 'Playfair Display', 'Georgia', serif;
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      letter-spacing: 1px;
+    }
+    
+    .subtitle {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    
+    .word-limit {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    /* Vintage Layout */
+    .vintage-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    @media (max-width: 900px) {
+      .vintage-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Letter Paper */
+    .letter-paper {
+      background: var(--stationery);
+      padding: 3rem;
+      border-radius: 2px;
+      box-shadow: 0 10px 30px var(--shadow);
+      position: relative;
+      border: 1px solid var(--border);
+      min-height: 600px;
+      background-image: 
+        linear-gradient(to bottom, transparent 39px, var(--paper-line) 1px);
+      background-size: 100% 40px;
+    }
+    
+    .letter-paper::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      border: 1px solid rgba(139, 69, 19, 0.1);
+      pointer-events: none;
+    }
+    
+    .paper-corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--accent-light);
+      opacity: 0.5;
+    }
+    
+    .corner-tl {
+      top: 15px;
+      left: 15px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    .corner-tr {
+      top: 15px;
+      right: 15px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    .corner-bl {
+      bottom: 15px;
+      left: 15px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    .corner-br {
+      bottom: 15px;
+      right: 15px;
+      border-left: none;
+      border-top: none;
+    }
+    
+    .letter-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 1rem;
+      line-height: 2;
+    }
+    
+    .letter-date {
+      text-align: right;
+      font-style: italic;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+.letter-add {
+      text-align: right;
+      font-style: italic;
+      color: var(--accent);
+      margin-bottom: 0;
+      font-size: 1.1rem;
+    }
+    
+    .letter-salutation {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .letter-body {
+      white-space: pre-line;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .letter-closing {
+      margin-top: 2rem;
+    }
+    
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    
+    /* Sidebar Guide */
+    .sidebar-guide {
+      background: var(--stationery);
+      padding: 2rem;
+      border-radius: 2px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .sidebar-guide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-light));
+    }
+    
+    .guide-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    .format-steps {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .format-steps li {
+      padding: 1rem 0;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+    
+    .step-number {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    /* Stamp Design */
+    .stamp {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 80px;
+      height: 100px;
+      background: var(--stamp);
+      border-radius: 10px;
+      transform: rotate(15deg);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border: 2px dashed white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-align: center;
+      padding: 0.5rem;
+      z-index: 3;
+    }
+    
+    .stamp::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border: 1px solid white;
+      border-radius: 5px;
+    }
+    
+    /* Recipient Selector */
+    .recipient-selector {
+      background: var(--stationery);
+      padding: 2rem;
+      border-radius: 2px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    
+    .selector-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .recipient-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .recipient-btn {
+      background: var(--stationery);
+      border: 2px solid var(--border);
+      padding: 1.2rem 1rem;
+      font-family: 'Crimson Text', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .recipient-btn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    
+    .recipient-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      font-weight: bold;
+    }
+    
+    /* Writing Tips */
+    .writing-tips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .tip-card {
+      background: var(--stationery);
+      padding: 2rem;
+      border-radius: 2px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .tip-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--accent), var(--accent-light));
+    }
+    
+    .tip-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    
+    .tip-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .tip-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dotted var(--border);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .tip-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-light);
+      font-size: 1.5rem;
+    }
+    
+    /* Envelope Section */
+    .envelope-section {
+      background: var(--stationery);
+      padding: 2.5rem;
+      border-radius: 2px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 1px solid var(--border);
+      margin: 3rem 0;
+      position: relative;
+    }
+    
+    .envelope-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .envelope-preview {
+      background: #f5e6ca;
+      width: 300px;
+      height: 200px;
+      margin: 0 auto;
+      position: relative;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #e8d4b5;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+    
+    .envelope-address {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-style: italic;
+      color: var(--ink);
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 5px;
+    }
+    
+    /* Footer */
+    .footer::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--accent-light), var(--border));
+    }
+    
+   .footer {
+   background: var(--accent);
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .letter-paper {
+        padding: 2rem;
+      }
+      
+      .recipient-buttons {
+        grid-template-columns: 1fr;
+      }
+      
+      .envelope-preview {
+        width: 250px;
+        height: 166px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .stationery-header {
+        padding: 2rem 1rem;
+      }
+      
+      .letter-paper {
+        padding: 1.5rem;
+      }
+      
+      .writing-tips {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Special Elements */
+    .ink-blot {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle at 30% 30%, var(--accent) 0%, transparent 70%);
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .blot-1 {
+      top: 100px;
+      left: 50px;
+      transform: rotate(45deg);
+    }
+    
+    .blot-2 {
+      bottom: 150px;
+      right: 80px;
+      transform: rotate(-30deg);
+    }
+    
+    .word-counter {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(139, 69, 19, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: bold;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Crimson+Text:wght@400;600;700&family=Dancing+Script:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Stationery Header -->
+  <header class="stationery-header">
+    <div class="header-content">
+      <h1>The Art of Personal Letters</h1>
+      <div class="subtitle">Expressing Emotions Through Written Words</div>
+      <div class="word-limit">
+        <i class="fas fa-pen-fancy"></i> Heartfelt Communication (150-200 words)
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Vintage Layout -->
+    <div class="vintage-layout">
+      <!-- Letter Paper -->
+      <div class="letter-paper">
+        <div class="paper-corner corner-tl"></div>
+        <div class="paper-corner corner-tr"></div>
+        <div class="paper-corner corner-bl"></div>
+        <div class="paper-corner corner-br"></div>
+        
+        <div class="ink-blot blot-1"></div>
+        <div class="ink-blot blot-2"></div>
+        
+        <div class="letter-content">
+           <div class="letter-add" id="letterAdd">Bhairahawa</div>
+           <div class="letter-date" id="letterDate">October 16, 2024</div>
+          
+          <div class="letter-salutation" id="letterSalutation">My Dearest Friend,</div>
+          
+          <div class="letter-body" id="letterBody">
+            I hope this letter finds you in the best of health and spirits. It feels like ages since we last met, though it has only been a few months. How quickly time flies when we're immersed in our studies and responsibilities!
+
+            I've been thinking about our wonderful school days together - the laughter we shared, the secrets we exchanged, and the dreams we nurtured. Remember how we used to sit under the old banyan tree during lunch breaks, sharing our tiffin and planning our futures? Those memories remain etched in my heart like precious jewels.
+
+            Life here in the city is busy but fulfilling. My SEE preparation is going well, though I must admit the pressure is sometimes overwhelming. Mathematics continues to challenge me, but I've found a wonderful tutor who makes complex problems seem simple. How are your studies progressing? I imagine you must be working hard as well.
+
+            I miss our evening walks and heartfelt conversations. Letters like these help bridge the distance, but they're no substitute for your cheerful presence. Please write back soon and tell me everything about your life. I eagerly await your response.
+
+            With warmest regards and fond memories,
+          </div>
+          
+          <div class="letter-closing">
+            <div>Yours affectionately,</div>
+            <div class="signature" id="letterSignature">Anita</div>
+          </div>
+        </div>
+        
+        <div class="word-counter" id="wordCounter">Word Count: 185</div>
+      </div>
+      
+      <!-- Sidebar Guide -->
+      <div class="sidebar-guide">
+        <h2 class="guide-title">Personal Letter Format</h2>
+        <ol class="format-steps">
+          <li>
+            <div class="step-number">1</div>
+            <span><strong>Sender's Address:</strong> Your address (top right)</span>
+          </li>
+          <li>
+            <div class="step-number">2</div>
+            <span><strong>Date:</strong> Below the address</span>
+          </li>
+          <li>
+            <div class="step-number">3</div>
+            <span><strong>Salutation:</strong> Dear [Name], or My Dear [Relation]</span>
+          </li>
+          <li>
+            <div class="step-number">4</div>
+            <span><strong>Opening:</strong> Express affection and ask about well-being</span>
+          </li>
+          <li>
+            <div class="step-number">5</div>
+            <span><strong>Body:</strong> Share news, feelings, and ask questions</span>
+          </li>
+          <li>
+            <div class="step-number">6</div>
+            <span><strong>Closing:</strong> Warm wishes and expressions of affection</span>
+          </li>
+          <li>
+            <div class="step-number">7</div>
+            <span><strong>Signature:</strong> Yours lovingly/affectionately, [Your Name]</span>
+          </li>
+          <li>
+            <div class="step-number">8</div>
+            <span><strong>Envelope:</strong> Proper addressing with stamp</span>
+          </li>
+        </ol>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(139, 69, 19, 0.05); border-left: 3px solid var(--accent-light);">
+          <strong style="color: var(--accent);">Remember:</strong> Personal letters are about sharing emotions, not just information. Write from the heart!
+        </div>
+      </div>
+    </div>
+    
+    <!-- Recipient Selector -->
+    <div class="recipient-selector">
+      <h2 class="selector-title">Select Recipient Type</h2>
+      <p style="text-align: center; color: var(--accent); font-style: italic;">Click on different relationships to view sample letters</p>
+      
+      <div class="recipient-buttons">
+        <button class="recipient-btn active" onclick="loadLetter(1)">To Best Friend</button>
+        <button class="recipient-btn" onclick="loadLetter(2)">To Family Member</button>
+        <button class="recipient-btn" onclick="loadLetter(3)">To Pen Pal</button>
+        <button class="recipient-btn" onclick="loadLetter(4)">To Former Teacher</button>
+        <button class="recipient-btn" onclick="loadLetter(5)">To Cousin/Sibling</button>
+      </div>
+    </div>
+    
+    <!-- Writing Tips -->
+    <div class="writing-tips">
+      <div class="tip-card">
+        <h3>
+          <i class="fas fa-heart" style="color: var(--accent-light);"></i>
+          Expressing Emotions
+        </h3>
+        <ul class="tip-list">
+          <li>Use affectionate language appropriate to your relationship</li>
+          <li>Share personal feelings and experiences honestly</li>
+          <li>Include specific memories you cherish together</li>
+          <li>Express concern for their well-being</li>
+          <li>Use descriptive language to paint vivid pictures</li>
+          <li>Balance sharing about yourself with asking about them</li>
+          <li>End with warm wishes and anticipation for their reply</li>
+        </ul>
+      </div>
+      
+      <div class="tip-card">
+        <h3>
+          <i class="fas fa-lightbulb" style="color: var(--accent-light);"></i>
+          Writing Techniques
+        </h3>
+        <ul class="tip-list">
+          <li>Start with a warm, personal greeting</li>
+          <li>Maintain a conversational, friendly tone</li>
+          <li>Use paragraphs to organize different thoughts</li>
+          <li>Include questions to encourage response</li>
+          <li>Share news in chronological or importance order</li>
+          <li>Use anecdotes and personal stories</li>
+          <li>Keep between 150-200 words for SEE exams</li>
+          <li>Proofread for spelling and clarity</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Developed by <strong>Nabaraj Dhungana</strong> </p>
+  </footer>
+  
+  <script>
+    const letters = [
+      {
+        add: "Biratnagar",
+        date: "November 15, 2025",
+        salutation: "My Dearest Friend,",
+        body: `I hope this letter finds you in the best of health and spirits. It feels like ages since we last met, though it has only been a few months. How quickly time flies when we're immersed in our studies and responsibilities!
+
+I've been thinking about our wonderful school days together - the laughter we shared, the secrets we exchanged, and the dreams we nurtured. Remember how we used to sit under the old banyan tree during lunch breaks, sharing our tiffin and planning our futures? Those memories remain etched in my heart like precious jewels.
+
+Life here in the city is busy but fulfilling. My SEE preparation is going well, though I must admit the pressure is sometimes overwhelming. Mathematics continues to challenge me, but I've found a wonderful tutor who makes complex problems seem simple. How are your studies progressing? I imagine you must be working hard as well.
+
+I miss our evening walks and heartfelt conversations. Letters like these help bridge the distance, but they're no substitute for your cheerful presence. Please write back soon and tell me everything about your life. I eagerly await your response.
+
+With warmest regards and fond memories,`,
+        signature: "Anita",
+        wordCount: 185
+      },
+      {
+         add: "Bhairahawa",
+        date: "September 12, 2025",
+        salutation: "Dear Mother and Father,",
+        body: `I hope this letter finds you both in excellent health and happiness. It has been two weeks since I left home for hostel life, and I must confess, I miss you both terribly. The warmth of home and your loving presence are what I long for every day.
+
+Life at the hostel is structured and disciplined, which is helping me focus on my SEE preparations. The study hours are fixed, and we have dedicated tutors for each subject. I'm gradually adapting to this new routine, though the initial days were challenging. Your constant encouragement during our phone calls gives me strength.
+
+I particularly miss Mother's delicious cooking. The hostel food is nutritious but lacks the special touch of your recipes. Father, I remember how you used to help me with my mathematics homework. Those sessions were so helpful! Now, I study with my classmates, and we help each other with difficult concepts.
+
+How is everyone at home? How is Grandmother's health? Please give her my warmest regards. I promise to work hard and make you proud in my examinations. Your blessings mean everything to me.
+
+With all my love and deepest respect,`,
+        signature: "Your loving son, Rohan",
+        wordCount: 195
+      },
+      {
+         add: "Pokhara",
+        date: "December 26, 2025",
+        salutation: "Dear Maya,",
+        body: `I was delighted to receive your letter last week and immediately decided to write back. It's wonderful to connect with someone from a different part of our beautiful country through the traditional art of letter writing.
+
+You asked about life in Kathmandu. The city is bustling with energy, especially as the festival season approaches. The markets are filled with colorful decorations, and there's a festive spirit everywhere. However, I sometimes miss the tranquility of village life that you described in your letter.
+
+My SEE preparations are in full swing. I've created a study schedule that balances all subjects, though Science requires most of my attention. Your mention of helping your family with farming while studying is truly inspiring. It must teach you wonderful lessons about hard work and time management.
+
+I found your description of your village festival fascinating. The traditions you described sound so rich and meaningful. Here in the city, we celebrate differently, but the essence of family togetherness remains the same.
+
+Please write again soon. I'm eager to learn more about your life and experiences. This pen-pal friendship is becoming very special to me.
+
+Warmly and with anticipation,`,
+        signature: "Your new friend, Priya",
+        wordCount: 190
+      },
+      {
+        add: "Kathmandu",
+        date: "April 27, 2025",
+        salutation: "Respected Sir,",
+        body: `I hope this letter finds you in good health and high spirits. It has been three years since I left your classroom, but the lessons I learned from you continue to guide me. As I prepare for my SEE examinations, I find myself frequently recalling your wise words and patient guidance.
+
+You taught us not just English grammar and literature, but also the importance of perseverance, honesty, and curiosity. I remember how you would stay after school to help struggling students, including myself when I found essay writing challenging. Your belief in my abilities gave me confidence I didn't know I possessed.
+
+Currently, I'm working hard on my studies, particularly focusing on the writing skills you helped me develop. Your advice about reading widely and writing regularly has been invaluable. I've started maintaining a journal, just as you suggested, and it has improved my expression tremendously.
+
+I often share stories from your classroom with my younger sister, who will be joining high school next year. I tell her about the teacher who made learning an adventure rather than a chore.
+
+Thank you for being more than just a teacher – for being a mentor and guide. Your influence continues to shape my educational journey.
+
+With deepest respect and gratitude,`,
+        signature: "Your former student, Bikram",
+        wordCount: 200
+      },
+      {
+        add: "Butwal",
+        date: "August 9, 2025",
+        salutation: "Dear Cousin,",
+        body: `How are you? I was thinking about you today and decided to write this letter. It's been too long since we last met at the family gathering during Dashain. Time certainly flies when we're both busy with school!
+
+How is your new school? You mentioned in your last message that you were adjusting to a different curriculum. I hope you've found good friends and supportive teachers. Remember our promise to each other – we would both work hard and achieve excellent results in our board exams.
+
+Life here is mostly about study routines these days. Between school, tuition classes, and self-study, there's little time for anything else. However, I do make time for my morning walk, which helps clear my mind. Do you still play football on weekends? I remember how talented you were during our childhood games.
+
+Auntie mentioned that you've taken up painting again. That's wonderful! Creative hobbies are so important amidst academic pressure. I've started gardening on our balcony – just a few pots of flowers, but it brings me peace.
+
+Let's plan to meet during the winter break. I miss our laughter and shared stories. Until then, let's stay connected through letters.
+
+With affection and best wishes for your success,`,
+        signature: "Your cousin, Sunita",
+        wordCount: 195
+      }
+    ];
+
+    // Initialize with first letter
+    document.addEventListener('DOMContentLoaded', function() {
+      loadLetter(1);
+    });
+
+    function loadLetter(index) {
+      // Update active button
+      const buttons = document.querySelectorAll('.recipient-btn');
+      buttons.forEach(button => button.classList.remove('active'));
+      buttons[index-1].classList.add('active');
+      
+      // Update letter content
+      const letter = letters[index-1];
+        document.getElementById('letterAdd').textContent = letter.add;
+      document.getElementById('letterDate').textContent = letter.date;
+      document.getElementById('letterSalutation').textContent = letter.salutation;
+      document.getElementById('letterBody').textContent = letter.body;
+      document.getElementById('letterSignature').textContent = letter.signature;
+      document.getElementById('wordCounter').textContent = `Word Count: ${letter.wordCount}`;
+    }
+
+    // Add ink blots dynamically
+    function createInkBlots() {
+      const letterPaper = document.querySelector('.letter-paper');
+      for (let i = 0; i < 3; i++) {
+        const blot = document.createElement('div');
+        blot.className = 'ink-blot';
+        blot.style.left = `${Math.random() * 80 + 10}%`;
+        blot.style.top = `${Math.random() * 80 + 10}%`;
+        blot.style.transform = `rotate(${Math.random() * 360}deg)`;
+        blot.style.opacity = Math.random() * 0.1 + 0.05;
+        blot.style.width = `${Math.random() * 30 + 20}px`;
+        blot.style.height = blot.style.width;
+        letterPaper.appendChild(blot);
+      }
+    }
+
+    createInkBlots();
+  </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Causative Verbs Quiz</title>
+  <style>
+    /* General Styles */
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #6A5ACD, #483D8B);
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Header */
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #F0F8FF;
+      text-align: center;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      margin-bottom: 20px;
+    }
+
+    /* Quiz Container */
+    .quiz-container {
+      text-align: center;
+      background: linear-gradient(135deg, #4169E1, #1E90FF);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.4);
+      max-width: 80%;
+      width: 600px;
+    }
+
+    /* Sentence */
+    .sentence {
+      font-size: 1.7rem;
+      margin-bottom: 30px;
+      color: #F0F8FF;
+      font-weight: bold;
+    }
+
+    /* 3D Box */
+    .scene {
+      width: 200px;
+      height: 200px;
+      perspective: 800px;
+      margin: 0 auto;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate 6s linear infinite;
+    }
+
+    .box.stop-rotation {
+      animation-play-state: paused;
+    }
+
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      color: white;
+      background: rgba(65, 105, 225, 0.8);
+      border: 2px solid #F0F8FF;
+      box-shadow: 0 0 20px rgba(240, 248, 255, 0.6);
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+
+    .front  { transform: translateZ(100px); }
+    .back   { transform: rotateY(180deg) translateZ(100px); }
+    .right  { transform: rotateY(90deg) translateZ(100px); }
+    .left   { transform: rotateY(-90deg) translateZ(100px); }
+
+    @keyframes rotate {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    /* Score */
+    .score {
+      margin-top: 30px;
+      font-size: 1.7rem;
+      color: #F0F8FF;
+      font-weight: bold;
+    }
+
+    /* Restart Button */
+    .restart-button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      color: white;
+      background: #8A2BE2;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .restart-button:hover {
+      background: #6A3093;
+    }
+
+   .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .stop-rotation {
+    animation: none !important;
+  }
+
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      background: rgba(30, 30, 80, 0.9);
+      color: #F0F8FF;
+      font-size: 1rem;
+    }
+
+ /* Responsive Design */
+  @media (max-width: 600px) {
+    .scene {
+      width: 150px;
+      height: 150px;
+      perspective: 400px;
+    }
+
+    .box {
+      transform-style: preserve-3d;
+      width: 100%;
+      height: 100%;
+    }
+
+    .face {
+      width: 150px;
+      height: 150px;
+      font-size: 1.2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <header>Learn Causative Verbs with Fun</header>
+  <div class="quiz-container">
+    <div class="sentence" id="sentence">The old man......... his son clean the floor.</div>
+    <div class="scene">
+      <div class="box" id="box">
+        <div class="face front">had</div>
+        <div class="face back">got</div>
+        <div class="face right">gets</div>
+        <div class="face left">make</div>
+      </div>
+    </div>
+    <div class="score">Score: <span id="score">0</span></div>
+    <button class="restart-button" onclick="restartQuiz()">Restart Quiz</button>
+  </div>
+  <footer>Game developed by: Nabaraj</footer>
+
+<script>
+    const box = document.getElementById('box');
+    const sentenceElement = document.getElementById('sentence');
+    const scoreElement = document.getElementById('score');
+    let score = 0;
+
+    const questions = [
+  {
+    sentence: "By the time we arrive, they will have had the room.......... for us.",
+    options: ["prepare", "preparing", "to prepare", "prepared"],
+    correctAnswer: "prepared"
+  },
+  {
+    sentence: "Last week, she made her brother.......... all the groceries.",
+    options: ["to buy", "buy", "buying", "bought"],
+    correctAnswer: "buy"
+  },
+  {
+    sentence: "I had my assistant.......... the reports before the meeting yesterday.",
+    options: ["to finalize", "finalizing", "finalized", "finalize"],
+    correctAnswer: "finalize"
+  },
+  {
+    sentence: "He will have his team.......... the software update by tomorrow.",
+    options: ["complete", "to complete", "completing", "completed"],
+    correctAnswer: "complete"
+  },
+  {
+    sentence: "She got her car.......... while she was on vacation last month.",
+    options: ["to fix", "fixing", "fixed", "fix"],
+    correctAnswer: "fixed"
+  },
+  {
+    sentence: "They have had their house.......... for sale for months now.",
+    options: ["to put", "put", "putting", "puts"],
+    correctAnswer: "put"
+  },
+  {
+    sentence: "The manager had the team.......... the data analysis before the meeting.",
+    options: ["to finish", "finish", "finished", "finishing"],
+    correctAnswer: "finish"
+  },
+  {
+    sentence: "The technician will get the device.......... by a specialist soon.",
+    options: ["repair", "repaired", "repairing", "to repair"],
+    correctAnswer: "repaired"
+  },
+  {
+    sentence: "I made her.......... the documents immediately after the meeting.",
+    options: ["to sign", "sign", "signing", "signed"],
+    correctAnswer: "sign"
+  },
+  {
+    sentence: "We had our flight.......... by the airline due to bad weather.",
+    options: ["cancel", "canceled", "to cancel", "cancelling"],
+    correctAnswer: "canceled"
+  }
+];
+
+
+    let currentQuestionIndex = 0;
+    let faces = box.querySelectorAll('.face');
+
+    function loadQuestion() {
+      if (currentQuestionIndex >= questions.length) {
+        endGame();
+        return;
+      }
+
+      const question = questions[currentQuestionIndex];
+      sentenceElement.textContent = question.sentence;
+      faces.forEach((face, index) => {
+        face.style.display = '';
+        face.textContent = question.options[index];
+        face.classList.remove('disabled');
+        face.onclick = () => checkAnswer(question.options[index], face);
+      });
+    }
+
+    function checkAnswer(selectedAnswer, faceElement) {
+      faces.forEach(face => face.classList.add('disabled')); // Disable all faces after one click
+      const correctAnswer = questions[currentQuestionIndex].correctAnswer;
+      
+      if (selectedAnswer === correctAnswer) {
+        faceElement.textContent = "Wow! You're right";
+        score++;
+        scoreElement.textContent = score;
+      } else {
+        faceElement.textContent = "Uff you're wrong";
+      }
+      
+      setTimeout(() => {
+        currentQuestionIndex++;
+        loadQuestion();
+      }, 3000);
+    }
+
+function endGame() {
+  box.classList.add('stop-rotation');
+  faces.forEach(face => {
+    face.style.display = 'none';
+  });
+  sentenceElement.innerHTML = `Thank you for playing!<br> You have attempted 10 questions. <br>Your score is: ${score}<br><br><br><strong>Have a nice time !</strong>`;
+}
+
+    function shuffleQuestions() {
+  for (let i = questions.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [questions[i], questions[j]] = [questions[j], questions[i]];
+  }
+}
+
+function restartQuiz() {
+  score = 0;
+  scoreElement.textContent = score;
+  currentQuestionIndex = 0;
+  shuffleQuestions(); // Shuffle the questions before starting
+  faces.forEach(face => {
+    face.style.display = '';
+  });
+  box.classList.remove('stop-rotation');
+  loadQuestion();
+}
+
+
+    // Load the first question
+    loadQuestion();
+</script>
+</body>
+</html>

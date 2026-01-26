@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Exercise: Multiple Blanks Challenge (Timed)</title>
+    <script>
+        // Array of CSS file names (same as original)
+        const stylesheets = ["../css/dragAndDrop.css", "../css/dragAndDrop1.css", "../css/dragAndDrop2.css", "../css/dragAndDrop3.css", "../css/dragAndDrop4.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script>
+    <style>
+        /* Timer Styles */
+        .timer-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            min-width: 140px;
+            transition: all 0.3s ease;
+        }
+        
+        .timer-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .timer-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .timer-warning {
+            animation: pulse 1s infinite;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .timer-finished {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        /* Multiple blanks styling */
+        .multiple-blank {
+            min-width: 40px;
+            margin: 0 3px;
+        }
+        
+        .sentence {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .blank-number {
+            font-size: 12px;
+            color: #666;
+            position: relative;
+            top: -8px;
+            left: 2px;
+        }
+        
+        .score-breakdown {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Toast Hint Styling - FIXED */
+        .hint-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(52, 152, 219, 0.95);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 2000;
+            font-size: 14px;
+            max-width: 80%;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .hint-toast.wrong {
+            background: rgba(231, 76, 60, 0.95);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .time-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Responsive timer */
+        @media (max-width: 768px) {
+            .timer-container {
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+                min-width: 120px;
+                font-size: 16px;
+            }
+            
+            .timer-display {
+                font-size: 20px;
+            }
+            
+            .sentence {
+                font-size: 16px;
+            }
+            
+            .hint-toast {
+                bottom: 10px;
+                max-width: 90%;
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .timer-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px auto;
+                width: 90%;
+                max-width: 200px;
+            }
+            
+            .multiple-blank {
+                min-width: 35px;
+                margin: 0 2px;
+            }
+            
+            .hint-toast {
+                bottom: 5px;
+                max-width: 95%;
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Timer Container -->
+    <div class="timer-container" id="timerContainer">
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-display" id="timerDisplay">03:00</div>
+    </div>
+
+    <h1>Article Exercise: Multiple Blanks Challenge (Timed)</h1>
+    <p class="instructions">Drag and drop the correct articles. Timer starts when you drag your first answer! Complete in 3 minutes.</p>
+    
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="a">a</div>
+        <div class="draggable" draggable="true" id="an">an</div>
+        <div class="draggable" draggable="true" id="the">the</div>
+        <div class="draggable" draggable="true" id="none">none</div>
+    </div>
+
+    <!-- Questions Section - Sentences with multiple blanks -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use no article with 'work' (as in workplace) and 'the' with specific highways.">
+            1. When I drive to <span class="word multiple-blank" data-blank="1.1">____</span> work, usually <span class="word multiple-blank" data-blank="1.2">____</span> highways are really busy.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before 'accident', 'the' with 'rush hour', and no article with 'chaos' (uncountable abstract noun).">
+            2. If there's <span class="word multiple-blank" data-blank="2.1">____</span> accident during <span class="word multiple-blank" data-blank="2.2">____</span> rush hour, it can be <span class="word multiple-blank" data-blank="2.3">____</span> chaos on the roads.
+        </div>
+        <div class="sentence" data-hint="Use no article with 'TV' when referring to TV as a medium in general.">
+            3. I don't watch <span class="word multiple-blank" data-blank="3.1">____</span> TV.
+        </div>
+        <div class="sentence" data-hint="Use no article with uncountable 'information' and 'news', and 'the' with 'Internet' (specific network).">
+            4. I get <span class="word multiple-blank" data-blank="4.1">____</span> information and <span class="word multiple-blank" data-blank="4.2">____</span> news, etc., from <span class="word multiple-blank" data-blank="4.3">____</span> Internet.
+        </div>
+        <div class="sentence" data-hint="Use 'the' with 'cinema' when referring to cinema as an institution/activity.">
+            5. I don't often go to <span class="word multiple-blank" data-blank="5.1">____</span> cinema, either.
+        </div>
+        <div class="sentence" data-hint="Use no article with 'finance' as an abstract field of study/interest.">
+            6. I'm interested in <span class="word multiple-blank" data-blank="6.1">____</span> finance.
+        </div>
+        <div class="sentence" data-hint="Use 'the' with specific currencies and 'the' with 'US dollar'.">
+            7. I heard <span class="word multiple-blank" data-blank="7.1">____</span> Euro is losing value, compared to <span class="word multiple-blank" data-blank="7.2">____</span> US dollar.
+        </div>
+        <div class="sentence" data-hint="Use no article with 'crime' when speaking generally about crime as a concept.">
+            8. I like Japan. <span class="word multiple-blank" data-blank="8.1">____</span> crime is infrequent there.
+        </div>
+        <div class="sentence" data-hint="Use no article with proper noun airport names.">
+            9. When I fly to Japan, I usually fly to <span class="word multiple-blank" data-blank="9.1">____</span> Narita Airport.
+        </div>
+        <div class="sentence" data-hint="Use no article with mountain names (Mount Fuji).">
+            10. The last time I was in Japan, I climbed <span class="word multiple-blank" data-blank="10.1">____</span> Mount Fuji. It was fun.
+        </div>
+        <div class="sentence" data-hint="Use 'the' with nationalities when referring to people as a group.">
+            11. I am tall. <span class="word multiple-blank" data-blank="11.1">____</span> Japanese are generally shorter than I am.
+        </div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 17 <span class="score-breakdown">(17 blanks total)</span></p>
+        <p class="time-info">Time Taken: <span id="timeTaken">0:00</span></p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+    
+    <footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+
+    <!-- Sound Files (using external files like original) -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+    <audio id="timer-sound" src="../sounds/right.wav"></audio> <!-- Using same sound for timer warning -->
+
+    <script>
+        // Correct answers for each blank - array of arrays
+        const correctAnswers = [
+            // Sentence 1: 2 blanks
+            ["none", "the"],
+            // Sentence 2: 3 blanks
+            ["an", "the", "none"],
+            // Sentence 3: 1 blank
+            ["none"],
+            // Sentence 4: 3 blanks
+            ["none", "none", "the"],
+            // Sentence 5: 1 blank
+            ["the"],
+            // Sentence 6: 1 blank
+            ["none"],
+            // Sentence 7: 2 blanks
+            ["the", "the"],
+            // Sentence 8: 1 blank
+            ["none"],
+            // Sentence 9: 1 blank
+            ["none"],
+            // Sentence 10: 1 blank
+            ["none"],
+            // Sentence 11: 1 blank
+            ["the"]
+        ];
+        
+        // Flattened array for easy checking (17 total blanks)
+        const flattenedAnswers = correctAnswers.flat();
+        
+        const blanks = document.querySelectorAll('.word');
+        const draggables = document.querySelectorAll('.draggable');
+        const scoreElement = document.getElementById('score');
+        const timeTakenElement = document.getElementById('timeTaken');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerContainer = document.getElementById('timerContainer');
+        
+        let score = 0;
+        let filledBlanks = Array(blanks.length).fill(false);
+        let timerStarted = false;
+        let timeLeft = 180; // 3 minutes in seconds (shorter because of multiple blanks)
+        let timerInterval;
+        let totalTime = 0; // Time taken to complete
+        let quizCompleted = false;
+
+        // Load sound files from HTML
+        const correctSound = document.getElementById('correct-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+        const timerSound = document.getElementById('timer-sound');
+
+        // Initialize draggables
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', handleDragStart);
+            draggable.addEventListener('dragend', handleDragEnd);
+        });
+
+        // Initialize drop zones
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('dragover', handleDragOver);
+            blank.addEventListener('drop', (event) => handleDrop(event, index));
+            
+            // Add small number indicator for multiple blanks
+            if (blank.classList.contains('multiple-blank')) {
+                const blankNum = blank.dataset.blank;
+                const numSpan = document.createElement('span');
+                numSpan.className = 'blank-number';
+                numSpan.textContent = blankNum;
+                blank.parentNode.insertBefore(numSpan, blank.nextSibling);
+            }
+        });
+
+        let draggedItem = null;
+
+        // Drag Start
+        function handleDragStart(event) {
+            if (!timerStarted && !quizCompleted) {
+                startTimer();
+                timerStarted = true;
+            }
+            draggedItem = event.target;
+            setTimeout(() => {
+                event.target.style.display = "none";
+            }, 0);
+        }
+
+        // Drag End
+        function handleDragEnd(event) {
+            setTimeout(() => {
+                draggedItem.style.display = "inline-block";
+                draggedItem = null;
+            }, 0);
+        }
+
+        // Allow drop
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        // Handle Drop
+        function handleDrop(event, index) {
+            event.preventDefault();
+            
+            if (quizCompleted) return;
+            
+            const blank = event.target;
+            const draggedText = draggedItem.textContent;
+
+            if (blank.textContent === "____" && !filledBlanks[index]) {
+                blank.textContent = draggedText;
+                filledBlanks[index] = true;
+
+                if (draggedText === flattenedAnswers[index]) {
+                    blank.style.color = "green";
+                    blank.style.fontWeight = "bold";
+                    correctSound.play();
+                    score++;
+                } else {
+                    blank.style.color = "red";
+                    blank.style.fontWeight = "bold";
+                    wrongSound.play();
+                    showHint(blank, index);
+                }
+
+                scoreElement.textContent = score;
+                
+                // Check if all blanks are filled
+                if (filledBlanks.every(filled => filled)) {
+                    completeQuiz();
+                }
+            }
+        }
+
+        // Show Hint as Toast - FIXED
+        function showHint(blankElement, blankIndex) {
+            // Remove any existing hint toast
+            const existingToast = document.querySelector('.hint-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Get the sentence containing this blank
+            const sentence = blankElement.closest('.sentence');
+            const hintText = sentence.dataset.hint;
+            
+            // Get the blank number for more specific hint
+            const blankNum = blankElement.dataset.blank;
+            const specificHint = blankNum ? `Blank ${blankNum}: ${hintText}` : hintText;
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast wrong';
+            toast.textContent = specificHint;
+            
+            // Add to body
+            document.body.appendChild(toast);
+            
+            // Remove toast after 7 seconds
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 7000);
+        }
+
+        // Timer Functions
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                totalTime++;
+                
+                // Update timer display
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                
+                // Update time taken display
+                const timeTakenMinutes = Math.floor(totalTime / 60);
+                const timeTakenSeconds = totalTime % 60;
+                timeTakenElement.textContent = `${timeTakenMinutes}:${timeTakenSeconds < 10 ? '0' : ''}${timeTakenSeconds}`;
+                
+                // Warning when 1 minute left
+                if (timeLeft === 60) {
+                    timerContainer.classList.add('timer-warning');
+                    if (timerSound) timerSound.play();
+                    
+                    // Show time warning toast
+                    showTimeWarningToast();
+                }
+                
+                // Warning when 30 seconds left
+                if (timeLeft === 30) {
+                    timerContainer.style.animationDuration = "0.5s"; // Faster pulse
+                    showTimeWarningToast("30 seconds remaining!");
+                }
+                
+                // Timer finished
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.textContent = "0:00";
+                    timerContainer.classList.remove('timer-warning');
+                    timerContainer.classList.add('timer-finished');
+                    endQuizDueToTime();
+                }
+            }, 1000);
+        }
+
+        function showTimeWarningToast(message = "1 minute remaining!") {
+            // Remove any existing toast
+            const existingToast = document.querySelector('.hint-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast';
+            toast.textContent = message;
+            toast.style.background = "rgba(243, 156, 18, 0.95)"; // Orange color for warnings
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 3000);
+        }
+
+        function endQuizDueToTime() {
+            quizCompleted = true;
+            
+            // Calculate how many blanks were filled
+            const filledCount = filledBlanks.filter(filled => filled).length;
+            
+            // Show completion toast
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast wrong';
+            toast.textContent = `Time's up! You filled ${filledCount} out of 16 blanks.`;
+            toast.style.background = "rgba(231, 76, 60, 0.95)"; // Red color
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+                alert(`Time's up! You filled ${filledCount} out of 17 blanks.\nYour score: ${score}/17\n\nTry to work faster next time!`);
+            }, 1000);
+            
+            // Disable all draggables
+            draggables.forEach(draggable => {
+                draggable.style.opacity = "0.5";
+                draggable.draggable = false;
+            });
+            
+            // Show all correct answers for unfilled blanks
+            blanks.forEach((blank, index) => {
+                if (blank.textContent === "____") {
+                    blank.textContent = flattenedAnswers[index];
+                    blank.style.color = "orange";
+                    blank.style.fontWeight = "bold";
+                }
+            });
+        }
+
+        function completeQuiz() {
+            clearInterval(timerInterval);
+            quizCompleted = true;
+            
+            // Calculate percentage
+            const percentage = (score / 17) * 100;
+            
+            // Calculate time bonus message
+            const minutesLeft = Math.floor(timeLeft / 60);
+            const secondsLeft = timeLeft % 60;
+            
+            // Show completion toast
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast';
+            toast.textContent = `Quiz completed! Score: ${score}/17 (${percentage.toFixed(1)}%)`;
+            toast.style.background = "rgba(46, 204, 113, 0.95)"; // Green color for success
+            document.body.appendChild(toast);
+            
+            let performanceMessage = "";
+            if (percentage === 100) {
+                performanceMessage = "Perfect score! You've mastered articles with multiple blanks!";
+            } else if (percentage >= 80) {
+                performanceMessage = "Excellent work! You understand articles very well!";
+            } else if (percentage >= 60) {
+                performanceMessage = "Good job! Keep practicing to improve further!";
+            } else {
+                performanceMessage = "Keep practicing! Review the rules and try again!";
+            }
+            
+            const timeBonusMessage = timeLeft > 30 ? `Great time management! You had ${minutesLeft}:${secondsLeft < 10 ? '0' : ''}${secondsLeft} remaining.` : "You finished just in time!";
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+                alert(`Quiz completed!\n\nYour score: ${score}/17 (${percentage.toFixed(1)}%)\n\n${timeBonusMessage}\n\n${performanceMessage}`);
+            }, 1500);
+            
+            // Disable all draggables
+            draggables.forEach(draggable => {
+                draggable.style.opacity = "0.5";
+                draggable.draggable = false;
+            });
+        }
+
+        // Reset Quiz
+        function resetQuiz() {
+            // Remove any existing toasts
+            document.querySelectorAll('.hint-toast').forEach(toast => {
+                toast.remove();
+            });
+            
+            // Reset all blanks
+            blanks.forEach((blank, index) => {
+                blank.textContent = "____";
+                blank.style.color = "black";
+                blank.style.fontWeight = "normal";
+                filledBlanks[index] = false;
+            });
+
+            // Reset draggables
+            draggables.forEach(draggable => {
+                draggable.style.display = "inline-block";
+                draggable.style.opacity = "1";
+                draggable.draggable = true;
+            });
+
+            // Reset score and timer
+            score = 0;
+            scoreElement.textContent = score;
+            timeLeft = 180;
+            totalTime = 0;
+            timerStarted = false;
+            quizCompleted = false;
+            
+            // Reset timer display
+            timerDisplay.textContent = "03:00";
+            timeTakenElement.textContent = "0:00";
+            timerContainer.classList.remove('timer-warning', 'timer-finished');
+            timerContainer.style.animationDuration = "1s"; // Reset pulse speed
+            
+            // Clear any existing timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Count total blanks for user info
+            const totalBlanks = blanks.length;
+            const instructions = document.querySelector('.instructions');
+            if (instructions) {
+                instructions.textContent += ` There are ${totalBlanks} blanks to fill in 3 minutes.`;
+            }
+        });
+    </script>
+</body>
+</html>
