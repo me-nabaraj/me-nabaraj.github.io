@@ -1,0 +1,205 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #e0f7fa, #f3f4f9); /* Light pastel gradient */
+    color: #4a4a4a; /* Softer dark gray */
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: #005f6a; /* Muted teal */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating Draggable Items Below the Title */
+.drag-container {
+    position: sticky; /* Make it stick to the top */
+    top: 0; /* Stick to the top of the page */
+    z-index: 10; /* Ensure it stays above other content */
+    background: rgba(255, 255, 255, 0.95); /* Slight transparency for aesthetics */
+    padding: 10px 0;
+    margin: 0 auto; /* Center-align the container */
+    border-bottom: 2px solid #d1e0e0; /* Lighter border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+}
+
+.draggable {
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    margin: 0 10px;
+    background: #80deea; /* Light teal */
+    color: #005f6a; /* Muted teal text */
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: grab;
+    transition: all 0.3s ease;
+}
+
+.draggable:active {
+    background: #4db6ac; /* Slightly darker shade for active */
+    cursor: grabbing;
+}
+
+
+/* Adjusting Question Container for Layout */
+.question-container {
+    margin-top: 2px; /* Space below draggable items */
+    padding: 10px;
+}
+
+.sentence {
+    font-size: 1.4rem;
+    margin: 20px auto;
+    width: 80%;
+    text-align: left;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #cfd8dc; /* Softer light gray */
+    position: relative;
+}
+
+.sentence:hover {
+    box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.word {
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    border: 1px dashed #80deea; /* Lighter teal border */
+    margin: 0 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #e0f7fa; /* Light cyan background */
+    transition: all 0.3s ease;
+}
+
+.word:hover {
+    border-color: #4db6ac; /* Slightly darker shade */
+    background-color: #b2ebf2; /* Lightened cyan */
+}
+
+/* Tooltip for Hints */
+.hint {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffee58; /* Light yellow */
+    color: #212529;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Results and Reset Button */
+.result {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border: 2px solid #cfd8dc; /* Softer light gray */
+    border-radius: 10px;
+    width: 60%;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: #4caf50; /* Soothing green */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #388e3c; /* Darker green on hover */
+    transform: translateY(-2px);
+}
+
+button:active {
+    background: #2c6b32; /* Even darker green */
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sentence {
+        font-size: 1.2rem;
+    }
+
+    .draggable {
+        width: 50px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+/* Sticky Footer Styling */
+.footer {
+    background: #00796b; /* Muted teal */
+    color: #f0f4f4; /* Light off-white */
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+
+/* Instructions */
+.instructions {
+    font-size: 1.2rem;
+    color: #00796b; /* Muted teal */
+    margin: 0; /* Remove any default margin */
+    padding: 5px 0; /* Add small padding for spacing */
+    font-weight: bold;
+}
+
+.footer strong {
+    color: #ffee58; /* Light yellow */
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}

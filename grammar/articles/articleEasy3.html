@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Article Quiz</title>
+    <script>
+        // Array of CSS file names
+       const stylesheets = ["../css/dragAndDrop.css", "../css/dragAndDrop1.css", "../css/dragAndDrop2.css", "../css/dragAndDrop3.css", "../css/dragAndDrop4.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script>
+</head>
+<body>
+    <h1> Article Exercise: Easy</h1>
+<p class="instructions">Drag and drop the correct article. </p>
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="a">a</div>
+        <div class="draggable" draggable="true" id="an">an</div>
+        <div class="draggable" draggable="true" id="the">the</div>
+        <div class="draggable" draggable="true" id="none">none</div>
+    </div>
+
+    <!-- Questions -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'the' for a heavenly body like 'the sun', 'the moon' etc.">
+            1. <span class="word">____</span> sun is shining brightly today.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before a vowel sound when it is not specific.">
+            2. There is <span class="word">____</span> apple on the table.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for a non-specific singular noun when the word starts with a consonant sound.">
+            3. He is <span class="word">____</span> teacher at a local school.
+        </div>
+        <div class="sentence" data-hint="Use 'none' for general statements when the noun is uncountable.">
+            4. Water is <span class="word">____</span> essential for life.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before a vowel sound when the following word is a none specific countable noun.">
+            5. She bought <span class="word">____</span> orange from the market.
+        </div>
+        <div class="sentence" data-hint="Use 'the' for something mentioned earlier.">
+            6. I saw <span class="word">____</span> movie you recommended.
+        </div>
+        <div class="sentence" data-hint="Use 'the' for specific references, in contextualized situation.">
+            7. Please pass <span class="word">____</span> salt.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before singular words with vowel sounds when the noun does not refer to a specific person or thing.">
+            8. He met <span class="word">____</span> artist in the gallery.
+        </div>
+        <div class="sentence" data-hint="Use 'none' when talking about a general activity. Here, a/an is not suitable as 'books' is a plural noun and 'the' is not suitable as it is not about a particular book.">
+            9. Reading <span class="word">____</span> books is my favorite pastime.
+        </div>
+        <div class="sentence" data-hint="Use 'a' for general, non-specific singular objects.">
+            10. She has <span class="word">____</span> dog as a pet.
+        </div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 10</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+    <!-- Sound Files -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+    <script>
+         // Correct answers for the challenging quiz
+const correctAnswers = ["the", "an", "a", "none", "an", "the", "the", "an", "none", "a"];
+
+const blanks = document.querySelectorAll('.word');
+const draggables = document.querySelectorAll('.draggable');
+const scoreElement = document.getElementById('score');
+let score = 0;
+
+// Load sound files from HTML
+const correctSound = document.getElementById('correct-sound');
+const wrongSound = document.getElementById('wrong-sound');
+
+draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', handleDragStart);
+    draggable.addEventListener('dragend', handleDragEnd);
+});
+
+blanks.forEach((blank, index) => {
+    blank.addEventListener('dragover', handleDragOver);
+    blank.addEventListener('drop', (event) => handleDrop(event, index));
+});
+
+let draggedItem = null;
+
+// Drag Start
+function handleDragStart(event) {
+    draggedItem = event.target;
+    setTimeout(() => {
+        event.target.style.display = "none";
+    }, 0);
+}
+
+// Drag End
+function handleDragEnd(event) {
+    setTimeout(() => {
+        draggedItem.style.display = "inline-block";
+        draggedItem = null;
+    }, 0);
+}
+
+// Allow drop
+function handleDragOver(event) {
+    event.preventDefault();
+}
+
+// Handle Drop
+function handleDrop(event, index) {
+    event.preventDefault();
+    const blank = event.target;
+    const draggedText = draggedItem.textContent;
+
+    if (blank.textContent === "____") {
+        blank.textContent = draggedText;
+
+        if (draggedText === correctAnswers[index]) {
+            blank.style.color = "green";
+            correctSound.play(); // Play correct sound
+            score++;
+        } else {
+            blank.style.color = "red";
+            wrongSound.play(); // Play wrong sound
+            showHint(blank.parentElement.dataset.hint, blank);
+        }
+
+        scoreElement.textContent = score;
+    }
+}
+
+// Show Hint
+function showHint(hintText, element) {
+    const hint = document.createElement('div');
+    hint.className = 'hint';
+    hint.textContent = hintText;
+    element.appendChild(hint);
+
+    setTimeout(() => {
+        element.removeChild(hint);
+    }, 7000);
+}
+
+// Reset Quiz
+function resetQuiz() {
+    blanks.forEach(blank => {
+        blank.textContent = "____";
+        blank.style.color = "black";
+    });
+
+    draggables.forEach(draggable => {
+        draggable.style.display = "inline-block";
+    });
+
+    score = 0;
+    scoreElement.textContent = score;
+}
+    </script>
+</body>
+</html>

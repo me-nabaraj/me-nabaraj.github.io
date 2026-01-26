@@ -1,0 +1,208 @@
+/* General Body Styling */
+body {
+    font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #1e1e1e, #333333); /* Dark background gradient */
+    color: #f5f5f5; /* Light gray text for contrast */
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 3rem;
+    margin: 20px 0;
+    color: #f44336; /* Bold red for eye-catching header */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Floating Draggable Items Below the Title */
+.drag-container {
+    position: sticky; /* Keep it sticky at the top */
+    top: 0; /* Stick to the top */
+    z-index: 10; /* Ensure it stays above other content */
+    background: rgba(38, 50, 56, 0.9); /* Dark background with slight transparency */
+    padding: 15px 0;
+    margin: 0 auto;
+    border-bottom: 2px solid #616161; /* Darker gray border */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
+}
+
+.draggable {
+    display: inline-block;
+    width: 70px;
+    height: 50px;
+    margin: 0 12px;
+    background: #03a9f4; /* Bright cyan for draggable items */
+    color: #ffffff;
+    text-align: center;
+    line-height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: grab;
+    transition: all 0.3s ease;
+}
+
+.draggable:active {
+    background: #0288d1; /* Darker blue when dragged */
+    cursor: grabbing;
+}
+
+/* Adjusting Question Container for Layout */
+.question-container {
+    margin-top: 30px; /* Space below draggable items */
+    padding: 15px;
+    background: #263238; /* Dark background for questions */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Strong shadow */
+}
+
+.sentence {
+    font-size: 1.6rem;
+    margin: 25px auto;
+    width: 85%;
+    text-align: left;
+    background: #37474f; /* Dark gray-blue background */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    border: 2px solid #607d8b; /* Muted blue-gray border */
+    position: relative;
+}
+
+.sentence:hover {
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.6); /* Hover shadow for better emphasis */
+    transition: 0.3s;
+}
+
+.word {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    border: 1px dashed #607d8b; /* Light blue-gray border */
+    margin: 0 8px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #455a64; /* Dark slate background */
+    transition: all 0.3s ease;
+}
+
+.word:hover {
+    border-color: #ff9800; /* Bright orange border on hover */
+    background-color: #607d8b; /* Lightened slate when hovered */
+}
+
+/* Tooltip for Hints */
+.hint {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffeb3b; /* Bright yellow for hints */
+    color: #212121; /* Dark text for readability */
+    font-size: 1rem;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 500;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Results and Reset Button */
+.result {
+    
+    padding: 30px;
+    background: #263238; /* Dark background for results */
+    border: 2px solid #546e7a; /* Muted gray border */
+    border-radius: 12px;
+    width: 60%;
+    margin: 30px auto;
+    margin-bottom: 90px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: #8bc34a; /* Vibrant green */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #689f38; /* Darker green on hover */
+    transform: translateY(-3px);
+}
+
+button:active {
+    background: #388e3c; /* Darker green for active */
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sentence {
+        font-size: 1.3rem;
+    }
+
+    .draggable {
+        width: 60px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Sticky Footer Styling */
+.footer {
+    background: #212121; /* Dark footer */
+    color: #f5f5f5; /* Light text */
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.4rem;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Instructions */
+.instructions {
+    font-size: 1.3rem;
+    color: #03a9f4; /* Bright cyan for instructions */
+    margin: 0;
+    padding: 5px 0;
+    font-weight: bold;
+}
+
+.footer strong {
+    color: #ffeb3b; /* Yellow footer text */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}

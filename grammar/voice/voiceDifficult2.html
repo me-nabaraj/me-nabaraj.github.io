@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Quiz</title>
+  <script>
+        // Array of CSS file names
+        const stylesheets = ["../css/voiceStyle1.css", "../css/voiceStyle2.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Grammar Quiz: Passive Voice</h1>
+    <div id="question-container">
+      <p id="sentence"></p>
+      <input type="text" id="answer-input" placeholder="Write the passive form here...">
+      <button id="show-answer-btn" onmousedown="showAnswer()">Show Answer</button>
+      <p id="feedback">Your feedback here</p> <!-- Placeholder text added -->
+    </div>
+    <div class="score-container">
+      <p>Score: <span id="score">0</span></p>
+    </div>
+    <button id="next-btn" onclick="loadNextQuestion()">Next Question</button>
+    <button id="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+  <script>
+      const sentences = [
+  {
+    active: "The scientists have discovered a new species of butterfly.",
+    passive: [
+      "A new species of butterfly has been discovered by the scientists.",
+      "A new species of butterfly has been discovered.",
+      "A new butterfly species has been discovered by the scientists.",
+      "The discovery of a new butterfly species has been made by the scientists.",
+      "By the scientists, a new species of butterfly has been discovered."
+    ]
+  },
+  {
+    active: "The committee will review the proposal by next week.",
+    passive: [
+      "The proposal will be reviewed by the committee by next week.",
+      "The proposal will be reviewed by next week by the committee.",
+      "By next week, the proposal will be reviewed by the committee.",
+      "By the committee, the proposal will be reviewed by next week."
+    ]
+  },
+  {
+    active: "Someone must have stolen my wallet during the concert.",
+    passive: [
+      "My wallet must have been stolen during the concert.",
+      "During the concert, my wallet must have been stolen.",
+       ]
+  },
+  {
+    active: "The construction workers are building a new bridge over the river.",
+    passive: [
+      "A new bridge is being built over the river by the construction workers.",
+      "A new bridge is being built by the construction workers over the river.",
+      "Over the river, a new bridge is being built by the construction workers.",
+      "A new bridge is being built over the river."
+    ]
+  },
+  {
+    active: "The teacher had already explained the rules before the students arrived.",
+    passive: [
+      "The rules had already been explained by the teacher before the students arrived.",
+      "The rules had already been explained before the students arrived.",
+      "Before the students arrived, the rules had already been explained by the teacher.",
+      ]
+  },
+  {
+    active: "The company is going to launch a revolutionary product next month.",
+    passive: [
+      "A revolutionary product is going to be launched by the company next month.",
+      "A revolutionary product is going to be launched next month.",
+      "Next month, a revolutionary product is going to be launched by the company.",
+      ]
+  },
+  {
+    active: "The police arrested the suspect after a long investigation.",
+    passive: [
+      "The suspect was arrested by the police after a long investigation.",
+      "The suspect was arrested after a long investigation.",
+      "After a long investigation, the suspect was arrested by the police.",
+      "After a long investigation the suspect was arrested."
+    ]
+  },
+  {
+    active: "The storm had destroyed several houses before the rescue team arrived.",
+    passive: [
+      "Several houses had been destroyed by the storm before the rescue team arrived.",
+      "Several houses had been destroyed before the rescue team arrived.",
+      "Before the rescue team arrived, several houses had been destroyed by the storm.",
+      "Before the rescue team arrived, several houses had been destroyed."
+    ]
+  },
+  {
+    active: "The chef is preparing a special dish for the guests tonight.",
+    passive: [
+      "A special dish is being prepared by the chef for the guests tonight.",
+      "A special dish is being prepared for the guests tonight by the chef.",
+      "For the guests tonight, a special dish is being prepared by the chef.",
+      "A special dish is being prepared for the guests tonight."
+    ]
+  },
+  {
+    active: "The government will implement new policies to address the crisis.",
+    passive: [
+      "New policies will be implemented by the government to address the crisis.",
+      "New policies will be implemented to address the crisis.",
+      "To address the crisis, new policies will be implemented by the government.",
+      "To address the crisis, new policies will be implemented."
+    ]
+  }
+];
+
+let score = 0;
+let isAnswerCorrectForCurrentQuestion = false;
+let shuffledQuestions = []; // Array to store shuffled questions
+let usedQuestions = []; // Array to track used questions
+
+const sentenceElement = document.getElementById('sentence');
+const answerInput = document.getElementById('answer-input');
+const feedbackElement = document.getElementById('feedback');
+const scoreElement = document.getElementById('score');
+const nextButton = document.getElementById('next-btn');
+const showAnswerButton = document.getElementById('show-answer-btn');
+
+// Function to shuffle an array using the Fisher-Yates algorithm
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Function to load a random question
+function loadRandomQuestion() {
+  if (shuffledQuestions.length === 0) {
+    // If all questions have been used, reshuffle and reset
+    shuffledQuestions = shuffleArray([...sentences]);
+    usedQuestions = [];
+  }
+
+  // Get the next question from the shuffled list
+  const question = shuffledQuestions.pop();
+  usedQuestions.push(question);
+
+  // Display the question
+  sentenceElement.textContent = question.active;
+  answerInput.value = '';
+  answerInput.style.color = 'red';
+  feedbackElement.textContent = 'Your feedback here';
+  feedbackElement.style.color = '#999';
+  isAnswerCorrectForCurrentQuestion = false;
+}
+
+function showAnswer() {
+  const currentQuestion = usedQuestions[usedQuestions.length - 1]; // Get the current question
+  answerInput.value = currentQuestion.passive[0]; // Show the first correct answer
+  answerInput.style.color = 'green';
+}
+
+function hideAnswer() {
+  answerInput.value = '';
+  answerInput.style.color = 'red';
+}
+
+function checkAnswer() {
+  const currentQuestion = usedQuestions[usedQuestions.length - 1]; // Get the current question
+  const userAnswer = answerInput.value.trim();
+  const correctAnswers = currentQuestion.passive;
+
+  // Check if the user's answer matches any of the correct answers
+  const isCorrect = correctAnswers.some(correctAnswer => userAnswer === correctAnswer);
+
+  if (isCorrect) {
+    answerInput.style.color = 'green';
+    feedbackElement.textContent = 'Correct!';
+    feedbackElement.style.color = '#28a745';
+
+    // Increment score only if the answer was not already correct for this question
+    if (!isAnswerCorrectForCurrentQuestion) {
+      score++;
+      scoreElement.textContent = score;
+      isAnswerCorrectForCurrentQuestion = true; // Mark the question as answered correctly
+    }
+  } else {
+    answerInput.style.color = 'red';
+    feedbackElement.textContent = 'Incorrect. Try again!';
+    feedbackElement.style.color = '#dc3545';
+  }
+}
+
+function loadNextQuestion() {
+  if (shuffledQuestions.length > 0 || usedQuestions.length < sentences.length) {
+    loadRandomQuestion();
+  } else {
+    alert('Quiz completed! Your final score is ' + score);
+    resetQuiz();
+  }
+}
+
+function resetQuiz() {
+  score = 0;
+  scoreElement.textContent = score;
+  shuffledQuestions = shuffleArray([...sentences]); // Reshuffle questions
+  usedQuestions = [];
+  loadRandomQuestion();
+}
+
+// Show answer only while the mouse is pressed down
+showAnswerButton.addEventListener('mousedown', showAnswer);
+showAnswerButton.addEventListener('mouseup', hideAnswer);
+showAnswerButton.addEventListener('mouseleave', hideAnswer);
+
+answerInput.addEventListener('input', checkAnswer);
+
+// Load the first question when the page loads
+window.onload = () => {
+  shuffledQuestions = shuffleArray([...sentences]); // Shuffle questions initially
+  loadRandomQuestion();
+};
+  </script>
+</body>
+</html>

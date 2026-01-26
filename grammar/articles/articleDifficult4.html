@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difficult Article Quiz - Advanced Set 2</title>
+    <script>
+        // Array of CSS file names (same as original)
+        const stylesheets = ["../css/dragAndDrop.css", "../css/dragAndDrop1.css", "../css/dragAndDrop2.css", "../css/dragAndDrop3.css", "../css/dragAndDrop4.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script>
+</head>
+<body>
+    <h1>Article Exercise: Difficult (Advanced Set 2)</h1>
+    <p class="instructions">Drag and drop the correct article. There are 25 challenging questions!</p>
+    
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="a">a</div>
+        <div class="draggable" draggable="true" id="an">an</div>
+        <div class="draggable" draggable="true" id="the">the</div>
+        <div class="draggable" draggable="true" id="none">none</div>
+    </div>
+
+    <!-- Questions Section - 25 difficult questions -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'a' when referring to units of measurement or price per unit.">
+            1. Sugar sells Rs. 85 <span class="word">____</span> kilo.
+        </div>
+        <div class="sentence" data-hint="Use 'the' before superlative adjectives like 'most beautiful'.">
+            2. Ramita is <span class="word">____</span> most beautiful girl in our society.
+        </div>
+        <div class="sentence" data-hint="Use 'the' when referring to a specific person that both speaker and listener know about.">
+            3. She is <span class="word">____</span> painter who has painted my portrait.
+        </div>
+        <div class="sentence" data-hint="Use 'a' before words that begin with a consonant sound. 'Eurasian' starts with a 'y' consonant sound.">
+            4. John is <span class="word">____</span> Eurasian.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before abbreviations that start with a vowel sound. 'UNO' is pronounced 'you-en-oh' (starts with vowel sound).">
+            5. My sister works in <span class="word">____</span> UNO office.
+        </div>
+        <div class="sentence" data-hint="Use 'the' when referring to a specific room in a house that both speaker and listener know about.">
+            6. His mother is working in <span class="word">____</span> kitchen.
+        </div>
+        <div class="sentence" data-hint="Use 'a' before words that begin with a consonant sound. 'Useful' starts with a consonant sound.">
+            7. Ram Lal is <span class="word">____</span> useful member of the family.
+        </div>
+        <div class="sentence" data-hint="Use 'the' with musical instruments when referring to playing them.">
+            8. Lakhan plays <span class="word">____</span> flute well.
+        </div>
+        <div class="sentence" data-hint="Use 'the' when referring to a specific newspaper that both speaker and listener know about.">
+            9. What's in <span class="word">____</span> newspaper?
+        </div>
+        <div class="sentence" data-hint="Use 'a' before uncountable nouns when they are modified by an adjective (like 'useful information').">
+            10. That could be <span class="word">____</span> useful information.
+        </div>
+        <div class="sentence" data-hint="Use 'a' when 'many' is followed by a singular noun to mean 'many a...' (archaic/formal expression).">
+            11. Many <span class="word">____</span> girl likes listening to pop songs.
+        </div>
+        <div class="sentence" data-hint="Use 'a' when referring to any teacher, not a specific one.">
+            12. Mohan heard <span class="word">____</span> teacher teaching.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before words that begin with a vowel sound. 'Unwanted' starts with a vowel sound.">
+            13. Mr. Shrestha was <span class="word">____</span> unwanted person in our locality.
+        </div>
+        <div class="sentence" data-hint="Use 'the' when referring to a specific position or title that is unique in that context.">
+            14. Mr. Rai is <span class="word">____</span> principal of our school.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before words that begin with a vowel sound. 'Honourable' starts with a vowel sound (silent h).">
+            15. Mrs. Tuladhar is <span class="word">____</span> honourable nurse.
+        </div>
+        <div class="sentence" data-hint="Use 'the' before superlative adjectives like 'highest' when referring to unique things.">
+            16. Mt. Everest is <span class="word">____</span> highest peak in the world.
+        </div>
+        <div class="sentence" data-hint="Use 'an' before abbreviations that start with a vowel sound. 'MA' is pronounced 'em-ay' (starts with vowel sound).">
+            17. My son is <span class="word">____</span> MA student.
+        </div>
+        <div class="sentence" data-hint="Use 'the' with musical instruments when referring to playing them.">
+            18. Madhu plays <span class="word">____</span> keyboard very well.
+        </div>
+        <div class="sentence" data-hint="Use 'a' when asking about any camera, not a specific one.">
+            19. Have you got <span class="word">____</span> camera?
+        </div>
+        <div class="sentence" data-hint="Use 'the' when referring to a specific girl that both speaker and listener know about.">
+            20. No, <span class="word">____</span> girl replied, "I have not fallen in love."
+        </div>
+        <div class="sentence" data-hint="Use 'the' before religious texts like 'Geeta', 'Bible', 'Quran'.">
+            21. My father recites <span class="word">____</span> Geeta every morning.
+        </div>
+        <div class="sentence" data-hint="Use no article with sports and games when referring to playing them.">
+            22. Raju is playing <span class="word">____</span> football in the play ground.
+        </div>
+        <div class="sentence" data-hint="Use 'a' before words that begin with a consonant sound. 'University' starts with a 'y' consonant sound.">
+            23. Sunita is studying in <span class="word">____</span> university.
+        </div>
+        <div class="sentence" data-hint="Use 'the' before superlative adjectives like 'worst'.">
+            24. Ravi is <span class="word">____</span> worst student in the class.
+        </div>
+        <div class="sentence" data-hint="Use 'a' when describing someone with a specific characteristic for the first time.">
+            25. Have you seen <span class="word">____</span> one eyed man?
+        </div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 25</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+    
+    <footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+
+    <!-- Sound Files (using external files like original) -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+    <script>
+        // Correct answers for the advanced quiz set 2
+        const correctAnswers = ["a", "the", "the", "a", "an", "the", "a", "the", "the", "a", "a", "a", "an", "the", "an", "the", "an", "the", "a", "the", "the", "none", "a", "the", "a"];
+        
+        const blanks = document.querySelectorAll('.word');
+        const draggables = document.querySelectorAll('.draggable');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+
+        // Load sound files from HTML
+        const correctSound = document.getElementById('correct-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', handleDragStart);
+            draggable.addEventListener('dragend', handleDragEnd);
+        });
+
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('dragover', handleDragOver);
+            blank.addEventListener('drop', (event) => handleDrop(event, index));
+        });
+
+        let draggedItem = null;
+
+        // Drag Start
+        function handleDragStart(event) {
+            draggedItem = event.target;
+            setTimeout(() => {
+                event.target.style.display = "none";
+            }, 0);
+        }
+
+        // Drag End
+        function handleDragEnd(event) {
+            setTimeout(() => {
+                draggedItem.style.display = "inline-block";
+                draggedItem = null;
+            }, 0);
+        }
+
+        // Allow drop
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        // Handle Drop
+        function handleDrop(event, index) {
+            event.preventDefault();
+            const blank = event.target;
+            const draggedText = draggedItem.textContent;
+
+            if (blank.textContent === "____") {
+                blank.textContent = draggedText;
+
+                if (draggedText === correctAnswers[index]) {
+                    blank.style.color = "green";
+                    correctSound.play(); // Play correct sound
+                    score++;
+                } else {
+                    blank.style.color = "red";
+                    wrongSound.play(); // Play wrong sound
+                    showHint(blank.parentElement.dataset.hint, blank);
+                }
+
+                scoreElement.textContent = score;
+            }
+        }
+
+        // Show Hint
+        function showHint(hintText, element) {
+            const hint = document.createElement('div');
+            hint.className = 'hint';
+            hint.textContent = hintText;
+            element.appendChild(hint);
+
+            setTimeout(() => {
+                element.removeChild(hint);
+            }, 7000);
+        }
+
+        // Reset Quiz
+        function resetQuiz() {
+            blanks.forEach(blank => {
+                blank.textContent = "____";
+                blank.style.color = "black";
+            });
+
+            draggables.forEach(draggable => {
+                draggable.style.display = "inline-block";
+            });
+
+            score = 0;
+            scoreElement.textContent = score;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Quiz</title>
+  <script>
+        // Array of CSS file names
+        const stylesheets = ["reportedStyle1.css", "reportedStyle2.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script> 
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Grammar Quiz: Reported Speech</h1>
+    <div id="question-container">
+      <p id="sentence"></p>
+      <input type="text" id="answer-input" placeholder="Write the reported form here...">
+      <button id="show-answer-btn" onmousedown="showAnswer()">Show Answer</button>
+      <p id="feedback">You are on the way......keep up.</p> <!-- Placeholder text added -->
+    </div>
+    <div class="score-container">
+      <p>Score: <span id="score">0</span></p>
+    </div>
+    <button id="next-btn" onclick="loadNextQuestion()">Next Question</button>
+    <button id="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+  <script>
+    const sentences = [
+  {
+    direct: "John said, 'I am learning to play the guitar.'",
+    reported: [
+      "John said that he was learning to play the guitar.",
+      "John said he was learning to play the guitar."
+    ]
+  },
+  {
+    direct: "The teacher said, 'The students have done well in the exam.'",
+    reported: [
+      "The teacher said that the students had done well in the exam.",
+      "The teacher said the students had done well in the exam.",
+      "The teacher informed that the students had done well in the exam.",
+      "The teacher informed the students had done well in the exam."
+    ]
+  },
+  {
+    direct: "She said, 'I will bake a cake for the party.'",
+    reported: [
+      "She said that she would bake a cake for the party.",
+      "She said she would bake a cake for the party."
+    ]
+  },
+  {
+    direct: "The manager said, 'We are planning a team outing next month.'",
+    reported: [
+      "The manager said that they were planning a team outing the following month.",
+      "The manager said they were planning a team outing the following month."
+    ]
+  },
+  {
+    direct: "He said, 'I was reading a book when the phone rang.'",
+    reported: [
+      "He said that he had been reading a book when the phone rang.",
+      "He said he had been reading a book when the phone rang."
+    ]
+  },
+  {
+    direct: "The children said, 'We have never been to a zoo.'",
+    reported: [
+      "The children said that they had never been to a zoo.",
+      "The children said they had never been to a zoo."
+    ]
+  },
+  {
+    direct: "She said, 'I can help you with your homework.'",
+    reported: [
+      "She said that she could help me with my homework.",
+      "She said she could help me with my homework."
+    ]
+  },
+  {
+    direct: "The doctor said, 'You need to take this medicine twice a day.'",
+    reported: [
+      "The doctor said that I needed to take that medicine twice a day.",
+      "The doctor said I needed to take that medicine twice a day.",
+      "The doctor advised that I needed to take that medicine twice a day.",
+      "The doctor advised I needed to take that medicine twice a day."
+    ]
+  },
+  {
+    direct: "They said, 'We were playing football when it started raining.'",
+    reported: [
+      "They said that they had been playing football when it started raining.",
+      "They said they had been playing football when it started raining."
+    ]
+  },
+  {
+    direct: "The boy said, 'I can't find my school bag.'",
+    reported: [
+      "The boy said that he couldn't find his school bag.",
+      "The boy said he couldn't find his school bag."
+    ]
+  }
+];
+
+
+let score = 0;
+let isAnswerCorrectForCurrentQuestion = false;
+let shuffledQuestions = []; // Array to store shuffled questions
+let usedQuestions = []; // Array to track used questions
+
+const sentenceElement = document.getElementById('sentence');
+const answerInput = document.getElementById('answer-input');
+const feedbackElement = document.getElementById('feedback');
+const scoreElement = document.getElementById('score');
+const nextButton = document.getElementById('next-btn');
+const showAnswerButton = document.getElementById('show-answer-btn');
+
+// Function to shuffle an array using the Fisher-Yates algorithm
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Function to load a random question
+function loadRandomQuestion() {
+  if (shuffledQuestions.length === 0) {
+    // If all questions have been used, reshuffle and reset
+    shuffledQuestions = shuffleArray([...sentences]);
+    usedQuestions = [];
+  }
+
+  // Get the next question from the shuffled list
+  const question = shuffledQuestions.pop();
+  usedQuestions.push(question);
+
+  // Display the question
+  sentenceElement.textContent = question.direct;
+  answerInput.value = '';
+  answerInput.style.color = 'red';
+  feedbackElement.textContent = 'Use proper punctuation, no extra space.';
+  feedbackElement.style.color = '#999';
+  isAnswerCorrectForCurrentQuestion = false;
+}
+
+function showAnswer() {
+  const currentQuestion = usedQuestions[usedQuestions.length - 1]; // Get the current question
+  answerInput.value = currentQuestion.reported[0]; // Show the first correct answer
+  answerInput.style.color = 'green';
+}
+
+function hideAnswer() {
+  answerInput.value = '';
+  answerInput.style.color = 'red';
+}
+
+function checkAnswer() {
+  const currentQuestion = usedQuestions[usedQuestions.length - 1]; // Get the current question
+  const userAnswer = answerInput.value.trim();
+  const correctAnswers = currentQuestion.reported;
+
+  // Check if the user's answer matches any of the correct answers
+  const isCorrect = correctAnswers.some(correctAnswer => userAnswer === correctAnswer);
+
+  if (isCorrect) {
+    answerInput.style.color = 'green';
+    feedbackElement.textContent = 'Correct!';
+    feedbackElement.style.color = '#28a745';
+
+    // Increment score only if the answer was not already correct for this question
+    if (!isAnswerCorrectForCurrentQuestion) {
+      score++;
+      scoreElement.textContent = score;
+      isAnswerCorrectForCurrentQuestion = true; // Mark the question as answered correctly
+    }
+  } else {
+    answerInput.style.color = 'red';
+    feedbackElement.textContent = 'You are on the way,........keep it up!';
+    feedbackElement.style.color = '#dc3545';
+  }
+}
+
+function loadNextQuestion() {
+  if (shuffledQuestions.length > 0 || usedQuestions.length < sentences.length) {
+    loadRandomQuestion();
+  } else {
+    alert('Quiz completed! Your final score is ' + score);
+    resetQuiz();
+  }
+}
+
+function resetQuiz() {
+  score = 0;
+  scoreElement.textContent = score;
+  shuffledQuestions = shuffleArray([...sentences]); // Reshuffle questions
+  usedQuestions = [];
+  loadRandomQuestion();
+}
+
+// Show answer only while the mouse is pressed down
+showAnswerButton.addEventListener('mousedown', showAnswer);
+showAnswerButton.addEventListener('mouseup', hideAnswer);
+showAnswerButton.addEventListener('mouseleave', hideAnswer);
+
+answerInput.addEventListener('input', checkAnswer);
+
+// Load the first question when the page loads
+window.onload = () => {
+  shuffledQuestions = shuffleArray([...sentences]); // Shuffle questions initially
+  loadRandomQuestion();
+};
+  </script>
+</body>
+</html>

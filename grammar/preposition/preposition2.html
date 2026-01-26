@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Prepositions Quiz</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 2.5rem;
+            margin: 15px 0;
+            color: #ff9f43;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Instructions */
+        .instructions {
+            font-size: 1.2rem;
+            margin: 5px 0;
+            color: #f0f0f0;
+            padding: 5px;
+        }
+
+        /* Drag Container (Sticky at the Top) */
+        .drag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .draggable {
+            padding: 15px 20px;
+            background: #ff6b6b;
+            color: #fff;
+            border-radius: 10px;
+            cursor: grab;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .draggable:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Question Container */
+        .question-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 90%;
+            max-width: 800px;
+            padding-bottom: 50px; 
+        }
+
+        .sentence {
+            font-size: 1.4rem;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            text-align: left;
+            position: relative;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .sentence:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .word {
+            display: inline-block;
+            width: 60px;
+            text-align: center;
+            color: #ff9f43;
+            font-weight: bold;
+        }
+
+        /* Results and Reset */
+        .result {
+            margin-top: 0;
+            margin-bottom: 90px; /* Space for footer */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .result p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .result button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background: #ff6b6b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .result button:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+        }
+
+        /* Footer (Sticky at the Bottom) */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px;
+            background: #1e3c72; 
+            font-size: 1rem;
+            color: #f0f0f0;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .footer strong {
+            color: #ff9f43;
+        }
+
+        /* Hint Styling */
+        .hint {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffc107;
+    color: #212529;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+        
+      h1 {
+                font-size: 2rem;
+                padding: 0 5px;
+            }
+
+            .sentence {
+                font-size: 1.2rem;
+            }
+
+            .draggable {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+
+            .result {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Prepositions Quiz</h1>
+    <p class="instructions">Drag and drop the correct preposition into the blanks.</p>
+
+    <!-- Floating Draggable Items (Sticky at the Top) -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="with">with</div>
+        <div class="draggable" draggable="true" id="on">on</div>
+        <div class="draggable" draggable="true" id="from">from</div>
+        <div class="draggable" draggable="true" id="by">by</div>
+        <div class="draggable" draggable="true" id="in">in</div>
+        <div class="draggable" draggable="true" id="to">to</div>
+        <div class="draggable" draggable="true" id="for">for</div>
+        <div class="draggable" draggable="true" id="at">at</div>
+        
+        
+    </div>
+
+    <!-- Questions -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'in' for periods of time.">
+            1. The project will be completed <span class="word">____</span> two weeks.
+        </div>
+        <div class="sentence" data-hint="Use 'on' for specific days or dates.">
+            2. The meeting is scheduled <span class="word">____</span> Monday.
+        </div>
+        <div class="sentence" data-hint="Use 'at' for specific times.">
+            3. The train departs <span class="word">____</span> 6:00 PM.
+        </div>
+        <div class="sentence" data-hint="Use 'by' to indicate a deadline.">
+            4. Please submit your report <span class="word">____</span> Friday.
+        </div>
+        <div class="sentence" data-hint="Use 'with' to indicate accompaniment.">
+            5. She went to the party <span class="word">____</span> her friends.
+        </div>
+        <div class="sentence" data-hint="Use 'for' to indicate purpose.">
+            6. This gift is <span class="word">____</span> you.
+        </div>
+        <div class="sentence" data-hint="Use 'to' to indicate direction/destination.">
+            7. He is traveling <span class="word">____</span> Paris next week.
+        </div>
+        <div class="sentence" data-hint="Use 'from' to indicate origin.">
+            8. This package came <span class="word">____</span> Germany.
+        </div>
+         <div class="sentence" data-hint="Use 'on' for surfaces.">
+            9. The book is <span class="word">____</span> the table.
+        </div>
+        <div class="sentence" data-hint="Use 'in' for enclosed spaces.">
+            10. The cat is hiding <span class="word">____</span> the box.
+        </div>
+       
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 10</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+    <!-- Footer (Sticky at the Bottom) -->
+    <footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+ <!-- Sound Files -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+
+    <script>
+        // Correct answers for the new quiz
+        const correctAnswers = ["in", "on", "at", "by", "with", "for", "to", "from", "on", "in"];
+
+        // Select the necessary elements
+        const blanks = document.querySelectorAll('.word');
+        const draggables = document.querySelectorAll('.draggable');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+          // Load sound files from HTML
+        const correctSound = document.getElementById('correct-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+
+
+        // Set up drag-and-drop events
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', handleDragStart);
+            draggable.addEventListener('dragend', handleDragEnd);
+        });
+
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('dragover', handleDragOver);
+            blank.addEventListener('drop', (event) => handleDrop(event, index));
+        });
+
+        let draggedItem = null;
+
+        // Drag Start
+        function handleDragStart(event) {
+            draggedItem = event.target;
+            setTimeout(() => {
+                event.target.style.display = "none";
+            }, 0);
+        }
+
+        // Drag End
+        function handleDragEnd(event) {
+            setTimeout(() => {
+                draggedItem.style.display = "inline-block";
+                draggedItem = null;
+            }, 0);
+        }
+
+        // Allow drop
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        // Handle Drop
+        function handleDrop(event, index) {
+            event.preventDefault();
+            const blank = event.target;
+            const draggedText = draggedItem.textContent;
+
+            if (blank.textContent === "____") {
+                blank.textContent = draggedText;
+
+                if (draggedText === correctAnswers[index]) {
+                    blank.style.color = "#4caf50"; // Green for correct
+                    correctSound.play(); // Play correct sound
+                    score++;
+                } else {
+                    blank.style.color = "#ff4757"; // Red for incorrect
+                    wrongSound.play(); // Play wrong sound
+                    showHint(blank.parentElement.dataset.hint, blank);
+                }
+
+                scoreElement.textContent = score;
+            }
+        }
+
+        // Show Hint
+        function showHint(hintText, element) {
+            const hint = document.createElement('div');
+            hint.className = 'hint';
+            hint.textContent = hintText;
+            element.appendChild(hint);
+
+            setTimeout(() => {
+                element.removeChild(hint);
+            }, 5000);
+        }
+
+        // Reset Quiz
+        function resetQuiz() {
+            blanks.forEach(blank => {
+                blank.textContent = "____";
+                blank.style.color = "#ff9f43";
+            });
+
+            draggables.forEach(draggable => {
+                draggable.style.display = "inline-block";
+            });
+
+            score = 0;
+            scoreElement.textContent = score;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Quiz</title>
+  <script>
+        // Array of CSS file names
+        const stylesheets = ["../css/voiceStyle1.css", "../css/voiceStyle2.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Grammar Quiz: Passive Voice</h1>
+    <div id="question-container">
+      <p id="sentence"></p>
+      <input type="text" id="answer-input" placeholder="Write the passive form here...">
+      <button id="show-answer-btn" onmousedown="showAnswer()">Show Answer</button>
+      <p id="feedback">Your feedback here</p> <!-- Placeholder text added -->
+    </div>
+    <div class="score-container">
+      <p>Score: <span id="score">0</span></p>
+    </div>
+    <button id="next-btn" onclick="loadNextQuestion()">Next Question</button>
+    <button id="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+  <script>
+     const sentences = [
+  {
+    active: "The cat chased the mouse.",
+    passive: ["The mouse was chased by the cat."]
+  },
+  {
+    active: "The teacher praised the student.",
+    passive: ["The student was praised by the teacher."]
+  },
+  {
+    active: "The company launched a new product.",
+    passive: ["A new product was launched by the company."]
+  },
+  {
+    active: "The storm damaged the roof.",
+    passive: ["The roof was damaged by the storm."]
+  },
+  {
+    active: "The chef cooked a delicious meal.",
+    passive: ["A delicious meal was cooked by the chef."]
+  },
+  {
+    active: "The old man carries a notebook",
+    passive: ["A notebook is carried by the old man."]
+  },
+{
+    active: "Ramila reads newspaper everyday.",
+    passive: ["Newspaper is read everyday by Ramila.", "Newspaper is read by Ramila everyday."]
+  },
+  {
+    active: "Children like video games.",
+    passive: ["Video games are liked by children."]
+  },
+{
+    active: "Our teacher told an interesting story.",
+    passive: ["An interesting story was told by our teacher.", "We were told an interesting story by our teacher.", "We were told an interesting story." ]
+  },
+{
+    active: "Melina bought some chocolates.",
+    passive: ["Some chocolates were bought by Melina."]
+  }
+];
+
+let score = 0;
+let isAnswerCorrectForCurrentQuestion = false;
+let shuffledQuestions = []; // Array to store shuffled questions
+let usedQuestions = []; // Array to track used questions
+
+const sentenceElement = document.getElementById('sentence');
+const answerInput = document.getElementById('answer-input');
+const feedbackElement = document.getElementById('feedback');
+const scoreElement = document.getElementById('score');
+const nextButton = document.getElementById('next-btn');
+const showAnswerButton = document.getElementById('show-answer-btn');
+
+// Function to shuffle an array using the Fisher-Yates algorithm
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Function to load a random question
+function loadRandomQuestion() {
+  if (shuffledQuestions.length === 0) {
+    // If all questions have been used, reshuffle and reset
+    shuffledQuestions = shuffleArray([...sentences]);
+    usedQuestions = [];
+  }
+
+  // Get the next question from the shuffled list
+  const question = shuffledQuestions.pop();
+  usedQuestions.push(question);
+
+  // Display the question
+  sentenceElement.textContent = question.active;
+  answerInput.value = '';
+  answerInput.style.color = 'red';
+  feedbackElement.textContent = 'Your feedback here';
+  feedbackElement.style.color = '#999';
+  isAnswerCorrectForCurrentQuestion = false;
+}
+
+function showAnswer() {
+  const currentQuestion = usedQuestions[usedQuestions.length - 1]; // Get the current question
+  answerInput.value = currentQuestion.passive[0]; // Show the first correct answer
+  answerInput.style.color = 'green';
+}
+
+function hideAnswer() {
+  answerInput.value = '';
+  answerInput.style.color = 'red';
+}
+
+function checkAnswer() {
+  const currentQuestion = usedQuestions[usedQuestions.length - 1]; // Get the current question
+  const userAnswer = answerInput.value.trim();
+  const correctAnswers = currentQuestion.passive;
+
+  // Check if the user's answer matches any of the correct answers
+  const isCorrect = correctAnswers.some(correctAnswer => userAnswer === correctAnswer);
+
+  if (isCorrect) {
+    answerInput.style.color = 'green';
+    feedbackElement.textContent = 'Correct!';
+    feedbackElement.style.color = '#28a745';
+
+    // Increment score only if the answer was not already correct for this question
+    if (!isAnswerCorrectForCurrentQuestion) {
+      score++;
+      scoreElement.textContent = score;
+      isAnswerCorrectForCurrentQuestion = true; // Mark the question as answered correctly
+    }
+  } else {
+    answerInput.style.color = 'red';
+    feedbackElement.textContent = 'Incorrect. Try again!';
+    feedbackElement.style.color = '#dc3545';
+  }
+}
+
+function loadNextQuestion() {
+  if (shuffledQuestions.length > 0 || usedQuestions.length < sentences.length) {
+    loadRandomQuestion();
+  } else {
+    alert('Quiz completed! Your final score is ' + score);
+    resetQuiz();
+  }
+}
+
+function resetQuiz() {
+  score = 0;
+  scoreElement.textContent = score;
+  shuffledQuestions = shuffleArray([...sentences]); // Reshuffle questions
+  usedQuestions = [];
+  loadRandomQuestion();
+}
+
+// Show answer only while the mouse is pressed down
+showAnswerButton.addEventListener('mousedown', showAnswer);
+showAnswerButton.addEventListener('mouseup', hideAnswer);
+showAnswerButton.addEventListener('mouseleave', hideAnswer);
+
+answerInput.addEventListener('input', checkAnswer);
+
+// Load the first question when the page loads
+window.onload = () => {
+  shuffledQuestions = shuffleArray([...sentences]); // Shuffle questions initially
+  loadRandomQuestion();
+};
+  </script>
+</body>
+</html>

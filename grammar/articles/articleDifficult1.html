@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difficult Article Quiz</title>
+     <script>
+        // Array of CSS file names
+        const stylesheets = ["../css/dragAndDrop.css", "../css/dragAndDrop1.css", "../css/dragAndDrop2.css", "../css/dragAndDrop3.css", "../css/dragAndDrop4.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script> 
+</head>
+<body>
+    <h1>Article Exercise: Difficult</h1>
+<p class="instructions"> Drag and drop the correct article.</p>
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="a">a</div>
+        <div class="draggable" draggable="true" id="an">an</div>
+        <div class="draggable" draggable="true" id="the">the</div>
+        <div class="draggable" draggable="true" id="none">none</div>
+    </div>
+
+    <!-- Questions Section -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'an' before nouns when introducing them for the first time. Care about the initial sound.">
+	1. He is known as <span class="word">____</span> authority on the subject.</div>
+        <div class="sentence" data-hint="Use no article when the following noun is an abstract noun, unless it's specific.">
+	2. <span class="word">____</span> honesty is the best policy.</div>
+        <div class="sentence" data-hint="Use 'the' when you refer to a famous, well-known structures; specifically when emphasizing its uniqueness.">
+	3. She stayed at <span class="word">____</span> Hotel California during her trip.</div>
+        <div class="sentence" data-hint="Use 'an' before nouns when it means 'one' with initial vowel sound.">
+	4. There was <span class="word">____</span> unmistakable sound of thunder in the distance.</div>
+        <div class="sentence" data-hint="Use 'the' when refering to something specific, or when you need to mean 'that'.">
+	5. Do you remember <span class="word">____</span> day we first met?</div>
+        <div class="sentence" data-hint="Use 'the' before country names if it is plural. Ex: the Netherlands, the Philippines etc.">
+	6. They live in <span class="word">____</span> United States.</div>
+        <div class="sentence" data-hint="Use 'a' before a noun when it refers to 'one'. Mark the initial consonant sound here.">
+	7. He wore <span class="word">____</span> unique dress.</div>
+        <div class="sentence" data-hint="Use 'the' before famous religious books like 'The Bhagavat Gita', 'The Kuran'.">
+	8. She reads <span class="word">____</span> Bible every night before bed.</div>
+        <div class="sentence" data-hint="Use no article when refering to an abstract noun or a subject of study like: physics, chemistry, Nepali, mathematics etc.">
+	9. Scholars say that <span class="word">____</span> history repeats itself.</div>
+        <div class="sentence" data-hint="Use 'the' when a superlative adjective comes before the noun.">
+	10. That is <span class="word">____</span> most beautiful painting I’ve ever seen.</div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 10</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+<footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+    <!-- Sound Files -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+    <script>
+       // Correct answers for the challenging quiz
+const correctAnswers = ["an", "none", "the", "an", "the", "the", "a", "the", "none", "the"];
+
+const blanks = document.querySelectorAll('.word');
+const draggables = document.querySelectorAll('.draggable');
+const scoreElement = document.getElementById('score');
+let score = 0;
+
+// Load sound files from HTML
+const correctSound = document.getElementById('correct-sound');
+const wrongSound = document.getElementById('wrong-sound');
+
+draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', handleDragStart);
+    draggable.addEventListener('dragend', handleDragEnd);
+});
+
+blanks.forEach((blank, index) => {
+    blank.addEventListener('dragover', handleDragOver);
+    blank.addEventListener('drop', (event) => handleDrop(event, index));
+});
+
+let draggedItem = null;
+
+// Drag Start
+function handleDragStart(event) {
+    draggedItem = event.target;
+    setTimeout(() => {
+        event.target.style.display = "none";
+    }, 0);
+}
+
+// Drag End
+function handleDragEnd(event) {
+    setTimeout(() => {
+        draggedItem.style.display = "inline-block";
+        draggedItem = null;
+    }, 0);
+}
+
+// Allow drop
+function handleDragOver(event) {
+    event.preventDefault();
+}
+
+// Handle Drop
+function handleDrop(event, index) {
+    event.preventDefault();
+    const blank = event.target;
+    const draggedText = draggedItem.textContent;
+
+    if (blank.textContent === "____") {
+        blank.textContent = draggedText;
+
+        if (draggedText === correctAnswers[index]) {
+            blank.style.color = "green";
+            correctSound.play(); // Play correct sound
+            score++;
+        } else {
+            blank.style.color = "red";
+            wrongSound.play(); // Play wrong sound
+            showHint(blank.parentElement.dataset.hint, blank);
+        }
+
+        scoreElement.textContent = score;
+    }
+}
+
+// Show Hint
+function showHint(hintText, element) {
+    const hint = document.createElement('div');
+    hint.className = 'hint';
+    hint.textContent = hintText;
+    element.appendChild(hint);
+
+    setTimeout(() => {
+        element.removeChild(hint);
+    }, 7000);
+}
+
+// Reset Quiz
+function resetQuiz() {
+    blanks.forEach(blank => {
+        blank.textContent = "____";
+        blank.style.color = "black";
+    });
+
+    draggables.forEach(draggable => {
+        draggable.style.display = "inline-block";
+    });
+
+    score = 0;
+    scoreElement.textContent = score;
+}
+   </script>
+</body>
+</html>
