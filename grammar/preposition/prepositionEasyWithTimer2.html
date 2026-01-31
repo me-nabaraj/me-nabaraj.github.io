@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preposition Exercise 2: Single Blanks Challenge (Timed)</title>
+    <script>
+        // Array of CSS file names (same as original)
+        const stylesheets = ["../css/dragAndDrop.css", "../css/dragAndDrop1.css", "../css/dragAndDrop2.css", "../css/dragAndDrop3.css", "../css/dragAndDrop4.css"];
+
+        // Select a random stylesheet
+        const randomStylesheet = stylesheets[Math.floor(Math.random() * stylesheets.length)];
+
+        // Create a link element
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = randomStylesheet;
+
+        // Append to head
+        document.head.appendChild(link);
+    </script>
+    <style>
+        /* Timer Styles */
+        .timer-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            min-width: 140px;
+            transition: all 0.3s ease;
+            cursor: move;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+            .timer-container.dragging {
+           opacity: 0.8;
+           box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+        
+        .timer-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .timer-display {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .timer-warning {
+            animation: pulse 1s infinite;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .timer-finished {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        /* Single blank styling (simpler than multiple blanks) */
+        .single-blank {
+            min-width: 50px;
+            margin: 0 5px;
+            display: inline-block;
+            text-align: center;
+            border-bottom: 2px dashed #667eea;
+            padding-bottom: 2px;
+        }
+        
+        .sentence {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+            font-size: 18px;
+        }
+        
+        .score-breakdown {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Toast Hint Styling */
+        .hint-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(52, 152, 219, 0.95);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 2000;
+            font-size: 14px;
+            max-width: 80%;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .hint-toast.wrong {
+            background: rgba(231, 76, 60, 0.95);
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+        
+        .time-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Beautiful Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideUpModal 0.4s ease;
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-header h2 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+        }
+        
+        .modal-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .modal-stats {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .stat-label {
+            font-weight: bold;
+        }
+        
+        .stat-value {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .percentage-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#4cd964 0% var(--percentage), rgba(255, 255, 255, 0.1) var(--percentage) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .percentage-inner {
+            width: 80px;
+            height: 80px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .remark {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-btn.primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .modal-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUpModal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive timer */
+        @media (max-width: 768px) {
+            .timer-container {
+                top: 10px;
+                right: 10px;
+                padding: 10px 15px;
+                min-width: 120px;
+                font-size: 16px;
+            }
+            
+            .timer-display {
+                font-size: 20px;
+            }
+            
+            .sentence {
+                font-size: 16px;
+            }
+            
+            .hint-toast {
+                bottom: 10px;
+                max-width: 90%;
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .timer-container {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px auto;
+                width: 90%;
+                max-width: 200px;
+            }
+            
+            .single-blank {
+                min-width: 40px;
+                margin: 0 3px;
+            }
+            
+            .hint-toast {
+                bottom: 5px;
+                max-width: 95%;
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+            
+            .percentage-circle {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .percentage-inner {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+        }
+        
+        /* Game instructions styling */
+        .instructions {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <!-- Timer Container -->
+    <div class="timer-container" id="timerContainer">
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-display" id="timerDisplay">03:00</div>
+    </div>
+
+    <h1>Preposition Exercise 2: Single Blanks Challenge (Timed)</h1>
+    <div class="instructions">
+        <p>Drag and drop the correct prepositions. Timer starts when you drag your first answer! Complete in 3 minutes.</p>
+        
+    </div>
+    
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="down">down</div>
+        <div class="draggable" draggable="true" id="during">during</div>
+        <div class="draggable" draggable="true" id="for">for</div>
+        <div class="draggable" draggable="true" id="from">from</div>
+        <div class="draggable" draggable="true" id="in">in</div>
+        <div class="draggable" draggable="true" id="behind">behind</div>
+        <div class="draggable" draggable="true" id="of">of</div>
+        <div class="draggable" draggable="true" id="on">on</div>
+        <div class="draggable" draggable="true" id="outof">out of</div>
+        <div class="draggable" draggable="true" id="over">over</div>
+    </div>
+
+    <!-- Questions Section - Sentences with single blanks -->
+    <div class="question-container">
+        <div class="sentence" data-hint="'over' is used when referring to age limits.">
+            1. You must be <span class="word single-blank" data-blank="1">____</span> 18 in order to see the film.
+        </div>
+        <div class="sentence" data-hint="'from' is used to indicate the cause of suffering.">
+            2. He is suffering <span class="word single-blank" data-blank="2">____</span> an unknown illness.
+        </div>
+        <div class="sentence" data-hint="'on' is used with media like radio, TV, or the internet.">
+            3. I listened to the game <span class="word single-blank" data-blank="3">____</span> the radio.
+        </div>
+        <div class="sentence" data-hint="'on' is used for surfaces.">
+            4. There were some beautiful pictures <span class="word single-blank" data-blank="4">____</span> the walls.
+        </div>
+        <div class="sentence" data-hint="'during' indicates a period of time when something happens.">
+            5. I bought many things <span class="word single-blank" data-blank="5">____</span> my stay in New York.
+        </div>
+        <div class="sentence" data-hint="'for' indicates something's effect on someone or something.">
+            6. Pessimism is bad <span class="word single-blank" data-blank="6">____</span> your health.
+        </div>
+        <div class="sentence" data-hint="'of' is used to indicate cause of death.">
+            7. My grandfather died <span class="word single-blank" data-blank="7">____</span> cancer.
+        </div>
+        <div class="sentence" data-hint="'behind' is used when something is blocked by something visually.">
+            8. He hid himself  <span class="word single-blank" data-blank="8">____</span> the lamp post.
+        </div>
+        <div class="sentence" data-hint="'out of' means through or from an opening.">
+            9. The thief jumped <span class="word single-blank" data-blank="9">____</span> the window.
+        </div>
+        <div class="sentence" data-hint="'down' is used to indicate reducing volume or level.">
+            10. Please turn <span class="word single-blank" data-blank="10">____</span> the volume of the radio.
+        </div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 10 <span class="score-breakdown">(10 blanks total)</span></p>
+        <p class="time-info">Time Taken: <span id="timeTaken">0:00</span></p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+    
+    <footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+
+    <!-- Sound Files (using external files like original) -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+    <audio id="timer-sound" src="../sounds/right.wav"></audio> <!-- Using same sound for timer warning -->
+
+    <script>
+        // Correct answers for each blank
+        const correctAnswers = [
+            "over",    // Sentence 1
+            "from",    // Sentence 2
+            "on",      // Sentence 3
+            "on",      // Sentence 4
+            "during",  // Sentence 5
+            "for",     // Sentence 6
+            "of",      // Sentence 7
+            "behind", // Sentence 8
+            "out of",  // Sentence 9
+            "down"     // Sentence 10
+        ];
+        
+        const blanks = document.querySelectorAll('.word');
+        const draggables = document.querySelectorAll('.draggable');
+        const scoreElement = document.getElementById('score');
+        const timeTakenElement = document.getElementById('timeTaken');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerContainer = document.getElementById('timerContainer');
+        
+        let score = 0;
+        let filledBlanks = Array(blanks.length).fill(false);
+        let timerStarted = false;
+        let timeLeft = 180; // 3 minutes in seconds
+        let timerInterval;
+        let totalTime = 0; // Time taken to complete
+        let quizCompleted = false;
+
+        // Load sound files from HTML
+        const correctSound = document.getElementById('correct-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+        const timerSound = document.getElementById('timer-sound');
+
+        // Initialize draggables
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', handleDragStart);
+            draggable.addEventListener('dragend', handleDragEnd);
+        });
+
+        // Initialize drop zones
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('dragover', handleDragOver);
+            blank.addEventListener('drop', (event) => handleDrop(event, index));
+        });
+
+        let draggedItem = null;
+
+        // Drag Start
+        function handleDragStart(event) {
+            if (!timerStarted && !quizCompleted) {
+                startTimer();
+                timerStarted = true;
+            }
+            draggedItem = event.target;
+            setTimeout(() => {
+                event.target.style.display = "none";
+            }, 0);
+        }
+
+        // Drag End
+        function handleDragEnd(event) {
+            setTimeout(() => {
+                draggedItem.style.display = "inline-block";
+                draggedItem = null;
+            }, 0);
+        }
+
+        // Allow drop
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        // Handle Drop
+        function handleDrop(event, index) {
+            event.preventDefault();
+            
+            if (quizCompleted) return;
+            
+            const blank = event.target;
+            const draggedText = draggedItem.textContent;
+
+            if (blank.textContent === "____" && !filledBlanks[index]) {
+                blank.textContent = draggedText;
+                filledBlanks[index] = true;
+
+                if (draggedText === correctAnswers[index]) {
+                    blank.style.color = "green";
+                    blank.style.fontWeight = "bold";
+                    blank.style.borderBottomColor = "green";
+                    correctSound.play();
+                    score++;
+                } else {
+                    blank.style.color = "red";
+                    blank.style.fontWeight = "bold";
+                    blank.style.borderBottomColor = "red";
+                    wrongSound.play();
+                    showHint(blank, index);
+                }
+
+                scoreElement.textContent = score;
+                
+                // Check if all blanks are filled
+                if (filledBlanks.every(filled => filled)) {
+                    completeQuiz();
+                }
+            }
+        }
+
+// Make timer draggable
+let isDragging = false;
+let offsetX, offsetY;
+
+timerContainer.addEventListener('mousedown', startDrag);
+document.addEventListener('mousemove', drag);
+document.addEventListener('mouseup', stopDrag);
+
+// For touch devices
+timerContainer.addEventListener('touchstart', startDragTouch);
+document.addEventListener('touchmove', dragTouch);
+document.addEventListener('touchend', stopDrag);
+
+function startDrag(e) {
+    isDragging = true;
+    timerContainer.classList.add('dragging');
+    
+    const rect = timerContainer.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+    
+    e.preventDefault();
+}
+
+function drag(e) {
+    if (!isDragging) return;
+    
+    const x = e.clientX - offsetX;
+    const y = e.clientY - offsetY;
+    
+    // Keep timer within viewport bounds
+    const maxX = window.innerWidth - timerContainer.offsetWidth;
+    const maxY = window.innerHeight - timerContainer.offsetHeight;
+    
+    timerContainer.style.left = Math.min(Math.max(0, x), maxX) + 'px';
+    timerContainer.style.right = 'auto';
+    timerContainer.style.top = Math.min(Math.max(0, y), maxY) + 'px';
+}
+
+function stopDrag() {
+    isDragging = false;
+    timerContainer.classList.remove('dragging');
+}
+
+// Touch events for mobile
+function startDragTouch(e) {
+    isDragging = true;
+    timerContainer.classList.add('dragging');
+    
+    const touch = e.touches[0];
+    const rect = timerContainer.getBoundingClientRect();
+    offsetX = touch.clientX - rect.left;
+    offsetY = touch.clientY - rect.top;
+    
+    e.preventDefault();
+}
+
+function dragTouch(e) {
+    if (!isDragging) return;
+    
+    const touch = e.touches[0];
+    const x = touch.clientX - offsetX;
+    const y = touch.clientY - offsetY;
+    
+    // Keep timer within viewport bounds
+    const maxX = window.innerWidth - timerContainer.offsetWidth;
+    const maxY = window.innerHeight - timerContainer.offsetHeight;
+    
+    timerContainer.style.left = Math.min(Math.max(0, x), maxX) + 'px';
+    timerContainer.style.right = 'auto';
+    timerContainer.style.top = Math.min(Math.max(0, y), maxY) + 'px';
+    
+    e.preventDefault();
+}
+
+
+
+        // Show Hint as Toast
+        function showHint(blankElement, blankIndex) {
+            // Remove any existing hint toast
+            const existingToast = document.querySelector('.hint-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Get the sentence containing this blank
+            const sentence = blankElement.closest('.sentence');
+            const hintText = sentence.dataset.hint;
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast wrong';
+            toast.textContent = hintText;
+            
+            // Add to body
+            document.body.appendChild(toast);
+            
+            // Remove toast after 7 seconds
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 7000);
+        }
+
+        // Timer Functions
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                totalTime++;
+                
+                // Update timer display
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                
+                // Update time taken display
+                const timeTakenMinutes = Math.floor(totalTime / 60);
+                const timeTakenSeconds = totalTime % 60;
+                timeTakenElement.textContent = `${timeTakenMinutes}:${timeTakenSeconds < 10 ? '0' : ''}${timeTakenSeconds}`;
+                
+                // Warning when 1 minute left
+                if (timeLeft === 60) {
+                    timerContainer.classList.add('timer-warning');
+                    if (timerSound) timerSound.play();
+                    
+                    // Show time warning toast
+                    showTimeWarningToast();
+                }
+                
+                // Warning when 30 seconds left
+                if (timeLeft === 30) {
+                    timerContainer.style.animationDuration = "0.5s"; // Faster pulse
+                    showTimeWarningToast("30 seconds remaining!");
+                }
+                
+                // Timer finished
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.textContent = "0:00";
+                    timerContainer.classList.remove('timer-warning');
+                    timerContainer.classList.add('timer-finished');
+                    endQuizDueToTime();
+                }
+            }, 1000);
+        }
+
+        function showTimeWarningToast(message = "1 minute remaining!") {
+            // Remove any existing toast
+            const existingToast = document.querySelector('.hint-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast';
+            toast.textContent = message;
+            toast.style.background = "rgba(243, 156, 18, 0.95)"; // Orange color for warnings
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+            }, 3000);
+        }
+
+        function endQuizDueToTime() {
+            quizCompleted = true;
+            
+            // Calculate how many blanks were filled
+            const filledCount = filledBlanks.filter(filled => filled).length;
+            
+            // Show completion toast
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast wrong';
+            toast.textContent = `Time's up! You filled ${filledCount} out of 10 blanks.`;
+            toast.style.background = "rgba(231, 76, 60, 0.95)"; // Red color
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+                showSummaryModal(false);
+            }, 1000);
+            
+            // Disable all draggables
+            draggables.forEach(draggable => {
+                draggable.style.opacity = "0.5";
+                draggable.draggable = false;
+            });
+            
+            // Show all correct answers for unfilled blanks
+            blanks.forEach((blank, index) => {
+                if (blank.textContent === "____") {
+                    blank.textContent = correctAnswers[index];
+                    blank.style.color = "orange";
+                    blank.style.fontWeight = "bold";
+                    blank.style.borderBottomColor = "orange";
+                }
+            });
+        }
+
+        function completeQuiz() {
+            clearInterval(timerInterval);
+            quizCompleted = true;
+            
+            // Calculate time bonus message
+            const minutesLeft = Math.floor(timeLeft / 60);
+            const secondsLeft = timeLeft % 60;
+            
+            // Show completion toast
+            const toast = document.createElement('div');
+            toast.className = 'hint-toast';
+            toast.textContent = `Quiz completed! Score: ${score}/10`;
+            toast.style.background = "rgba(46, 204, 113, 0.95)"; // Green color for success
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.parentNode.removeChild(toast);
+                }
+                showSummaryModal(true);
+            }, 1500);
+            
+            // Disable all draggables
+            draggables.forEach(draggable => {
+                draggable.style.opacity = "0.5";
+                draggable.draggable = false;
+            });
+        }
+
+        // Show Beautiful Summary Modal
+        function showSummaryModal(completed) {
+            // Remove any existing modal
+            const existingModal = document.querySelector('.modal-overlay');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Calculate percentage
+            const percentage = (score / 10) * 100;
+            
+            // Calculate time stats
+            const minutesLeft = Math.floor(timeLeft / 60);
+            const secondsLeft = timeLeft % 60;
+            const timeTakenMinutes = Math.floor(totalTime / 60);
+            const timeTakenSeconds = totalTime % 60;
+            
+            // Determine remark based on score
+            let remark = "";
+            if (percentage === 100) {
+                remark = "Perfect score! You're a preposition expert!";
+            } else if (percentage >= 80) {
+                remark = "Excellent work! You have a strong understanding of prepositions!";
+            } else if (percentage >= 60) {
+                remark = "Good job! You know most of these prepositions well.";
+            } else if (percentage >= 40) {
+                remark = "Not bad! With more practice, you'll master prepositions.";
+            } else {
+                remark = "Keep practicing! Review the preposition rules and try again!";
+            }
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>${completed ? 'Quiz Completed!' : "Time's Up!"}</h2>
+                        <p>${completed ? 'Great job finishing the quiz!' : 'You ran out of time!'}</p>
+                    </div>
+                    
+                    <div class="modal-stats">
+                        <div class="percentage-circle" style="--percentage: ${percentage}%">
+                            <div class="percentage-inner">
+                                ${percentage}%
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <span class="stat-label">Score:</span>
+                            <span class="stat-value">${score}/10</span>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <span class="stat-label">Time Taken:</span>
+                            <span class="stat-value">${timeTakenMinutes}:${timeTakenSeconds < 10 ? '0' : ''}${timeTakenSeconds}</span>
+                        </div>
+                        
+                        ${completed ? `
+                        <div class="stat-item">
+                            <span class="stat-label">Time Remaining:</span>
+                            <span class="stat-value">${minutesLeft}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}</span>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="stat-item">
+                            <span class="stat-label">Completion:</span>
+                            <span class="stat-value">${filledBlanks.filter(filled => filled).length}/10 blanks</span>
+                        </div>
+                    </div>
+                    
+                    <div class="remark">
+                        ${remark}
+                    </div>
+                    
+                    <div class="modal-buttons">
+                        <button class="modal-btn primary" onclick="resetQuiz(); this.closest('.modal-overlay').remove();">Try Again</button>
+                        <button class="modal-btn secondary" onclick="this.closest('.modal-overlay').remove();">Close</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add modal to body
+            document.body.appendChild(modal);
+        }
+
+        // Reset Quiz
+        function resetQuiz() {
+            // Remove any existing toasts
+            document.querySelectorAll('.hint-toast').forEach(toast => {
+                toast.remove();
+            });
+            
+            // Remove any existing modal
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.remove();
+            });
+            
+            // Reset all blanks
+            blanks.forEach((blank, index) => {
+                blank.textContent = "____";
+                blank.style.color = "black";
+                blank.style.fontWeight = "normal";
+                blank.style.borderBottomColor = "#667eea";
+                filledBlanks[index] = false;
+            });
+
+            // Reset draggables
+            draggables.forEach(draggable => {
+                draggable.style.display = "inline-block";
+                draggable.style.opacity = "1";
+                draggable.draggable = true;
+            });
+
+            // Reset score and timer
+            score = 0;
+            scoreElement.textContent = score;
+            timeLeft = 180;
+            totalTime = 0;
+            timerStarted = false;
+            quizCompleted = false;
+            
+            // Reset timer display
+            timerDisplay.textContent = "03:00";
+            timeTakenElement.textContent = "0:00";
+            timerContainer.classList.remove('timer-warning', 'timer-finished');
+            timerContainer.style.animationDuration = "1s"; // Reset pulse speed
+            
+            // Clear any existing timer
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Count total blanks for user info
+            const totalBlanks = blanks.length;
+            const instructions = document.querySelector('.instructions p:first-child');
+            if (instructions) {
+                instructions.textContent += ` There are ${totalBlanks} blanks to fill in 3 minutes.`;
+            }
+        });
+    </script>
+</body>
+</html>

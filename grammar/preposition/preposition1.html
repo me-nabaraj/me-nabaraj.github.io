@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepositions Quiz</title>
+    
+    <style>
+        /* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+    color: #333;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: #343a40;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating Draggable Items Below the Title */
+.drag-container {
+    position: sticky; /* Make it stick to the top */
+    top: 0; /* Stick to the top of the page */
+    z-index: 10; /* Ensure it stays above other content */
+    background: rgba(255, 255, 255, 0.95); /* Slight transparency for aesthetics */
+    padding: 10px 0;
+    margin: 0 auto; /* Center-align the container */
+    border-bottom: 2px solid #dee2e6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+}
+
+.draggable {
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    margin: 0 10px;
+    background: #007bff;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: grab;
+    transition: all 0.3s ease;
+}
+
+.draggable:active {
+    background: #0056b3;
+    cursor: grabbing;
+}
+
+
+/* Adjusting Question Container for Layout */
+.question-container {
+    margin-top: 2px; /* Space below draggable items */
+    padding: 10px;
+}
+
+
+.sentence {
+    font-size: 1.4rem;
+    margin: 20px auto;
+    width: 80%;
+    text-align: left;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #dee2e6;
+    position: relative;
+   
+}
+.sentence:hover {
+    box-shadow:15px 15px 10px  rgba(0,0,0,0.2);
+    transition: .3s;
+    
+}
+.word {
+    display: inline-block;
+    width: 70px;
+    height: 30px;
+    border: 1px dashed #6c757d;
+    margin: 0 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.word:hover {
+    border-color: #007bff;
+    background-color: #e9ecef;
+}
+
+/* Tooltip for Hints */
+.hint {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffc107;
+    color: #212529;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -10px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Results and Reset Button */
+.result {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    width: 60%;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background: #1e7e34;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sentence {
+        font-size: 1.2rem;
+    }
+
+    .draggable {
+        width: 50px;
+        height: 35px;
+        font-size: 1rem;
+        margin: 2px;
+    }
+}
+/* Sticky Footer Styling */
+.footer {
+    background: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures it stays above other elements */
+}
+/* Instructions */
+.instructions {
+    font-size: 1.2rem;
+    color: #007bff;
+    margin: 0; /* Remove any default margin */
+    padding: 5px 0; /* Add small padding for spacing */
+    font-weight: bold;
+}
+.footer strong {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.footer p {
+    margin: 0;
+    padding: 0;
+}
+    </style>
+</head>
+<body>
+    <h1>Prepositions Exercise</h1>
+    <p class="instructions">Drag and drop the correct preposition.</p>
+
+    <!-- Floating Draggable Items -->
+    <div class="drag-container">
+        <div class="draggable" draggable="true" id="with">with</div>
+        <div class="draggable" draggable="true" id="to">to</div>
+        <div class="draggable" draggable="true" id="at">at</div>
+        <div class="draggable" draggable="true" id="by">by</div>
+        <div class="draggable" draggable="true" id="in">in</div>
+        <div class="draggable" draggable="true" id="from">from</div>
+        <div class="draggable" draggable="true" id="for">for</div>
+        <div class="draggable" draggable="true" id="on">on</div>
+    </div>
+
+    <!-- Questions -->
+    <div class="question-container">
+        <div class="sentence" data-hint="Use 'in' for enclosed spaces.">
+            1. She is <span class="word">____</span> the kitchen cooking dinner.
+        </div>
+        <div class="sentence" data-hint="Use 'on' for surfaces.">
+            2. The book is <span class="word">____</span> the table.
+        </div>
+        <div class="sentence" data-hint="Use 'at' for specific points or locations.">
+            3. We will meet <span class="word">____</span> the bus stop.
+        </div>
+        <div class="sentence" data-hint="Use 'by' to indicate proximity or means.">
+            4. The house is <span class="word">____</span> the river.
+        </div>
+        <div class="sentence" data-hint="Use 'with' to indicate accompaniment.">
+            5. He went to the party <span class="word">____</span> his friends.
+        </div>
+        <div class="sentence" data-hint="Use 'for' to indicate purpose.">
+            6. This gift is <span class="word">____</span> you.
+        </div>
+        <div class="sentence" data-hint="Use 'to' to indicate direction.">
+            7. She is going <span class="word">____</span> the park.
+        </div>
+        <div class="sentence" data-hint="Use 'from' to indicate origin.">
+            8. I received a letter <span class="word">____</span> my cousin.
+        </div>
+        <div class="sentence" data-hint="Use 'in' for months and years.">
+            9. My birthday is <span class="word">____</span> July.
+        </div>
+        <div class="sentence" data-hint="Use 'at' for events.">
+            10. I will see you <span class="word">____</span> the concert.
+        </div>
+        <div class="sentence" data-hint="Use 'at' for specific times.">
+            11. The train arrives <span class="word">____</span> 5 PM.
+        </div>
+        <div class="sentence" data-hint="Use 'for' to indicate duration.">
+            12. We have been waiting <span class="word">____</span> two hours.
+        </div>
+        <div class="sentence" data-hint="Use 'with' to indicate using something.">
+            13. She cut the paper <span class="word">____</span> scissors.
+        </div>
+          <div class="sentence" data-hint="Use 'from' to indicate separation.">
+            14. She moved away <span class="word">____</span> her hometown.
+        </div>
+         <div class="sentence" data-hint="Use 'by' to indicate a deadline.">
+            15. Please submit your assignment <span class="word">____</span> Friday.
+        </div>
+        <div class="sentence" data-hint="Use 'in' for parts of the day.">
+            16. We usually go for a walk <span class="word">____</span> the evening.
+        </div>
+        <div class="sentence" data-hint="Use 'on' for dates.">
+            17. The event is <span class="word">____</span> the 15th of June.
+        </div>
+        <div class="sentence" data-hint="Use 'to' to indicate a recipient.">
+            18. He gave the book <span class="word">____</span> his sister.
+        </div>
+        <div class="sentence" data-hint="Use 'on' for days of the week.">
+            19. We have a meeting <span class="word">____</span> Monday.
+        </div>
+        <div class="sentence" data-hint="Use 'by' to indicate authorship.">
+            20. This book was written <span class="word">____</span> J.K. Rowling.
+        </div>
+    </div>
+
+    <!-- Results and Reset -->
+    <div class="result">
+        <p>Your Score: <span id="score">0</span> / 20</p>
+        <button onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+    <footer class="footer">
+        <p>Game developed by <strong>Nabaraj Dhungana</strong></p>
+    </footer>
+
+    <!-- Sound Files -->
+    <audio id="correct-sound" src="../sounds/right.wav"></audio>
+    <audio id="wrong-sound" src="../sounds/wrong.wav"></audio>
+
+    <script>
+        // Correct answers for the new quiz
+        const correctAnswers = ["in", "on", "at", "by", "with", "for", "to", "from", "in", "at", "at", "for", "with", "from", "by", "in", "on", "to", "on", "by"];
+
+        // Select the necessary elements
+        const blanks = document.querySelectorAll('.word');
+        const draggables = document.querySelectorAll('.draggable');
+        const scoreElement = document.getElementById('score');
+        let score = 0;
+
+        // Load sound files from HTML
+        const correctSound = document.getElementById('correct-sound');
+        const wrongSound = document.getElementById('wrong-sound');
+
+        // Set up drag-and-drop events
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', handleDragStart);
+            draggable.addEventListener('dragend', handleDragEnd);
+        });
+
+        blanks.forEach((blank, index) => {
+            blank.addEventListener('dragover', handleDragOver);
+            blank.addEventListener('drop', (event) => handleDrop(event, index));
+        });
+
+        let draggedItem = null;
+
+        // Drag Start
+        function handleDragStart(event) {
+            draggedItem = event.target;
+            setTimeout(() => {
+                event.target.style.display = "none";
+            }, 0);
+        }
+
+        // Drag End
+        function handleDragEnd(event) {
+            setTimeout(() => {
+                draggedItem.style.display = "inline-block";
+                draggedItem = null;
+            }, 0);
+        }
+
+        // Allow drop
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        // Handle Drop
+        function handleDrop(event, index) {
+            event.preventDefault();
+            const blank = event.target;
+            const draggedText = draggedItem.textContent;
+
+            if (blank.textContent === "____") {
+                blank.textContent = draggedText;
+
+                if (draggedText === correctAnswers[index]) {
+                    blank.style.color = "green";
+                    correctSound.play(); // Play correct sound
+                    score++;
+                } else {
+                    blank.style.color = "red";
+                    wrongSound.play(); // Play wrong sound
+                    showHint(blank.parentElement.dataset.hint, blank);
+                }
+
+                scoreElement.textContent = score;
+            }
+        }
+
+        // Show Hint
+        function showHint(hintText, element) {
+            const hint = document.createElement('div');
+            hint.className = 'hint';
+            hint.textContent = hintText;
+            element.appendChild(hint);
+
+            setTimeout(() => {
+                element.removeChild(hint);
+            }, 10000);
+        }
+
+        // Reset Quiz
+        function resetQuiz() {
+            blanks.forEach(blank => {
+                blank.textContent = "____";
+                blank.style.color = "black";
+            });
+
+            draggables.forEach(draggable => {
+                draggable.style.display = "inline-block";
+            });
+
+            score = 0;
+            scoreElement.textContent = score;
+        }
+    </script>
+</body>
+</html>
