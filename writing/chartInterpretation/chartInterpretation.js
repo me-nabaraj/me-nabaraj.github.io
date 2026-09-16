@@ -328,6 +328,7 @@ const content = {
           <li><strong>Conclusion:</strong> Write about the overall impression.</li>
         </ul>
         <h3>Sample Interpretation:</h3>
+        <h3 align="center"> A Holiday by the Sea </h3>
         <p>This illustration depicts a serene beach scene with a family enjoying a sunny day by the sea. A young boy and girl are at the center, building an intricate sandcastle with towers and flags, their expressions showing focus and joy. Nearby, their mother relaxes on a lounge chair, engrossed in a book.</p>
 
         <p>The background features calm blue waters, a sailboat drifting in the distance, and lush green mountains rising against a bright sky with fluffy clouds. The setting conveys a tranquil and idyllic atmosphere, where nature and leisure blend harmoniously. The scene is lively, with other beachgoers splashing in the waves. Various beach essentials, such as towels, sandals, a picnic basket, and toys, add to the realism of the scene.</p>
